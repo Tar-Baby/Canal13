@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9927c305e0845484b972cf08d3b9a723, type: 3}
+  m_Name: Caso1CharacterSpritesDatabase
+  m_EditorClassIdentifier: 
+  characters:
+  - characterName: "Luc\xEDa"
+    expressions:
+    - expressionName: Default
+      sprite: {fileID: -6108262493997048881, guid: aab8879467442e44fabf6076215cf973, type: 3}
+    - expressionName: Frase
+      sprite: {fileID: 257757282901283291, guid: e3262fdf0e4067841ad3c7c198583de7, type: 3}
+    - expressionName: Saludo
+      sprite: {fileID: -6100518626072062490, guid: a4a2179deedddd94ea02e319d8c1fc34, type: 3}
+    - expressionName: Que paseee
+      sprite: {fileID: 1670590151807114735, guid: 3bb2f73864b710e46bb9d5ba38d4b866, type: 3}
+  - characterName: "Roc\xEDo"
+    expressions:
+    - expressionName: Default
+      sprite: {fileID: 2506363256892981630, guid: ac8645c4f7990a74d94e8fa3de96cf29, type: 3}
+    - expressionName: Saludo
+      sprite: {fileID: 5087576693734562359, guid: ac7c7e67189767c40a23565c2d55983f, type: 3}
+  - characterName: "H\xE9ctor"
+    expressions: []
+  - characterName: Isaac
+    expressions: []
+  - characterName: Xavier
+    expressions: []
