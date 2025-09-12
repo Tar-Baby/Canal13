@@ -21,7 +21,7 @@ Lucía: El placer es todo mío, bueno cuéntanos qué te trae aquí hoy.
 Rocío: Verás Lucía, estoy enfrentando la decisión más difícil en la vida de toda mujer.
 
 // OPCIONES DEL USUARIO (en rosado en el diagrama)
-* [Vaya, si lo pones así...dime más!!!]
+* [Vaya, si lo pones así... dime más!!!]
     ~ episode_rating += 5
     // Esta es la respuesta del usuario/jugador
     -> continue_story //usar estos Diverts para sacar el Final Bueno y Final Malo
@@ -46,13 +46,13 @@ Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
     ~ episode_rating += 5
     Rocío: Gracias Lucía, sabía que podía contar con tu apoyo!
     
-* [Los amas a los dos, Rocío? Hmm...no lo sé, algo me huele raro aquí.]
+* [Los amas a los dos, Rocío? Hmm... no lo sé, algo me huele raro aquí.]
     ~ episode_rating += 10
     Rocío: Ay no seas así, déjame explicarte antes de que saltes a conclusiones.
     
 - Lucía: Bueno, bueno cómo es la vaina?
 Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno para el Gusto y otro para el Gasto. 
-    ~ episode_rating += 10 // reaccion del publico Asombro public_reaction = "asombro"
+    //~ episode_rating += 10 // reaccion del publico Asombro public_reaction = "asombro"
 
 * [Tal y cómo lo sospeché. Eres una bandida!]
     ~ episode_rating += 10   // reaccion del publico Risas
@@ -62,12 +62,12 @@ Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno par
     
 - Rocío: (se sonroja) A ver, pero qué culpa tengo yo de que el guapo sea chiro y el del billete sea bagre?
 Rocío: Por eso quiero que me ayudes a decidirme por uno!!! 
-Lucía: Ya ya entendí...La plena que esto se pone cada vez mejor, que pase el primer noviooooo Héctor!! //Reaacion del publico Aplausos
+Lucía: Ya ya entendí... La plena que esto se pone cada vez mejor, que pase el primer noviooooo Héctor!! //Reaacion del publico Aplausos
 
 (Llega Héctor y abraza a Rocío antes de tomar asiento)
 Héctor: Buenas con todos, un gusto haber sido invitado.
 
-*[Uy, tú de ley eres el del Gasto porque con esas fachas...olvídate papito. De Gusto no tienes nada.]
+*[Uy, tú de ley eres el del Gasto porque con esas fachas... olvídate papito. De Gusto no tienes nada.]
     ~ episode_rating += 10 // reaccion del publico Risas
     Rocío: Lucía, contrólate por favor!
     Héctor: Ehh disculpa, cómo dices?
@@ -100,10 +100,10 @@ Rocío: Se van a lastimar, alguien haga algo!!!
 - Lucía: Ya mucha tontera, se me calman los dos. O resuelven esto como adultos o los expulso de mi set!!!
 (Los dos vuelven a sus asientos y todos hacen silencio en la sala)
 
-Lucía: Está bien, podemos proseguir...Rocío, les debes una explicación a estos muchachos.
+Lucía: Está bien, podemos proseguir... Rocío, les debes una explicación a estos muchachos.
 Hector e Isaac dirigen su mirada a Rocío.
 
-Rocío: Jeje hola chicos, pues verán... los dos son maravillosos y me siento tan afortunada de tenerlos!!!.
+Rocío: Jeje hola chicos, pues verán... los dos son maravillosos y me siento tan afortunada de tenerlos!!!
 Rocío: Porque uno es tan guapo que pone celosas a todas mis amigas de lo bueno que está y el otro me cumple todos mis caprichos y me consiente.
 Rocío: No veo por qué no podemos continuar con esto tan especial que tenemos. Es como dice el dicho. "Lo que no es en tu año, no te hace daño" (guiño, guiño)
 
@@ -123,7 +123,7 @@ Isaac: Te lo agradezco Lucía, pues yo soy el verdadero novio de Rocío y estoy 
     //public_reaction = "ternura"
 
 * [Eso es muy simp beta cuck de tu parte, pero lo respeto.]
-    ~ episode_rating += 5
+    ~ episode_rating -= 5
     //public_reaction = "ternura"
     
 * [Estás conciente de que te está poniendo los cachos, verdad?]
@@ -148,10 +148,10 @@ Lucía: “Hombre proveedor?”... Así que tú eres el del Gasto!!!
 Isaac: Así es y a mucha honra!
     //public_reaction = "sorpresa"
 Lucía: Rocío por qué estás tan callada, vas a dejar que este sinvergüenza se exprese así de ti y de todas nosotras?
-Rocío: ...es que...Lucía...nunca nadie se había preocupado tanto por mí!
+Rocío: ... es que... Lucía... nunca nadie se había preocupado tanto por mí!
 Lucía: Ay bebé. Estás viendo y no ves...
 
-Carmen (via intercom): Eh...Lucía, producción me comenta que tienen un Testigo Sorpresa.
+Carmen (via intercom): Eh... Lucía, producción me comenta que tienen un Testigo Sorpresa.
 Lucía: Entendido Carmencita, hazlo pasar.
 Rocío: Espera, eso es imposible. Debe ser un malentendido, él no puede estar aquí! 
 Lucía: Este es mi show y aquí mando yo!!! Que pase el Testigoooooo!!!!
