@@ -4,24 +4,27 @@ using System.Collections;
 
 public class CharacterPortrait : MonoBehaviour
 {
-    [SerializeField]
-    private Image _spriteImage; // The Image component that displays the sprite
-    public Image SpriteImage => _spriteImage;
+    [SerializeField] private Image _spriteImage;
+    [SerializeField] private GameObject _characterRoot;
+    
+    [Header("Scaler Target")]
+    [SerializeField] private Transform _scaleTarget; // <- drag "PortraitRoot" object here
 
-    [SerializeField]
-    private GameObject _characterRoot; // The root GameObject of this character (for position/scale)
-
-    [Header("Animation Settings (Copy from DialogueManager)")]
-    public float animationDuration = 0.2f;
+    [Header("Animation Settings")]
+    public float fadesAnimationDuration = 0.3f;
     public Vector3 talkingScale = new Vector3(1.05f, 1.05f, 1.05f);
-    public float talkingOpacity = 1f;
     public Vector3 idleScale = Vector3.one;
-    public float idleOpacity = 0.7f;
-    public float hiddenOpacity = 0f; // For completely hidden characters
 
-    private Coroutine _currentAnimationRoutine;
-    private string _currentCharacterName; // Keep track of who is in this slot
+    [Header("Scale Animation Settings")]
+    public float overshootMultiplier = 1.15f;
+// 🎨 Use Unity's curve editor for pop easing
+    public AnimationCurve talkEasingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    public AnimationCurve idleEasingCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    
+    private Coroutine _fadeRoutine;
+    private Coroutine _scaleRoutine;
 
+    private string _currentCharacterName;
     public string CurrentCharacterName => _currentCharacterName;
 
     public void Setup(string characterName, Sprite initialSprite)
@@ -29,15 +32,22 @@ public class CharacterPortrait : MonoBehaviour
         _currentCharacterName = characterName;
         _spriteImage.sprite = initialSprite;
         _characterRoot.SetActive(true);
-        // Immediately set to idle state if this character just appeared
-        _characterRoot.transform.localScale = idleScale;
-        Color currentColor = _spriteImage.color;
-        _spriteImage.color = new Color(currentColor.r, currentColor.g,
-                                       currentColor.b, idleOpacity);
+
+        // Force invisible at start
+        _spriteImage.color = new Color(1f, 1f, 1f, 0f);
+        _spriteImage.rectTransform.localScale = idleScale;
+
+        // Start fade in
+        if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
+        _fadeRoutine = StartCoroutine(FadeInCoroutine());
+        
+        Debug.Log($"[Setup] Showing {characterName} with sprite {initialSprite?.name}");
     }
 
     public void Clear()
     {
+        Debug.Log($"[Clear] Clearing portrait {_currentCharacterName}");
+        
         _currentCharacterName = null;
         _spriteImage.sprite = null;
         _characterRoot.SetActive(false);
@@ -45,86 +55,128 @@ public class CharacterPortrait : MonoBehaviour
 
     public void SetSprite(Sprite newSprite)
     {
-        if (_spriteImage.sprite != newSprite) // Only update if different
+        if (newSprite != null && _spriteImage.sprite != newSprite)
         {
+            Debug.Log($"[SetSprite] {_currentCharacterName} sprite changed to {newSprite.name}");
             _spriteImage.sprite = newSprite;
         }
     }
 
+    // --- Talking/Idle scale (scale only, alpha untouched) ---
     public void SetTalkingState()
     {
-        Animate(_characterRoot.transform, _spriteImage, talkingScale,
-                talkingOpacity);
+        if (!_characterRoot.activeSelf) return;
+        Debug.Log($"[SetTalkingState] {_currentCharacterName}");
+        if (_scaleRoutine != null) StopCoroutine(_scaleRoutine);
+        _scaleRoutine = StartCoroutine(ScaleTo(talkingScale, overshoot: true)); // pop!
     }
 
     public void SetIdleState()
     {
-        Animate(_characterRoot.transform, _spriteImage, idleScale, idleOpacity);
+        if (!_characterRoot.activeSelf) return;
+        Debug.Log($"[SetIdleState] {_currentCharacterName}");
+        if (_scaleRoutine != null) StopCoroutine(_scaleRoutine);
+        _scaleRoutine = StartCoroutine(ScaleTo(idleScale, overshoot: false)); // no overshoot
     }
 
+    // --- Hide with fade out ---
     public void SetHiddenState()
     {
-        // Animate to hidden opacity, then deactivate if desired
-        Animate(_characterRoot.transform, _spriteImage, idleScale,
-                hiddenOpacity, () => _characterRoot.SetActive(false));
+        Debug.Log($"[SetHiddenState] {_currentCharacterName}");
+        if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
+        _fadeRoutine = StartCoroutine(FadeOutCoroutine());
     }
 
-    private void Animate(Transform targetTransform, Image targetImage,
-                         Vector3 endScale, float endOpacity,
-                         System.Action onComplete = null)
+    // --- Coroutines ---
+    // --- Scale Coroutine with optional overshoot ---
+    private IEnumerator ScaleTo(Vector3 endScale, bool overshoot = false)
     {
-        if (_currentAnimationRoutine != null)
+        Vector3 start = _scaleTarget.localScale;
+        float t = 0f;
+        float duration = fadesAnimationDuration;
+        // Overshoot = make the target slightly larger
+        Vector3 overshootScale = endScale * overshootMultiplier;
+
+        while (t < duration)
         {
-            StopCoroutine(_currentAnimationRoutine);
-        }
-        _currentAnimationRoutine = StartCoroutine(AnimateCoroutine(
-            targetTransform, targetImage, endScale, endOpacity, onComplete));
-    }
+            t += Time.deltaTime;
+            float progress = Mathf.Clamp01(t / duration);
 
-    private IEnumerator AnimateCoroutine(Transform targetTransform,
-                                         Image targetImage, Vector3 endScale,
-                                         float endOpacity,
-                                         System.Action onComplete)
-    {
-        Vector3 startScale = targetTransform.localScale;
-        Color startColor = targetImage.color;
-        Color endColor = new Color(startColor.r, startColor.g, startColor.b,
-                                   endOpacity);
+            if (overshoot)
+            {
+                // 🎨 Evaluate custom curve from Inspector
+                //float curveValue = talkEasingCurve.Evaluate(progress);
 
-        float timer = 0f;
-        while (timer < animationDuration)
-        {
-            float progress = timer / animationDuration;
-            targetTransform.localScale =
-                Vector3.Lerp(startScale, endScale, progress);
-            targetImage.color = Color.Lerp(startColor, endColor, progress);
+                if (progress < 0.6f)
+                {
+                    if (progress < 0.6f)
+                        _scaleTarget.localScale = Vector3.Lerp(start, overshootScale, progress / 0.6f);
+                    else
+                        _scaleTarget.localScale = Vector3.Lerp(overshootScale, endScale, (progress - 0.6f) / 0.4f);
+                }
+                else
+                {
+                    float curveValue = idleEasingCurve.Evaluate(progress);
+                    _scaleTarget.localScale = Vector3.LerpUnclamped(start, endScale, curveValue);
+                }
+            }
+            else
+            {
+                // Idle uses the idle curve
+                float curveValue = idleEasingCurve.Evaluate(progress);
+                _scaleTarget.localScale = Vector3.LerpUnclamped(start, endScale, curveValue);
+            }
 
-            timer += Time.deltaTime;
+            Debug.Log($"[ScaleTo] {_currentCharacterName} scale now {_scaleTarget.localScale}");
             yield return null;
         }
 
-        targetTransform.localScale = endScale;
-        targetImage.color = endColor;
-        _currentAnimationRoutine = null;
-        onComplete?.Invoke();
+        // ✅ lock exact final scale
+        _scaleTarget.localScale = endScale;
+        Debug.Log($"[ScaleTo] {_currentCharacterName} ended at {_scaleTarget.localScale}");
+        _scaleRoutine = null;
     }
 
-    // Called when the GameObject is disabled (e.g., when dialogue ends)
-    private void OnDisable()
+    private IEnumerator FadeInCoroutine()
     {
-        if (_characterRoot != null)
+        Debug.Log($"[FadeIn] {_currentCharacterName} starting fade in");
+        
+        Color start = new Color(1f, 1f, 1f, 0f);
+        Color end = new Color(1f, 1f, 1f, 1f);
+
+        float t = 0f;
+        while (t < fadesAnimationDuration)
         {
-            _characterRoot.transform.localScale = idleScale;
-            Color currentColor = _spriteImage.color;
-            _spriteImage.color =
-                new Color(currentColor.r, currentColor.g, currentColor.b,
-                          hiddenOpacity); // Fade out completely
-            _characterRoot.SetActive(false);
+            t += Time.deltaTime;
+            float p = Mathf.Clamp01(t / fadesAnimationDuration);
+            _spriteImage.color = Color.Lerp(start, end, p);
+            yield return null;
         }
-        if (_currentAnimationRoutine != null)
+        // ✅ Lock at full opacity
+        _spriteImage.color = end;
+        Debug.Log($"[FadeIn] {_currentCharacterName} completed fade in");
+        _fadeRoutine = null;
+    }
+
+    private IEnumerator FadeOutCoroutine()
+    {
+        Debug.Log($"[FadeOut] {_currentCharacterName} starting fade out");
+        
+        Color start = _spriteImage.color;
+        Color end = new Color(start.r, start.g, start.b, 0f);
+
+        float t = 0f;
+        while (t < fadesAnimationDuration)
         {
-            StopCoroutine(_currentAnimationRoutine);
-            _currentAnimationRoutine = null;
+            t += Time.deltaTime;
+            float p = Mathf.Clamp01(t / fadesAnimationDuration);
+            _spriteImage.color = Color.Lerp(start, end, p);
+            yield return null;
         }
+        // ✅ Lock at full transparency
+        _spriteImage.color = end;
+        _characterRoot.SetActive(false);
+        Debug.Log($"[FadeOut] {_currentCharacterName} completed fade out");
+        _fadeRoutine = null;
     }
 }

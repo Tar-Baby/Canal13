@@ -5,12 +5,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
 using UnityEngine.SceneManagement; // Necesario para cargar escenas (al final del caso)
+using System.Linq; // For LINQ operations like .FirstOrDefault
 
 public class CaseSceneManager : MonoBehaviour
 {
     [Header("Case UI References")]
     [SerializeField] private GameObject casePanel; // Referencia al GameObject "CaseDialoguePanelUI"
     [SerializeField] private TextMeshProUGUI caseText; // Referencia al TextMeshProUGUI "CaseText" (o DialogueText)
+    [SerializeField] private GameObject namePanel; // panel de nombre de speaker
+    [SerializeField] private TextMeshProUGUI speakerNameText;
     [SerializeField] private Button caseContinueButton; // Referencia al Button "ContinueButton"
     [SerializeField] private GameObject caseChoicesPanel; // Referencia al GameObject "CaseChoicesPanel" (o ChoicesPanel)
     [SerializeField] private Button[] caseChoiceButtons = new Button[4]; // Array de referencias a Button "ChoiceButton1", etc.
@@ -244,6 +247,11 @@ public class CaseSceneManager : MonoBehaviour
         // Activa el panel principal de la UI del caso y el PublicReactionUI en esta escena.
         casePanel.SetActive(true); // Activa el GameObject "CaseDialoguePanelUI"
         ActivatePublicReactionUI(); // Activa el PublicReactionUI.
+        foreach (var portrait in _characterPortraits)
+        {
+            portrait.Clear();
+        }
+        _activeCharacters.Clear();
 
         // Asegúrate de que las opciones y el botón final estén ocultos al inicio.
         caseChoicesPanel.SetActive(false);
@@ -281,18 +289,51 @@ public class CaseSceneManager : MonoBehaviour
         if (caseStory.canContinue)
         {
             string currentLine = caseStory.Continue().Trim();
-            CheckEpisodeRatingChanges(); 
+            
+            // --- Process tags BEFORE text ---
+            if (caseStory.currentTags != null && caseStory.currentTags.Count > 0)
+            {
+                ProcessTags(caseStory.currentTags);
+            }
+            
+            CheckEpisodeRatingChanges();
+
             if (!string.IsNullOrEmpty(currentLine))
             {
-                ShowCaseText(currentLine);
+                // Split into "SPEAKER: Dialogue"
+                string speakerName = "";
+                string dialogueContent = currentLine;
+
+                if (currentLine.Contains(":"))
+                {
+                    string[] parts = currentLine.Split(new char[] { ':' }, 2);
+                    speakerName = parts[0].Trim();
+                    dialogueContent = parts[1].Trim();
+                }
+
+                // --- Set speaker name text ---
+                if (speakerNameText != null)
+                {
+                    speakerNameText.text = speakerName;
+                }
+
+                // --- Animate current speaker ---
+                if (speakerNameText != null) speakerNameText.text = speakerName;
+                
+                //  Update portraits immediately (fade/scale starts here)
+                UpdateSpeakerAnimation(speakerName);
+
+                // --- Show dialogue text ---
+                ShowCaseText(dialogueContent);  // texto con nombres recortados
+
+                //ShowCaseText(currentLine);  // texto completo, con nombres
                 if (caseStory.currentChoices.Count > 0) StartCoroutine(ShowChoicesAfterText());
             }
-            else { ContinueCaseStory(); } 
-        }
-        else // Historia no puede continuar: o terminó o esperando elección.
-        {
-            if (caseStory.currentChoices.Count > 0) ShowCaseChoicesFromStory(); 
-            else EndCase(); // Caso termina si no hay más texto ni opciones.
+            else
+            {
+                ContinueCaseStory(); // skip blank lines
+                
+            }
         }
     }
 
@@ -453,6 +494,242 @@ public class CaseSceneManager : MonoBehaviour
             ContinueCaseStory();
         }
     }
+
+    #region CharacterPortraits
+
+    private void RefreshUI()
+    {
+        string text = caseStory.Continue();
+
+        string speakerName = "";
+        string dialogueContent = text;
+
+        if (text.Contains(":"))
+        {
+            string[] parts = text.Split(new char[] { ':' }, 2);
+            speakerName = parts[0].Trim();
+            dialogueContent = parts[1].Trim();
+        }
+
+        //caseText.text = dialogueContent;
+        speakerNameText.text = speakerName;
+
+        // Animate speakers
+        UpdateSpeakerAnimation(speakerName);
+        
+    }
+
+    private void UpdateSpeakerAnimation(string currentSpeaker)
+        { 
+            Debug.Log($"[UpdateSpeakerAnimation] Current speaker: '{currentSpeaker}'");
+            
+        // First, set everyone to idle
+        foreach (var kvp in _activeCharacters)
+        {
+                        kvp.Value.SetIdleState();  // scale back to 1.0
+        }
+        
+        if (!string.IsNullOrEmpty(currentSpeaker) && _activeCharacters.TryGetValue(currentSpeaker, out CharacterPortrait speakerPortrait))
+        { // Make the active speaker pop
+            Debug.Log($"[UpdateSpeakerAnimation] Talking: {currentSpeaker}");
+          speakerPortrait.SetTalkingState(); // scale up to 1.05
+          _currentSpeakerPortrait = speakerPortrait;
+        }
+        else
+        {
+            _currentSpeakerPortrait = null;
+            if (!string.IsNullOrEmpty(currentSpeaker))
+            { Debug.LogWarning($"Speaker '{currentSpeaker}' has dialogue but is not SHOWN. Did you forget a #SHOW tag?"); }
+        }
+        }
+
+    private void ProcessTags(List<string> currentTags)
+    {
+        foreach (string tag in currentTags)
+        {
+            string trimmedTag = tag.Trim().ToUpper();
+
+            // Format: #SHOW_CHARACTERNAME_SLOTNAME
+            // Example: #SHOW_HERO_LEFT, #SHOW_VILLAIN_RIGHT
+            if (trimmedTag.StartsWith("SHOW_"))
+            {
+                string[] parts = trimmedTag.Split('_', 3); // SHOW_NAME_SLOT
+                if (parts.Length == 3)
+                {
+                    string characterName = parts[1];
+                    string slotName = parts[2];
+                    ShowCharacter(characterName, slotName);
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid SHOW tag: {tag}");
+                }
+            }
+            // Format: #HIDE_CHARACTERNAME or #HIDE_ALL
+            // Example: #HIDE_HERO, #HIDE_ALL
+            else if (trimmedTag.StartsWith("HIDE_"))
+            {
+                string[] parts = trimmedTag.Split('_', 2);
+                if (parts.Length == 2)
+                {
+                    string characterToHide = parts[1];
+                    if (characterToHide == "ALL")
+                    {
+                        HideAllCharacters();
+                    }
+                    else
+                    {
+                        HideCharacter(characterToHide);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid HIDE tag: {tag}");
+                }
+            }
+            // Format: #EXPRESSION_CHARACTERNAME_EXPRESSIONNAME
+            // Example: #EXPRESSION_HERO_HAPPY
+            else if (trimmedTag.StartsWith("EXPRESSION_"))
+            {
+                string[] parts = trimmedTag.Split('_', 3);
+                if (parts.Length == 3)
+                {
+                    string characterName = parts[1];
+                    string expressionName = parts[2];
+                    SetCharacterExpression(characterName, expressionName);
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid EXPRESSION tag: {tag}");
+                }
+            }
+            // Format: #FADEALL
+            else if (trimmedTag == "FADEALL")
+            {
+                FadeAllCharactersToIdle();
+            }
+            // Add more tag handlers here (e.g., #MOVE_CHARACTER_SLOT)
+            else
+            {
+                Debug.Log($"Unhandled Ink tag: {tag}");
+            }
+        }
+    }
+
+    private void ShowCharacter(string characterName, string slotName)
+    {
+        // Find an available slot with the matching name (case-insensitive)
+        CharacterPortrait targetSlot = _characterPortraits.FirstOrDefault(
+            p =>
+                p.name.EndsWith($"_{slotName}",
+                                 System.StringComparison.OrdinalIgnoreCase));
+
+        if (targetSlot == null)
+        {
+            Debug.LogError($"No character slot found matching '{slotName}'");
+            return;
+        }
+
+        CharacterSpriteDatabase.CharacterEntry charEntry =
+            _spriteDatabase.GetCharacterEntry(characterName);
+        if (charEntry == null)
+        {
+            Debug.LogError(
+                $"Character '{characterName}' not found in Sprite Database!");
+            return;
+        }
+
+        // Check if the character is already in this slot or another
+        if (_activeCharacters.TryGetValue(characterName, out CharacterPortrait existingPortrait))
+        {
+            if (existingPortrait == targetSlot)
+            {
+                // Already in the correct slot, just update expression
+                Debug.Log($"Character {characterName} already in {slotName}.");
+                return;
+            }
+            else
+            {
+                // Character is in a different slot, move them (hide old, show new)
+                Debug.Log($"Moving {characterName} from {existingPortrait.name} to {targetSlot.name}.");
+                existingPortrait.SetHiddenState(); // Fade out from old slot
+                _activeCharacters.Remove(characterName);
+            }
+        }
+
+        // Occupy the slot
+        _activeCharacters[characterName] = targetSlot;
+        targetSlot.Setup(characterName, charEntry.GetExpressionSprite("default"));
+        targetSlot.SetIdleState(); // Make it appear as idle
+        Debug.Log($"Showing {characterName} in {targetSlot.name}");
+    }
+
+    private void HideCharacter(string characterName)
+    {
+        if (_activeCharacters.TryGetValue(characterName,
+                                          out CharacterPortrait portrait))
+        {
+            portrait.SetHiddenState();
+            _activeCharacters.Remove(characterName);
+            Debug.Log($"Hiding character: {characterName}");
+            if (_currentSpeakerPortrait == portrait)
+            {
+                _currentSpeakerPortrait = null;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Character '{characterName}' is not currently active.");
+        }
+    }
+
+    private void HideAllCharacters()
+    {
+        foreach (var pair in _activeCharacters)
+        {
+            pair.Value.SetHiddenState();
+        }
+        _activeCharacters.Clear();
+        _currentSpeakerPortrait = null;
+        Debug.Log("Hiding all characters.");
+    }
+
+    private void SetCharacterExpression(string characterName,
+                                       string expressionName)
+    {
+        if (_activeCharacters.TryGetValue(characterName,
+                                          out CharacterPortrait portrait))
+        {
+            CharacterSpriteDatabase.CharacterEntry charEntry =
+                _spriteDatabase.GetCharacterEntry(characterName);
+            if (charEntry != null)
+            {
+                Sprite newSprite = charEntry.GetExpressionSprite(expressionName);
+                if (newSprite != null)
+                {
+                    portrait.SetSprite(newSprite);
+                    Debug.Log(
+                        $"Set {characterName} expression to {expressionName}");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning(
+                $"Character '{characterName}' not active to change expression.");
+        }
+    }
+
+    private void FadeAllCharactersToIdle()
+    {
+        foreach (var pair in _activeCharacters)
+        {
+            pair.Value.SetIdleState();
+        }
+        _currentSpeakerPortrait = null;
+    }
+
+    #endregion
 
     // Maneja la entrada del usuario para avanzar el diálogo o completar el typewriter.
     private void Update()

@@ -2,22 +2,27 @@ VAR show_name = ""
 VAR episode_rating = 0  //luego agregar public_reaction
 VAR public_reaction = "neutral"
 
+//#FADEALL
 // Inicio del programa principal
-Al aire en 3...2...1...
-
+Narrador: Al aire en 3...2...1...
+#SHOW_LUCÍA_LEFT
+//#EXPRESSION_LUCÍA_SALUDO este es su expresion default en este caso
 Lucía: Hola a todos, bienvenidos al gran estreno de "{show_name}" el día de hoy tenemos un programa espectacular! 
 
+#EXPRESSION_LUCÍA_FRASE
 Lucía: Y quisiera comenzar con una frase, se trata de un antiguo proverbio montubio que dice así:
 Lucía: "El que la hace, se olvida. El que la recibe, nunca"
-
+#EXPRESSION_LUCÍA_QUE PASEEE
 Lucía: Que pase nuestra invitada especial, démosle un aplauso a Rocíooo.
 
-(Reacción del público: Emoción y gritos)
-
+Narrador: (El público enloquece)
+#SHOW_ROCÍO_RIGHT
 Rocío: Hola Lucía es un honor estar ante ustedes y ante las cámaras. Gracias por recibirme en tu programa.
 
+#EXPRESSION_LUCÍA_NORMAL
 Lucía: El placer es todo mío, bueno cuéntanos qué te trae aquí hoy.
 
+#EXPRESSION_ROCÍO_NORMAL
 Rocío: Verás Lucía, estoy enfrentando la decisión más difícil en la vida de toda mujer.
 
 // OPCIONES DEL USUARIO (en rosado en el diagrama)
@@ -33,6 +38,7 @@ Rocío: Verás Lucía, estoy enfrentando la decisión más difícil en la vida d
 
 = continue_story
 // Aquí continúa independientemente de la opción elegida
+
 Rocío: Estoy enamorada...
 // reaccion del publico Ternura
 Rocío: De dos a la vez... 
@@ -41,7 +47,7 @@ Rocío: De dos a la vez...
 Lucía: Espérate, pérate. Cómo es eso?
 Rocío: Tal y como escuchaste Lucía. Llevo saliendo ya un buen tiempo con dos chicos que conocí en la academia de baile en la que estudio.
 Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
-
+#HIDE_LUCÍA
 * [Tranquila reina nosotros te ayudaremos a resolver este triángulo amoroso.]
     ~ episode_rating += 5
     Rocío: Gracias Lucía, sabía que podía contar con tu apoyo!
@@ -64,7 +70,7 @@ Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno par
 Rocío: Por eso quiero que me ayudes a decidirme por uno!!! 
 Lucía: Ya ya entendí... La plena que esto se pone cada vez mejor, que pase el primer noviooooo Héctor!! //Reaacion del publico Aplausos
 
-(Llega Héctor y abraza a Rocío antes de tomar asiento)
+Narrador: (Llega Héctor y abraza a Rocío antes de tomar asiento)
 Héctor: Buenas con todos, un gusto haber sido invitado.
 
 *[Uy, tú de ley eres el del Gasto porque con esas fachas... olvídate papito. De Gusto no tienes nada.]
@@ -84,7 +90,7 @@ Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
 (Llega Isaac y se acerca para besar a Rocío)
 Héctor: Hijo de la gran...
-(Héctor se abalanza sobre él y comienzan a caerse a golpes)
+Narrador: (Héctor se abalanza sobre él y comienzan a caerse a golpes)
 //reacion del publico asombro
 Lucía: Ave maría purísima, se armó la grande.
 Rocío: Se van a lastimar, alguien haga algo!!!
@@ -98,7 +104,7 @@ Rocío: Se van a lastimar, alguien haga algo!!!
 ~ episode_rating -= 10
 
 - Lucía: Ya mucha tontera, se me calman los dos. O resuelven esto como adultos o los expulso de mi set!!!
-(Los dos vuelven a sus asientos y todos hacen silencio en la sala)
+Narrador: (Los dos vuelven a sus asientos y todos hacen silencio en la sala)
 
 Lucía: Está bien, podemos proseguir... Rocío, les debes una explicación a estos muchachos.
 Hector e Isaac dirigen su mirada a Rocío.
