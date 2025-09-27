@@ -16,39 +16,37 @@ MonoBehaviour:
   - characterName: "Luc\xEDa"
     expressions:
     - expressionName: Default
-      sprite: {fileID: -6100518626072062490, guid: a4a2179deedddd94ea02e319d8c1fc34, type: 3}
+      sprite: {fileID: 21300000, guid: f2963a3d7df1b274e874577f183c8fa3, type: 3}
     - expressionName: Frase
-      sprite: {fileID: 257757282901283291, guid: e3262fdf0e4067841ad3c7c198583de7, type: 3}
+      sprite: {fileID: 21300000, guid: 787fcdd81758be543b09780844a8588f, type: 3}
     - expressionName: Saludo
       sprite: {fileID: -6100518626072062490, guid: a4a2179deedddd94ea02e319d8c1fc34, type: 3}
     - expressionName: Que paseee
-      sprite: {fileID: 21300000, guid: 3bb2f73864b710e46bb9d5ba38d4b866, type: 3}
+      sprite: {fileID: 21300000, guid: 53055731dc49e7342a15bfe2eeaf8379, type: 3}
     - expressionName: Normal
-      sprite: {fileID: -6108262493997048881, guid: aab8879467442e44fabf6076215cf973, type: 3}
+      sprite: {fileID: 21300000, guid: c4f69bc2f1038de4cab7f32c37daf0c8, type: 3}
     - expressionName: Confundida1
-      sprite: {fileID: -5779745823729748736, guid: 91b8fb2865de8084a8004b3e71163a0b, type: 3}
+      sprite: {fileID: 21300000, guid: 6243be1f59b8bd3429a3147f309409e5, type: 3}
     - expressionName: Sorprendida1
-      sprite: {fileID: 5334961073218260559, guid: 291a72c58dbb4c84eac72390c53c7481, type: 3}
-    - expressionName: QuietNeutral
-      sprite: {fileID: -2046249989567186450, guid: 7231eaa88ecca5e47970b12da50b9f81, type: 3}
+      sprite: {fileID: 21300000, guid: dbcde16f1a093864e9fd6451c8b24951, type: 3}
     - expressionName: ConmovidaSoft
-      sprite: {fileID: -5062850762863569978, guid: 3ff0895876362a84cbb580854217ae86, type: 3}
+      sprite: {fileID: 21300000, guid: b9e753d7442c5bf46be0fb5bc938ebd3, type: 3}
     - expressionName: Dudosa1
-      sprite: {fileID: -6865368607105263934, guid: a8ecad9b9f9346143becc7be642689ae, type: 3}
+      sprite: {fileID: 21300000, guid: 58e084822b189a94a9782c12c923eb2e, type: 3}
   - characterName: "Roc\xEDo"
     expressions:
     - expressionName: Default
-      sprite: {fileID: 21300000, guid: ac7c7e67189767c40a23565c2d55983f, type: 3}
+      sprite: {fileID: 21300000, guid: ff771e0b19046cc4c992852018817db1, type: 3}
     - expressionName: Normal
-      sprite: {fileID: 21300000, guid: ac8645c4f7990a74d94e8fa3de96cf29, type: 3}
+      sprite: {fileID: 21300000, guid: 0db251ace47a5814eb4aa3b598baa420, type: 3}
     - expressionName: Enamorada1
-      sprite: {fileID: 21300000, guid: 126b058490ed447448923ebc10a15591, type: 3}
+      sprite: {fileID: 21300000, guid: af3225d27786fe4499f344c785098c48, type: 3}
     - expressionName: Enamorada2
-      sprite: {fileID: 21300000, guid: 8757c08fb2c88cb4a874d0e4b1a32f8f, type: 3}
+      sprite: {fileID: 21300000, guid: a64c96e0dc3586f43812fd01e9b2a1c0, type: 3}
     - expressionName: Bandida1
-      sprite: {fileID: 21300000, guid: d8d0c349d84c89849b17a14b9cc02c79, type: 3}
+      sprite: {fileID: 21300000, guid: 7c75556b5679a794184bf18faeb881af, type: 3}
     - expressionName: FelizIndecisa
-      sprite: {fileID: 21300000, guid: a1ed7abcbcf69c84eba39343892808d4, type: 3}
+      sprite: {fileID: 21300000, guid: 65d02b1eec66e9b46af365967718144d, type: 3}
   - characterName: "H\xE9ctor"
     expressions: []
   - characterName: Isaac
