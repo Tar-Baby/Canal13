@@ -33,6 +33,8 @@ MonoBehaviour:
       sprite: {fileID: -2046249989567186450, guid: 7231eaa88ecca5e47970b12da50b9f81, type: 3}
     - expressionName: ConmovidaSoft
       sprite: {fileID: -5062850762863569978, guid: 3ff0895876362a84cbb580854217ae86, type: 3}
+    - expressionName: Dudosa1
+      sprite: {fileID: -6865368607105263934, guid: a8ecad9b9f9346143becc7be642689ae, type: 3}
   - characterName: "Roc\xEDo"
     expressions:
     - expressionName: Default

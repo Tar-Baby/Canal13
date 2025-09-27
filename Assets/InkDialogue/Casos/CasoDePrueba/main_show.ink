@@ -53,7 +53,7 @@ Lucía: Espérate, pérate. Cómo es eso?
 #EXPRESSION_ROCÍO_BANDIDA1
 Rocío: Tal y como escuchaste Lucía. Llevo saliendo ya un buen tiempo con dos chicos que conocí en la academia de baile en la que estudio.
 #EXPRESSION_ROCÍO_FELIZINDECISA
-#EXPRESSION_LUCÍA_QUIETNEUTRAL
+#EXPRESSION_LUCÍA_DUDOSA1
 Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
 //#HIDE_LUCÍA para peobar que funcione el FadeOut
 * [Tranquila reina nosotros te ayudaremos a resolver este triángulo amoroso.]
