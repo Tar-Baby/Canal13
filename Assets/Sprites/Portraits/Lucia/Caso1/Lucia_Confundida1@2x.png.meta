@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: ac8645c4f7990a74d94e8fa3de96cf29
+guid: 91b8fb2865de8084a8004b3e71163a0b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2506363256892981630
-    second: Rocio_Default@2x_0
-  - first:
-      213: -5111015009914287248
-    second: Rocio_Default@2x_1
+      213: -5779745823729748736
+    second: Lucia_Confundida1@2x_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -129,12 +126,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocio_Default@2x_0
+      name: Lucia_Confundida1@2x_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1884
+        width: 2248
         height: 1918
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -144,30 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e7182355a1468c220800000000000000
-      internalID: 2506363256892981630
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocio_Default@2x_1
-      rect:
-        serializedVersion: 2
-        x: 1958
-        y: 0
-        width: 290
-        height: 210
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 07b8e548de60219b0800000000000000
-      internalID: -5111015009914287248
+      spriteID: 0057a84bbc73acfa0800000000000000
+      internalID: -5779745823729748736
       vertices: []
       indices: 
       edges: []
@@ -176,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -185,9 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Rocio_Default@2x_0: 2506363256892981630
-      Rocio_Default@2x_1: -5111015009914287248
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

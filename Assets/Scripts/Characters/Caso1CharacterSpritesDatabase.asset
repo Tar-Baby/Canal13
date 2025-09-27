@@ -25,12 +25,28 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 3bb2f73864b710e46bb9d5ba38d4b866, type: 3}
     - expressionName: Normal
       sprite: {fileID: -6108262493997048881, guid: aab8879467442e44fabf6076215cf973, type: 3}
+    - expressionName: Confundida1
+      sprite: {fileID: -5779745823729748736, guid: 91b8fb2865de8084a8004b3e71163a0b, type: 3}
+    - expressionName: Sorprendida1
+      sprite: {fileID: 5334961073218260559, guid: 291a72c58dbb4c84eac72390c53c7481, type: 3}
+    - expressionName: QuietNeutral
+      sprite: {fileID: -2046249989567186450, guid: 7231eaa88ecca5e47970b12da50b9f81, type: 3}
+    - expressionName: ConmovidaSoft
+      sprite: {fileID: -5062850762863569978, guid: 3ff0895876362a84cbb580854217ae86, type: 3}
   - characterName: "Roc\xEDo"
     expressions:
     - expressionName: Default
-      sprite: {fileID: 5087576693734562359, guid: ac7c7e67189767c40a23565c2d55983f, type: 3}
+      sprite: {fileID: 21300000, guid: ac7c7e67189767c40a23565c2d55983f, type: 3}
     - expressionName: Normal
-      sprite: {fileID: 2506363256892981630, guid: ac8645c4f7990a74d94e8fa3de96cf29, type: 3}
+      sprite: {fileID: 21300000, guid: ac8645c4f7990a74d94e8fa3de96cf29, type: 3}
+    - expressionName: Enamorada1
+      sprite: {fileID: 21300000, guid: 126b058490ed447448923ebc10a15591, type: 3}
+    - expressionName: Enamorada2
+      sprite: {fileID: 21300000, guid: 8757c08fb2c88cb4a874d0e4b1a32f8f, type: 3}
+    - expressionName: Bandida1
+      sprite: {fileID: 21300000, guid: d8d0c349d84c89849b17a14b9cc02c79, type: 3}
+    - expressionName: FelizIndecisa
+      sprite: {fileID: 21300000, guid: a1ed7abcbcf69c84eba39343892808d4, type: 3}
   - characterName: "H\xE9ctor"
     expressions: []
   - characterName: Isaac

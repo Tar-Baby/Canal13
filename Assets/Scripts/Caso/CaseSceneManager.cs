@@ -520,28 +520,49 @@ public class CaseSceneManager : MonoBehaviour
     }
 
     private void UpdateSpeakerAnimation(string currentSpeaker)
-        { 
-            Debug.Log($"[UpdateSpeakerAnimation] Current speaker: '{currentSpeaker}'");
-            
-        // First, set everyone to idle
+    {
+        Debug.Log($"[UpdateSpeakerAnimation] Speaker='{currentSpeaker}'");
+
+        if (string.IsNullOrEmpty(currentSpeaker))
+        {
+            // No speaker → narration → everyone idle
+            foreach (var kvp in _activeCharacters)
+                kvp.Value.SetIdleState();
+
+            _currentSpeakerPortrait = null;
+            return;
+        }
+
         foreach (var kvp in _activeCharacters)
         {
-                        kvp.Value.SetIdleState();  // scale back to 1.0
+            // normalize both sides for safe compare
+            if (kvp.Key.ToUpper() == currentSpeaker.ToUpper())
+            {
+                kvp.Value.SetTalkingState();   // active speaker pops
+                _currentSpeakerPortrait = kvp.Value;
+            }
+            else
+            {
+                kvp.Value.SetIdleState();      // others idle
+            }
         }
         
-        if (!string.IsNullOrEmpty(currentSpeaker) && _activeCharacters.TryGetValue(currentSpeaker, out CharacterPortrait speakerPortrait))
-        { // Make the active speaker pop
-            Debug.Log($"[UpdateSpeakerAnimation] Talking: {currentSpeaker}");
-          speakerPortrait.SetTalkingState(); // scale up to 1.05
-          _currentSpeakerPortrait = speakerPortrait;
+
+        // Highlight current speaker
+        if (!string.IsNullOrEmpty(currentSpeaker) &&
+            _activeCharacters.TryGetValue(currentSpeaker, out CharacterPortrait speakerPortrait))
+        {
+            speakerPortrait.SetTalkingState();
         }
         else
         {
-            _currentSpeakerPortrait = null;
-            if (!string.IsNullOrEmpty(currentSpeaker))
-            { Debug.LogWarning($"Speaker '{currentSpeaker}' has dialogue but is not SHOWN. Did you forget a #SHOW tag?"); }
+            // If narration (no speaker), everyone goes idle
+            foreach (var kvp in _activeCharacters)
+            {
+                kvp.Value.SetIdleState();
+            }
         }
-        }
+    }
 
     private void ProcessTags(List<string> currentTags)
     {

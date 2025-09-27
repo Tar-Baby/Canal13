@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: ac8645c4f7990a74d94e8fa3de96cf29
+guid: a1ed7abcbcf69c84eba39343892808d4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2506363256892981630
-    second: Rocio_Default@2x_0
+      213: -8408688525752868374
+    second: Rocio_FelizIndecisa@2x_0
   - first:
-      213: -5111015009914287248
-    second: Rocio_Default@2x_1
+      213: 6036176027420693897
+    second: Rocio_FelizIndecisa@2x_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,12 +129,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rocio_Default@2x_0
+      name: Rocio_FelizIndecisa@2x_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1884
+        width: 1886
         height: 1918
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -144,19 +144,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e7182355a1468c220800000000000000
-      internalID: 2506363256892981630
+      spriteID: ae1e89346565e4b80800000000000000
+      internalID: -8408688525752868374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rocio_Default@2x_1
+      name: Rocio_FelizIndecisa@2x_1
       rect:
         serializedVersion: 2
-        x: 1958
+        x: 1960
         y: 0
-        width: 290
+        width: 288
         height: 210
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07b8e548de60219b0800000000000000
-      internalID: -5111015009914287248
+      spriteID: 985932cad1ec4c350800000000000000
+      internalID: 6036176027420693897
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rocio_Default@2x_0: 2506363256892981630
-      Rocio_Default@2x_1: -5111015009914287248
+      Rocio_FelizIndecisa@2x_0: -8408688525752868374
+      Rocio_FelizIndecisa@2x_1: 6036176027420693897
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

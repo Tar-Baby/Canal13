@@ -39,15 +39,23 @@ Rocío: Verás Lucía, estoy enfrentando la decisión más difícil en la vida d
 = continue_story
 // Aquí continúa independientemente de la opción elegida
 
+#EXPRESSION_ROCÍO_ENAMORADA1
+#EXPRESSION_LUCÍA_CONMOVIDASOFT
 Rocío: Estoy enamorada...
 // reaccion del publico Ternura
+#EXPRESSION_ROCÍO_ENAMORADA2
+#EXPRESSION_LUCÍA_SORPRENDIDA1
 Rocío: De dos a la vez... 
 // reaccion del publico Asombro
 
+#EXPRESSION_LUCÍA_CONFUNDIDA1
 Lucía: Espérate, pérate. Cómo es eso?
+#EXPRESSION_ROCÍO_BANDIDA1
 Rocío: Tal y como escuchaste Lucía. Llevo saliendo ya un buen tiempo con dos chicos que conocí en la academia de baile en la que estudio.
+#EXPRESSION_ROCÍO_FELIZINDECISA
+#EXPRESSION_LUCÍA_QUIETNEUTRAL
 Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
-#HIDE_LUCÍA
+//#HIDE_LUCÍA para peobar que funcione el FadeOut
 * [Tranquila reina nosotros te ayudaremos a resolver este triángulo amoroso.]
     ~ episode_rating += 5
     Rocío: Gracias Lucía, sabía que podía contar con tu apoyo!
