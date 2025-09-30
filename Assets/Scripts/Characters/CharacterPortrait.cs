@@ -8,6 +8,11 @@ public class CharacterPortrait : MonoBehaviour
     [SerializeField] private GameObject _characterRoot; // Outer slot container
     [SerializeField] private Transform _scaleTarget;    // PortraitRoot child to scale
 
+    [Header("Speaker Tint Settings")]
+    public Color speakerColor = Color.white; // Bright speaker
+    public Color nonSpeakerColor = new Color(0.6f, 0.6f, 0.6f, 1f); // Dimmed non-speaker
+    public float tintDuration = 0.25f; // How long to lerp tint
+    
     [Header("Animation Settings")]
     public float animationDuration = 0.25f;
     public Vector3 idleScale = Vector3.one;
@@ -26,6 +31,7 @@ public class CharacterPortrait : MonoBehaviour
     public string CurrentCharacterName => _currentCharacterName;
 
     // --- Show / Setup
+    private bool isFadingIn;
     public void Setup(string characterName, Sprite initialSprite)
     {
         _currentCharacterName = characterName;
@@ -37,6 +43,7 @@ public class CharacterPortrait : MonoBehaviour
         _spriteImage.color = new Color(c.r, c.g, c.b, 0f);
 
         if (_fadeRoutine != null) StopCoroutine(_fadeRoutine);
+        isFadingIn = true;
         _fadeRoutine = StartCoroutine(FadeInCoroutine());
 
         justShown = true;
@@ -146,6 +153,7 @@ public class CharacterPortrait : MonoBehaviour
     private IEnumerator FadeInCoroutine()
     {
         Debug.Log($"[FadeIn] {_currentCharacterName} starting");
+        Debug.Log($"[FadeIn] {_currentCharacterName} alpha={_spriteImage.color.a}");
         Color start = new Color(1f, 1f, 1f, 0f);
         Color end = new Color(1f, 1f, 1f, 1f);
 
@@ -159,6 +167,7 @@ public class CharacterPortrait : MonoBehaviour
         }
 
         _spriteImage.color = end;
+        isFadingIn = false; //  now tinting can apply
         Debug.Log($"[FadeIn] {_currentCharacterName} complete");
         _fadeRoutine = null;
     }
@@ -182,5 +191,39 @@ public class CharacterPortrait : MonoBehaviour
         _characterRoot.SetActive(false);
         Debug.Log($"[FadeOut] {_currentCharacterName} complete");
         _fadeRoutine = null;
+    }
+    
+    private Coroutine _tintRoutine;
+
+    public void ApplySpeakerTint(bool isSpeaker)
+    {
+        if (isFadingIn) return; // skip tint while fading
+        if (_tintRoutine != null) StopCoroutine(_tintRoutine);
+
+        // keep the current alpha (from fade coroutine)
+        float currentAlpha = _spriteImage.color.a;
+
+        Color target = isSpeaker ? speakerColor : nonSpeakerColor;
+        target.a = currentAlpha; // preserve fade alpha
+
+        _tintRoutine = StartCoroutine(SmoothTintTo(target));
+    }
+
+    private IEnumerator SmoothTintTo(Color target)
+    {
+        Color start = _spriteImage.color;
+        float t = 0f;
+
+        while (t < tintDuration)
+        {
+            t += Time.deltaTime;
+            float progress = Mathf.Clamp01(t / tintDuration);
+
+            _spriteImage.color = Color.Lerp(start, target, progress);
+            yield return null;
+        }
+
+        _spriteImage.color = target;
+        _tintRoutine = null;
     }
 }

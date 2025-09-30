@@ -758,6 +758,9 @@ MonoBehaviour:
   _spriteImage: {fileID: 1895354436}
   _characterRoot: {fileID: 233441312}
   _scaleTarget: {fileID: 657713700}
+  speakerColor: {r: 1, g: 1, b: 1, a: 1}
+  nonSpeakerColor: {r: 0.74213827, g: 0.74213827, b: 0.74213827, a: 1}
+  tintDuration: 0.25
   animationDuration: 0.3
   idleScale: {x: 1, y: 1, z: 1}
   talkingScale: {x: 1.1, y: 1.1, z: 1.1}
@@ -3375,6 +3378,9 @@ MonoBehaviour:
   _spriteImage: {fileID: 1928028962}
   _characterRoot: {fileID: 1804098922}
   _scaleTarget: {fileID: 1384259152}
+  speakerColor: {r: 1, g: 1, b: 1, a: 1}
+  nonSpeakerColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+  tintDuration: 0.25
   animationDuration: 0.3
   idleScale: {x: 1, y: 1, z: 1}
   talkingScale: {x: 1.1, y: 1.1, z: 1.1}

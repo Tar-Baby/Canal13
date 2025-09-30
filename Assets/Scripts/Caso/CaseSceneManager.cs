@@ -527,25 +527,33 @@ public class CaseSceneManager : MonoBehaviour
     {
         Debug.Log($"[UpdateSpeakerAnimation] Speaker = '{currentSpeaker}'");
 
-        if (string.IsNullOrEmpty(currentSpeaker))
-        {
-            // narration: everyone idle
-            foreach (var kvp in _activeCharacters)
-                kvp.Value.SetIdleState();
-            _currentSpeakerPortrait = null;
-            return;
-        }
+   if (string.IsNullOrEmpty(currentSpeaker) ||
+    currentSpeaker.Equals("Narrador", System.StringComparison.OrdinalIgnoreCase))
+{
+    foreach (var kvp in _activeCharacters)
+    {
+        // only adjust scale, leave fadeIn to finish
+        kvp.Value.SetIdleState();
+
+        // keep everyone bright, but preserve alpha (fade still runs)
+        kvp.Value.ApplySpeakerTint(true);
+    }
+    _currentSpeakerPortrait = null;
+    return;
+}
 
         foreach (var kvp in _activeCharacters)
         {
             if (string.Equals(kvp.Key, currentSpeaker, System.StringComparison.OrdinalIgnoreCase))
             {
                 kvp.Value.SetTalkingState();   // current speaker pops & stays enlarged
+                kvp.Value.ApplySpeakerTint(true);  // brighten speaker
                 _currentSpeakerPortrait = kvp.Value;
             }
             else
             {
                 kvp.Value.SetIdleState();      // everyone else idle
+                kvp.Value.ApplySpeakerTint(false); // smoothly dim others
             }
         }
     }

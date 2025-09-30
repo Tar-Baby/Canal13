@@ -95,14 +95,14 @@ Rocío: Qué culpa tengo yo de que el guapo sea chiro y el del billete sea bagre
 #EXPRESSION_LUCÍA_RESIGNADA1
 #EXPRESSION_ROCÍO_AVERGONZADA1
 Rocío: Por eso quiero que me ayudes a decidirme por uno... 
-Lucía: Ya ya entendí... 
+Lucía: Ya ya, posi posi... 
 #EXPRESSION_LUCÍA_MOTIVADA1
 #EXPRESSION_ROCÍO_AVERGONZADA2
 Lucía: La plena que esto se pone cada vez mejor.
 #EXPRESSION_LUCÍA_QUE PASEEE
 #EXPRESSION_ROCÍO_ENAMORADA4
 Lucía: Que pase el primer noviooooo Héctor!! //Reaccion del publico Aplausos
-#HIDE_LUCÍA
+//#HIDE_LUCÍA
 Narrador: (Llega Héctor y abraza a Rocío antes de tomar asiento)
 Héctor: Buenas con todos, un gusto haber sido invitado.
 
