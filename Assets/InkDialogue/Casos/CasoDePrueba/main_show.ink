@@ -76,7 +76,7 @@ Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno par
     
 - Rocío: (se sonroja) A ver, pero qué culpa tengo yo de que el guapo sea chiro y el del billete sea bagre?
 Rocío: Por eso quiero que me ayudes a decidirme por uno!!! 
-Lucía: Ya ya entendí... La plena que esto se pone cada vez mejor, que pase el primer noviooooo Héctor!! //Reaacion del publico Aplausos
+Lucía: Ya ya entendí... La plena que esto se pone cada vez mejor, que pase el primer noviooooo Héctor!! //Reaccion del publico Aplausos
 
 Narrador: (Llega Héctor y abraza a Rocío antes de tomar asiento)
 Héctor: Buenas con todos, un gusto haber sido invitado.
@@ -96,7 +96,7 @@ Héctor: Pues la verdad no, Rocío dijo que tenía una sorpresa para mí y que p
 Lucía: Pues enorme sorpresa la que te vas a llevar, que pase el segundo noviooooo Isaac!!!
 Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
-(Llega Isaac y se acerca para besar a Rocío)
+Narrador: (Llega Isaac y se acerca para besar a Rocío)
 Héctor: Hijo de la gran...
 Narrador: (Héctor se abalanza sobre él y comienzan a caerse a golpes)
 //reacion del publico asombro
@@ -115,7 +115,7 @@ Rocío: Se van a lastimar, alguien haga algo!!!
 Narrador: (Los dos vuelven a sus asientos y todos hacen silencio en la sala)
 
 Lucía: Está bien, podemos proseguir... Rocío, les debes una explicación a estos muchachos.
-Hector e Isaac dirigen su mirada a Rocío.
+Narrador: Hector e Isaac dirigen su mirada a Rocío.
 
 Rocío: Jeje hola chicos, pues verán... los dos son maravillosos y me siento tan afortunada de tenerlos!!!
 Rocío: Porque uno es tan guapo que pone celosas a todas mis amigas de lo bueno que está y el otro me cumple todos mis caprichos y me consiente.

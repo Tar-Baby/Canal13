@@ -55,7 +55,8 @@ public class CaseSceneManager : MonoBehaviour
 
     private Story caseStory; // La historia de Ink para este caso
     private Dictionary<string, object> inkVariables = new Dictionary<string, object>();
-
+    
+    private Coroutine typewriterRoutine;
 
     private void Start()
     {
@@ -383,7 +384,10 @@ public class CaseSceneManager : MonoBehaviour
     {
         if (!caseStarted) return;
         currentText = text;
-        if (caseText != null) { caseText.text = currentText; StartCoroutine(TypewriterEffect()); } // <-- ¡CORRECCIÓN! caseText.text = currentText
+
+        if (typewriterRoutine != null) StopCoroutine(typewriterRoutine);
+        typewriterRoutine = StartCoroutine(TypewriterEffect());
+
         if (debugMode) Debug.Log($"[CaseSceneManager] Showing case text: {text}");
     }
 
@@ -521,45 +525,27 @@ public class CaseSceneManager : MonoBehaviour
 
     private void UpdateSpeakerAnimation(string currentSpeaker)
     {
-        Debug.Log($"[UpdateSpeakerAnimation] Speaker='{currentSpeaker}'");
+        Debug.Log($"[UpdateSpeakerAnimation] Speaker = '{currentSpeaker}'");
 
         if (string.IsNullOrEmpty(currentSpeaker))
         {
-            // No speaker → narration → everyone idle
+            // narration: everyone idle
             foreach (var kvp in _activeCharacters)
                 kvp.Value.SetIdleState();
-
             _currentSpeakerPortrait = null;
             return;
         }
 
         foreach (var kvp in _activeCharacters)
         {
-            // normalize both sides for safe compare
-            if (kvp.Key.ToUpper() == currentSpeaker.ToUpper())
+            if (string.Equals(kvp.Key, currentSpeaker, System.StringComparison.OrdinalIgnoreCase))
             {
-                kvp.Value.SetTalkingState();   // active speaker pops
+                kvp.Value.SetTalkingState();   // current speaker pops & stays enlarged
                 _currentSpeakerPortrait = kvp.Value;
             }
             else
             {
-                kvp.Value.SetIdleState();      // others idle
-            }
-        }
-        
-
-        // Highlight current speaker
-        if (!string.IsNullOrEmpty(currentSpeaker) &&
-            _activeCharacters.TryGetValue(currentSpeaker, out CharacterPortrait speakerPortrait))
-        {
-            speakerPortrait.SetTalkingState();
-        }
-        else
-        {
-            // If narration (no speaker), everyone goes idle
-            foreach (var kvp in _activeCharacters)
-            {
-                kvp.Value.SetIdleState();
+                kvp.Value.SetIdleState();      // everyone else idle
             }
         }
     }
@@ -639,11 +625,9 @@ public class CaseSceneManager : MonoBehaviour
 
     private void ShowCharacter(string characterName, string slotName)
     {
-        // Find an available slot with the matching name (case-insensitive)
+        // Find correct slot
         CharacterPortrait targetSlot = _characterPortraits.FirstOrDefault(
-            p =>
-                p.name.EndsWith($"_{slotName}",
-                                 System.StringComparison.OrdinalIgnoreCase));
+            p => p.name.EndsWith($"_{slotName}", System.StringComparison.OrdinalIgnoreCase));
 
         if (targetSlot == null)
         {
@@ -651,37 +635,36 @@ public class CaseSceneManager : MonoBehaviour
             return;
         }
 
-        CharacterSpriteDatabase.CharacterEntry charEntry =
-            _spriteDatabase.GetCharacterEntry(characterName);
+        var charEntry = _spriteDatabase.GetCharacterEntry(characterName);
         if (charEntry == null)
         {
-            Debug.LogError(
-                $"Character '{characterName}' not found in Sprite Database!");
+            Debug.LogError($"Character '{characterName}' not found in Sprite Database!");
             return;
         }
 
-        // Check if the character is already in this slot or another
+        // Already active?
         if (_activeCharacters.TryGetValue(characterName, out CharacterPortrait existingPortrait))
         {
             if (existingPortrait == targetSlot)
             {
-                // Already in the correct slot, just update expression
                 Debug.Log($"Character {characterName} already in {slotName}.");
                 return;
             }
             else
             {
-                // Character is in a different slot, move them (hide old, show new)
+                // move from old slot
                 Debug.Log($"Moving {characterName} from {existingPortrait.name} to {targetSlot.name}.");
-                existingPortrait.SetHiddenState(); // Fade out from old slot
+                existingPortrait.SetHiddenState(); 
                 _activeCharacters.Remove(characterName);
             }
         }
 
         // Occupy the slot
         _activeCharacters[characterName] = targetSlot;
-        targetSlot.Setup(characterName, charEntry.GetExpressionSprite("default"));
-        targetSlot.SetIdleState(); // Make it appear as idle
+        targetSlot.Setup(characterName, charEntry.GetExpressionSprite("entrada"));
+
+        // ⚠️ Removed targetSlot.SetIdleState(); (no extra idle forced)
+
         Debug.Log($"Showing {characterName} in {targetSlot.name}");
     }
 
@@ -761,7 +744,8 @@ public class CaseSceneManager : MonoBehaviour
             {
                 if (isTyping)
                 {
-                    StopAllCoroutines();
+                    //StopAllCoroutines();
+                    if (typewriterRoutine != null) StopCoroutine(typewriterRoutine);
                     // ASIGNACIÓN CORRECTA: Asigna el string 'currentText' a la propiedad '.text' de 'caseText'.
                     if (caseText != null) caseText.text = currentText; 
                     isTyping = false;

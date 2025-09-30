@@ -599,7 +599,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 13
+  m_lineSpacing: 14
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -760,8 +760,8 @@ MonoBehaviour:
   _scaleTarget: {fileID: 657713700}
   animationDuration: 0.3
   idleScale: {x: 1, y: 1, z: 1}
-  talkingScale: {x: 1.3, y: 1.3, z: 1.3}
-  overshootMultiplier: 1.4
+  talkingScale: {x: 1.1, y: 1.1, z: 1.1}
+  overshootMultiplier: 1.1
   talkCurve:
     serializedVersion: 2
     m_Curve:
@@ -1573,7 +1573,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -49, y: 159}
-  m_SizeDelta: {x: 412.9, y: 81.1}
+  m_SizeDelta: {x: 313.2, y: 92.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661489055
 MonoBehaviour:
@@ -1776,7 +1776,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 6
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -2186,7 +2186,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -49, y: 260.2}
-  m_SizeDelta: {x: 412.9, y: 81.1}
+  m_SizeDelta: {x: 313.2, y: 92.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1026839269
 MonoBehaviour:
@@ -2554,7 +2554,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 6
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -3357,7 +3357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 603.12, y: 45.6}
+  m_AnchoredPosition: {x: 623.23, y: 45.6}
   m_SizeDelta: {x: 479.2368, y: 479.2368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1804098924
@@ -3377,8 +3377,8 @@ MonoBehaviour:
   _scaleTarget: {fileID: 1384259152}
   animationDuration: 0.3
   idleScale: {x: 1, y: 1, z: 1}
-  talkingScale: {x: 1.3, y: 1.3, z: 1.3}
-  overshootMultiplier: 1.4
+  talkingScale: {x: 1.1, y: 1.1, z: 1.1}
+  overshootMultiplier: 1.1
   talkCurve:
     serializedVersion: 2
     m_Curve:
@@ -3461,7 +3461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37.1, y: 32.2}
+  m_AnchoredPosition: {x: 68.2, y: 32.199997}
   m_SizeDelta: {x: 2048, y: 1847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1895354436
@@ -3660,7 +3660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.64, y: 32.2}
+  m_AnchoredPosition: {x: -30, y: 32.2}
   m_SizeDelta: {x: 2048, y: 1847}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928028962
