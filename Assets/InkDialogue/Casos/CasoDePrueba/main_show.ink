@@ -55,29 +55,54 @@ Rocío: Tal y como escuchaste Lucía. Llevo saliendo ya un buen tiempo con dos c
 #EXPRESSION_ROCÍO_FELIZINDECISA
 #EXPRESSION_LUCÍA_DUDOSA1
 Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
-//#HIDE_LUCÍA para peobar que funcione el FadeOut
+//#HIDE_LUCÍA para probar que funcione el FadeOut
 * [Tranquila reina nosotros te ayudaremos a resolver este triángulo amoroso.]
     ~ episode_rating += 5
+    #EXPRESSION_ROCÍO_ENAMORADA3
+    #EXPRESSION_LUCÍA_CONMOVIDASOFT
     Rocío: Gracias Lucía, sabía que podía contar con tu apoyo!
     
 * [Los amas a los dos, Rocío? Hmm... no lo sé, algo me huele raro aquí.]
     ~ episode_rating += 10
+    #EXPRESSION_ROCÍO_NERVIOSA1
+    #EXPRESSION_LUCÍA_CONFUNDIDA1
     Rocío: Ay no seas así, déjame explicarte antes de que saltes a conclusiones.
     
-- Lucía: Bueno, bueno cómo es la vaina?
+- #EXPRESSION_LUCÍA_FELIZOJOSCERRADOS
+ Lucía: Bueno, bueno cómo es la vaina?
+#EXPRESSION_ROCÍO_ENTRADA
 Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno para el Gusto y otro para el Gasto. 
     //~ episode_rating += 10 // reaccion del publico Asombro public_reaction = "asombro"
 
 * [Tal y cómo lo sospeché. Eres una bandida!]
     ~ episode_rating += 10   // reaccion del publico Risas
+    #EXPRESSION_LUCÍA_PAPEADORA1
+    #EXPRESSION_ROCÍO_TRISTE1
+    Rocío: Lucíaaaa no me digas así!!
     
 * [No sé si termino de comprender, pero tengo miedo de preguntar.]
     ~ episode_rating -= 5
+    #EXPRESSION_LUCÍA_DUDOSA2
+    #EXPRESSION_ROCÍO_DUDOSA1
+    Rocío: Ash, no es tan complicado.
     
-- Rocío: (se sonroja) A ver, pero qué culpa tengo yo de que el guapo sea chiro y el del billete sea bagre?
-Rocío: Por eso quiero que me ayudes a decidirme por uno!!! 
-Lucía: Ya ya entendí... La plena que esto se pone cada vez mejor, que pase el primer noviooooo Héctor!! //Reaccion del publico Aplausos
-
+-#EXPRESSION_ROCÍO_ENOJADA1
+#EXPRESSION_LUCÍA_INCOMODA1
+Rocío: ...Además, no se supone que en tu show ayudas a las personas?
+#EXPRESSION_ROCÍO_ENOJADA2
+#EXPRESSION_LUCÍA_INCOMODA2
+Rocío: Qué culpa tengo yo de que el guapo sea chiro y el del billete sea bagre?!
+#EXPRESSION_LUCÍA_RESIGNADA1
+#EXPRESSION_ROCÍO_AVERGONZADA1
+Rocío: Por eso quiero que me ayudes a decidirme por uno... 
+Lucía: Ya ya entendí... 
+#EXPRESSION_LUCÍA_MOTIVADA1
+#EXPRESSION_ROCÍO_AVERGONZADA2
+Lucía: La plena que esto se pone cada vez mejor.
+#EXPRESSION_LUCÍA_QUE PASEEE
+#EXPRESSION_ROCÍO_ENAMORADA4
+Lucía: Que pase el primer noviooooo Héctor!! //Reaccion del publico Aplausos
+#HIDE_LUCÍA
 Narrador: (Llega Héctor y abraza a Rocío antes de tomar asiento)
 Héctor: Buenas con todos, un gusto haber sido invitado.
 

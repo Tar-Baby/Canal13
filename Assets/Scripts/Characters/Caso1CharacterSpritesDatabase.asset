@@ -16,7 +16,7 @@ MonoBehaviour:
   - characterName: "Luc\xEDa"
     expressions:
     - expressionName: Default
-      sprite: {fileID: 21300000, guid: f2963a3d7df1b274e874577f183c8fa3, type: 3}
+      sprite: {fileID: 21300000, guid: c4f69bc2f1038de4cab7f32c37daf0c8, type: 3}
     - expressionName: Frase
       sprite: {fileID: 21300000, guid: 787fcdd81758be543b09780844a8588f, type: 3}
     - expressionName: Saludo
@@ -35,6 +35,22 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 58e084822b189a94a9782c12c923eb2e, type: 3}
     - expressionName: Entrada
       sprite: {fileID: 21300000, guid: f2963a3d7df1b274e874577f183c8fa3, type: 3}
+    - expressionName: FelizOjosCerrados
+      sprite: {fileID: 21300000, guid: bf0c89bd39b0d7849a6372319c19cc22, type: 3}
+    - expressionName: Papeadora1
+      sprite: {fileID: 21300000, guid: 59dc87f371c97ca43a0546a02c878125, type: 3}
+    - expressionName: Dudosa1
+      sprite: {fileID: 21300000, guid: 58e084822b189a94a9782c12c923eb2e, type: 3}
+    - expressionName: Dudosa2
+      sprite: {fileID: 21300000, guid: c076f974ff6954e40bd1abfab0cc7be5, type: 3}
+    - expressionName: Incomoda1
+      sprite: {fileID: 21300000, guid: 238fa6afc25ee364387efd4b0f7df647, type: 3}
+    - expressionName: Incomoda2
+      sprite: {fileID: 21300000, guid: 9bd46c4e1bcb03340ba56dcbb9cc7080, type: 3}
+    - expressionName: Resignada1
+      sprite: {fileID: 21300000, guid: 343f5137192c35f4bbd5420241d1e0d8, type: 3}
+    - expressionName: Motivada1
+      sprite: {fileID: 21300000, guid: 02b787e1f2591d045a8b956c838f92f5, type: 3}
   - characterName: "Roc\xEDo"
     expressions:
     - expressionName: Default
@@ -51,6 +67,24 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 65d02b1eec66e9b46af365967718144d, type: 3}
     - expressionName: Entrada
       sprite: {fileID: 21300000, guid: ff771e0b19046cc4c992852018817db1, type: 3}
+    - expressionName: Enamorada4
+      sprite: {fileID: 21300000, guid: 673df165e77513e40ba08a508e91631a, type: 3}
+    - expressionName: Nerviosa1
+      sprite: {fileID: 21300000, guid: a1d9681038d595a48a205930f262496a, type: 3}
+    - expressionName: Enojada1
+      sprite: {fileID: 21300000, guid: 36db119c61d7f4745bc6b30fbb6f3e50, type: 3}
+    - expressionName: Enojada2
+      sprite: {fileID: 21300000, guid: 156cf183547424545a2dc4d08fa3763f, type: 3}
+    - expressionName: Avergonzada1
+      sprite: {fileID: 21300000, guid: c7ca499f666d2f844b316025db1f3325, type: 3}
+    - expressionName: Avergonzada2
+      sprite: {fileID: 21300000, guid: 8c2ebc3e949511947b66b155e6c25361, type: 3}
+    - expressionName: Enamorada3
+      sprite: {fileID: 21300000, guid: 236b59eb15b75b942ae44f73f7b63035, type: 3}
+    - expressionName: Triste1
+      sprite: {fileID: 21300000, guid: 269eb9f3a0330724a8dcde121dfd9384, type: 3}
+    - expressionName: Dudosa1
+      sprite: {fileID: 21300000, guid: 0aaee7564e007a9448838a66f08c6e66, type: 3}
   - characterName: "H\xE9ctor"
     expressions: []
   - characterName: Isaac
