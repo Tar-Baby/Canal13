@@ -8,13 +8,16 @@ Narrador: Al aire en 3...2...1...
 #SHOW_LUCÍA_LEFT
 //#EXPRESSION_LUCÍA_SALUDO este es su expresion default en este caso
 Lucía: Hola a todos, bienvenidos al gran estreno de "{show_name}" el día de hoy tenemos un programa espectacular! 
-
 #EXPRESSION_LUCÍA_FRASEALT
 Lucía: Y quisiera comenzar con una frase, se trata de un antiguo proverbio montubio que dice así:
 #EXPRESSION_LUCÍA_FRASE
 Lucía: "El que la hace, se olvida. El que la recibe, nunca"
+#EXPRESSION_LUCÍA_FELIZOJOSCERRADOS
+Lucía: Que pase nuestra invitada especial!
 #EXPRESSION_LUCÍA_QUE PASEEE
-Lucía: Que pase nuestra invitada especial, démosle un aplauso a Rocíooo.
+#WIGGLE
+Lucía: UN APLAUSO PARA ROCÍOOOOO!!!
+#NO_WIGGLE
 
 Narrador: El público enloquece.
 #SHOW_ROCÍO_RIGHT
@@ -39,7 +42,6 @@ Rocío: Verás Lucía, estoy enfrentando la decisión más difícil en la vida d
 
 = continue_story
 // Aquí continúa independientemente de la opción elegida
-
 #EXPRESSION_ROCÍO_ENAMORADA1
 #EXPRESSION_LUCÍA_CONMOVIDASOFT
 Rocío: Estoy enamorada...
@@ -103,7 +105,9 @@ Lucía: Ya ya, posi posi...
 Lucía: La plena que esto se pone cada vez mejor.
 #EXPRESSION_LUCÍA_QUE PASEEE
 #EXPRESSION_ROCÍO_ENAMORADA4
-Lucía: Que pase el primer noviooooo Héctor!! //Reaccion del publico Aplausos
+#WIGGLE
+Lucía: QUE PASE EL PRIMER NOVIOOOOO!!! //Reaccion del publico Aplausos
+#NO_WIGGLE
 //#HIDE_LUCÍA
 Narrador: Llega Héctor y abraza a Rocío antes de tomar asiento.
 Héctor: Buenas con todos, un gusto haber sido invitado.
@@ -120,7 +124,10 @@ Héctor: Nos conocimos en nuestros ensayos de baile urbano, desde que la vi qued
 
 - Lucía: Y tienes alguna idea de por qué estás aquí?
 Héctor: Pues la verdad no, Rocío dijo que tenía una sorpresa para mí y que podía salir en televisión. Y heme aquí.
-Lucía: Pues enorme sorpresa la que te vas a llevar, que pase el segundo noviooooo Isaac!!!
+Lucía: Pues enorme sorpresa la que te vas a llevar.
+#WIGGLE
+Lucía:QUE PASE EL SEGUNDO NOVIOOOOO!!!
+#NO_WIGGLE
 Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
 Narrador: Llega Isaac y se acerca para besar a Rocío.
@@ -197,6 +204,8 @@ Narrador: Todos en la sala quedan desconcertados y confundidos.
 Lucía: Maravillosas noticias Carmencita, hazlo pasar. 
 Isaac: Espera, no puedes meter a cualquier random aquí. Este problema es de los tres nada más.
 Lucía: Este es mi show, papito, y aquí mando YO!!! 
-Lucía: Que pase el testigoooooo!!!!
+#WIGGLE
+Lucía: QUE PASE EL TESTIGOOOO!!!!
+#NO_WIGGLE
 
 -> END

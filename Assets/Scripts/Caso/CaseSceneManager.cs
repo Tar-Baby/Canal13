@@ -32,6 +32,10 @@ public class CaseSceneManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float typewriterSpeed = 0.05f; // Velocidad del efecto de máquina de escribir
     [SerializeField] private bool debugMode = true; // Modo depuración para logs adicionales
+    [SerializeField] private float wiggleStrength = 5f;
+    [SerializeField] private float wiggleSpeed = 25f;
+    private bool wiggleActive = false;
+    private Coroutine wiggleRoutine;
     
     [Header("Character Sprites & Portraits")]
     [SerializeField]
@@ -398,12 +402,26 @@ public class CaseSceneManager : MonoBehaviour
     private IEnumerator TypewriterEffect()
     {
         isTyping = true;
+
         for (int i = 0; i <= currentText.Length; i++)
         {
-            if (caseText != null) caseText.text = currentText.Substring(0, i);
+            caseText.text = currentText.Substring(0, i);
+
+            if (wiggleActive)
+            {
+                ApplyWiggleEffect();
+            }
+
             yield return new WaitForSeconds(typewriterSpeed);
         }
+
         isTyping = false;
+
+        if (wiggleActive)
+        {
+            if (wiggleRoutine != null) StopCoroutine(wiggleRoutine);
+            wiggleRoutine = StartCoroutine(ContinuousWiggle());
+        }
     }
 
     // Muestra los botones de opciones del caso.
@@ -627,6 +645,24 @@ public class CaseSceneManager : MonoBehaviour
                 FadeAllCharactersToIdle();
             }
             // Add more tag handlers here (e.g., #MOVE_CHARACTER_SLOT)
+
+            
+            else if (trimmedTag == "WIGGLE")
+            {
+                wiggleActive = true;
+                if (!isTyping) // if line already typed
+                {
+                    if (wiggleRoutine != null) StopCoroutine(wiggleRoutine);
+                    wiggleRoutine = StartCoroutine(ContinuousWiggle());
+                }
+            }
+            else if (trimmedTag == "NO_WIGGLE")
+            {
+                wiggleActive = false;
+                if (wiggleRoutine != null) StopCoroutine(wiggleRoutine);
+                wiggleRoutine = null;
+            }
+            
             else
             {
                 Debug.Log($"Unhandled Ink tag: {tag}");
@@ -779,6 +815,48 @@ public class CaseSceneManager : MonoBehaviour
 
         namePanelRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, targetWidth);
         _resizeRoutine = null;
+    }
+    
+    private void ApplyWiggleEffect()
+    {
+        caseText.ForceMeshUpdate();
+        var textInfo = caseText.textInfo;
+        int charCount = textInfo.characterCount;
+
+        for (int c = 0; c < charCount; c++)
+        {
+            if (!textInfo.characterInfo[c].isVisible) continue;
+
+            int vertexIndex = textInfo.characterInfo[c].vertexIndex;
+            int matIndex = textInfo.characterInfo[c].materialReferenceIndex;
+            Vector3[] vertices = textInfo.meshInfo[matIndex].vertices;
+
+            float offsetX = Mathf.Sin((Time.time + c) * wiggleSpeed) * wiggleStrength;
+            float offsetY = Mathf.Cos((Time.time + c) * wiggleSpeed * 0.5f) * wiggleStrength * 0.5f;
+            Vector3 offset = new Vector3(offsetX, offsetY, 0);
+
+            vertices[vertexIndex + 0] += offset;
+            vertices[vertexIndex + 1] += offset;
+            vertices[vertexIndex + 2] += offset;
+            vertices[vertexIndex + 3] += offset;
+        }
+
+        for (int m = 0; m < textInfo.meshInfo.Length; m++)
+        {
+            var meshInfo = textInfo.meshInfo[m];
+            meshInfo.mesh.vertices = meshInfo.vertices;
+            caseText.UpdateGeometry(meshInfo.mesh, m);
+        }
+    }
+
+    private IEnumerator ContinuousWiggle()
+    {
+        while (wiggleActive)
+        {
+            ApplyWiggleEffect();
+            yield return null;
+        }
+        wiggleRoutine = null;
     }
 
     // Maneja la entrada del usuario para avanzar el diálogo o completar el typewriter.
