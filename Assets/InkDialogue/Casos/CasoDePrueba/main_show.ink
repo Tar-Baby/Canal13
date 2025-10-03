@@ -15,7 +15,7 @@ Lucía: "El que la hace, se olvida. El que la recibe, nunca"
 #EXPRESSION_LUCÍA_QUE PASEEE
 Lucía: Que pase nuestra invitada especial, démosle un aplauso a Rocíooo.
 
-Narrador: (El público enloquece)
+Narrador: El público enloquece.
 #SHOW_ROCÍO_RIGHT
 Rocío: Hola Lucía es un honor estar ante ustedes y ante las cámaras. Gracias por recibirme en tu programa.
 
@@ -69,7 +69,7 @@ Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
     Rocío: Ay no seas así, déjame explicarte antes de que saltes a conclusiones.
     
 - #EXPRESSION_LUCÍA_FELIZOJOSCERRADOS
- Lucía: Bueno, bueno cómo es la vaina?
+Lucía: Bueno, bueno cómo es la vaina?
 #EXPRESSION_ROCÍO_ENTRADA
 Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno para el Gusto y otro para el Gasto. 
     //~ episode_rating += 10 // reaccion del publico Asombro public_reaction = "asombro"
@@ -103,7 +103,7 @@ Lucía: La plena que esto se pone cada vez mejor.
 #EXPRESSION_ROCÍO_ENAMORADA4
 Lucía: Que pase el primer noviooooo Héctor!! //Reaccion del publico Aplausos
 //#HIDE_LUCÍA
-Narrador: (Llega Héctor y abraza a Rocío antes de tomar asiento)
+Narrador: Llega Héctor y abraza a Rocío antes de tomar asiento.
 Héctor: Buenas con todos, un gusto haber sido invitado.
 
 *[Uy, tú de ley eres el del Gasto porque con esas fachas... olvídate papito. De Gusto no tienes nada.]
@@ -121,9 +121,9 @@ Héctor: Pues la verdad no, Rocío dijo que tenía una sorpresa para mí y que p
 Lucía: Pues enorme sorpresa la que te vas a llevar, que pase el segundo noviooooo Isaac!!!
 Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
-Narrador: (Llega Isaac y se acerca para besar a Rocío)
+Narrador: Llega Isaac y se acerca para besar a Rocío.
 Héctor: Hijo de la gran...
-Narrador: (Héctor se abalanza sobre él y comienzan a caerse a golpes)
+Narrador: Héctor se abalanza sobre él y comienzan a caerse a golpes.
 //reacion del publico asombro
 Lucía: Ave maría purísima, se armó la grande.
 Rocío: Se van a lastimar, alguien haga algo!!!
@@ -137,7 +137,7 @@ Rocío: Se van a lastimar, alguien haga algo!!!
 ~ episode_rating -= 10
 
 - Lucía: Ya mucha tontera, se me calman los dos. O resuelven esto como adultos o los expulso de mi set!!!
-Narrador: (Los dos vuelven a sus asientos y todos hacen silencio en la sala)
+Narrador: Los dos vuelven a sus asientos y todos hacen silencio en la sala.
 
 Lucía: Está bien, podemos proseguir... Rocío, les debes una explicación a estos muchachos.
 Narrador: Hector e Isaac dirigen su mirada a Rocío.
@@ -154,7 +154,7 @@ Rocío: No veo por qué no podemos continuar con esto tan especial que tenemos. 
 * [Dios mío, pero qué conchuda que eres!]
     ~ episode_rating += 10 // reaccion del publico Risas public_reaction = "enojo"
     // info a un lado que diga (i: decidiste regañar a Rocío)
-    Rocío: Lucíaaa, vine al programa porque se supone que debes ayudarme!!!! No hacerme quedar como la mala :(
+    Rocío: Lucíaaa qué te pasa, no me hagas quedar como la mala.
 
 - Lucía: Isaac, te concedo la palabra ya que no tuviste la oportunidad de presentarte. Pero te lo advierto, nada de insultos ni provocaciones, ese es mi trabajo!
 
@@ -174,7 +174,7 @@ Isaac: Te lo agradezco Lucía, pues yo soy el verdadero novio de Rocío y estoy 
 Isaac: Se le estimuló la hipergamia. Claramente está confundida y necesita que yo tome las decisiones por ella.
     //public_reaction = "indignación"
     
-Lucía pone cara de enojo...
+Narrador: Lámpara este man oe. Lucía pone cara de enojo...
 
 Lucía: Ok, primero que nada la palabra "Hipergamia" queda prohibida en mi set.
 Lucía: Segundo, acaso estás diciendo que las mujeres somos todas unas infieles y unas incapaces? Eso no te lo voy a permitir!
@@ -188,11 +188,13 @@ Isaac: Así es y a mucha honra!
     //public_reaction = "sorpresa"
 Lucía: Rocío por qué estás tan callada, vas a dejar que este sinvergüenza se exprese así de ti y de todas nosotras?
 Rocío: ... es que... Lucía... nunca nadie se había preocupado tanto por mí!
-Lucía: Ay bebé. Estás viendo y no ves...
+Lucía: No seas ridícula, por favor.
 
 Carmen (via intercom): Eh... Lucía, producción me comenta que tienen un Testigo Sorpresa.
-Lucía: Entendido Carmencita, hazlo pasar.
-Rocío: Espera, eso es imposible. Debe ser un malentendido, él no puede estar aquí! 
-Lucía: Este es mi show y aquí mando yo!!! Que pase el Testigoooooo!!!!
+Narrador: Todos en la sala quedan desconcertados y confundidos.
+Lucía: Maravillosas noticias Carmencita, hazlo pasar. 
+Isaac: Espera, no puedes meter a cualquier random aquí. Este problema es de los tres nada más.
+Lucía: Este es mi show y aquí mando yo!!! 
+Lucía: Que pase el Testigoooooo!!!!
 
 -> END
