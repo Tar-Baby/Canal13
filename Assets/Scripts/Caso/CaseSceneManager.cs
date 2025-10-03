@@ -12,12 +12,15 @@ public class CaseSceneManager : MonoBehaviour
     [Header("Case UI References")]
     [SerializeField] private GameObject casePanel; // Referencia al GameObject "CaseDialoguePanelUI"
     [SerializeField] private TextMeshProUGUI caseText; // Referencia al TextMeshProUGUI "CaseText" (o DialogueText)
-    [SerializeField] private GameObject namePanel; // panel de nombre de speaker
-    [SerializeField] private TextMeshProUGUI speakerNameText;
     [SerializeField] private Button caseContinueButton; // Referencia al Button "ContinueButton"
     [SerializeField] private GameObject caseChoicesPanel; // Referencia al GameObject "CaseChoicesPanel" (o ChoicesPanel)
     [SerializeField] private Button[] caseChoiceButtons = new Button[4]; // Array de referencias a Button "ChoiceButton1", etc.
     [SerializeField] private Button caseFinalButton; // Referencia al Button "FinalButton" (si tu caso termina con un botón final)
+    
+    [Header("Speaker Name UI")]
+    [SerializeField] private RectTransform namePanelRect;     // The background box panel de nombre de speaker
+    [SerializeField] private TextMeshProUGUI speakerNameText; // TMP text inside the panel
+    [SerializeField] private float horizontalPadding = 30f;   // Extra padding on each side
 
     // Ya NO necesitamos una referencia para el icono de menú aquí,
     // porque estará SIEMPRE visible y no será controlado por este script para su visibilidad.
@@ -312,12 +315,12 @@ public class CaseSceneManager : MonoBehaviour
                     dialogueContent = parts[1].Trim();
                 }
 
-                // --- Set speaker name text ---
-                if (speakerNameText != null)
+                // --- Set speaker name + resize box ---
+                if (speakerNameText != null && namePanelRect != null)
                 {
-                    speakerNameText.text = speakerName;
+                    UpdateNameBox(speakerName);
                 }
-
+                
                 // --- Animate current speaker ---
                 if (speakerNameText != null) speakerNameText.text = speakerName;
                 
@@ -742,6 +745,41 @@ public class CaseSceneManager : MonoBehaviour
     }
 
     #endregion
+    
+    private Coroutine _resizeRoutine;
+
+    private void UpdateNameBox(string speakerName)
+    {
+        // Set the text
+        speakerNameText.text = speakerName;
+
+        // Force TMP to recalc width
+        speakerNameText.ForceMeshUpdate();
+        float targetWidth = speakerNameText.preferredWidth + horizontalPadding;
+
+        // Smooth resize
+        if (_resizeRoutine != null) StopCoroutine(_resizeRoutine);
+        _resizeRoutine = StartCoroutine(SmoothResize(targetWidth));
+    }
+
+    private IEnumerator SmoothResize(float targetWidth)
+    {
+        float start = namePanelRect.rect.width;
+        float t = 0f;
+        float duration = 0.25f; // How fast the box resizes
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float p = Mathf.Clamp01(t / duration);
+            float width = Mathf.Lerp(start, targetWidth, p);
+            namePanelRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+            yield return null;
+        }
+
+        namePanelRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, targetWidth);
+        _resizeRoutine = null;
+    }
 
     // Maneja la entrada del usuario para avanzar el diálogo o completar el typewriter.
     private void Update()

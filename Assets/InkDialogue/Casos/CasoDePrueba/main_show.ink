@@ -9,8 +9,9 @@ Narrador: Al aire en 3...2...1...
 //#EXPRESSION_LUCÍA_SALUDO este es su expresion default en este caso
 Lucía: Hola a todos, bienvenidos al gran estreno de "{show_name}" el día de hoy tenemos un programa espectacular! 
 
-#EXPRESSION_LUCÍA_FRASE
+#EXPRESSION_LUCÍA_FRASEALT
 Lucía: Y quisiera comenzar con una frase, se trata de un antiguo proverbio montubio que dice así:
+#EXPRESSION_LUCÍA_FRASE
 Lucía: "El que la hace, se olvida. El que la recibe, nunca"
 #EXPRESSION_LUCÍA_QUE PASEEE
 Lucía: Que pase nuestra invitada especial, démosle un aplauso a Rocíooo.
@@ -67,6 +68,7 @@ Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
     #EXPRESSION_ROCÍO_NERVIOSA1
     #EXPRESSION_LUCÍA_CONFUNDIDA1
     Rocío: Ay no seas así, déjame explicarte antes de que saltes a conclusiones.
+    
     
 - #EXPRESSION_LUCÍA_FELIZOJOSCERRADOS
 Lucía: Bueno, bueno cómo es la vaina?
@@ -194,7 +196,7 @@ Carmen (via intercom): Eh... Lucía, producción me comenta que tienen un Testig
 Narrador: Todos en la sala quedan desconcertados y confundidos.
 Lucía: Maravillosas noticias Carmencita, hazlo pasar. 
 Isaac: Espera, no puedes meter a cualquier random aquí. Este problema es de los tres nada más.
-Lucía: Este es mi show y aquí mando yo!!! 
-Lucía: Que pase el Testigoooooo!!!!
+Lucía: Este es mi show, papito, y aquí mando YO!!! 
+Lucía: Que pase el testigoooooo!!!!
 
 -> END
