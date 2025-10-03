@@ -33,7 +33,19 @@ public class CaseSceneManager : MonoBehaviour
     [SerializeField] private float typewriterSpeed = 0.05f; // Velocidad del efecto de máquina de escribir
     [SerializeField] private bool debugMode = true; // Modo depuración para logs adicionales
     [SerializeField] private float wiggleStrength = 5f;
-    [SerializeField] private float wiggleSpeed = 25f;
+   
+    [System.Serializable]
+    public class WigglePreset
+    {
+        public string presetName;
+        public float strength = 5f;
+        public float speed = 25f;
+    }
+    
+    [SerializeField] private List<WigglePreset> wigglePresets = new List<WigglePreset>();
+    private float currentWiggleStrength = 5f;
+    private float currentWiggleSpeed = 25f;
+
     private bool wiggleActive = false;
     private Coroutine wiggleRoutine;
     
@@ -647,20 +659,39 @@ public class CaseSceneManager : MonoBehaviour
             // Add more tag handlers here (e.g., #MOVE_CHARACTER_SLOT)
 
             
-            else if (trimmedTag == "WIGGLE")
+            else if (trimmedTag.StartsWith("WIGGLE"))
             {
-                wiggleActive = true;
-                if (!isTyping) // if line already typed
+                string[] parts = trimmedTag.Split('_');
+                string presetName = parts.Length > 1 ? parts[1] : "DEFAULT";
+
+                WigglePreset preset = wigglePresets
+                    .FirstOrDefault(p => p.presetName.Equals(presetName, System.StringComparison.OrdinalIgnoreCase));
+
+                if (preset != null)
                 {
-                    if (wiggleRoutine != null) StopCoroutine(wiggleRoutine);
-                    wiggleRoutine = StartCoroutine(ContinuousWiggle());
+                    currentWiggleStrength = preset.strength;
+                    currentWiggleSpeed = preset.speed;
+                    Debug.Log($"[Wiggle] Using preset {preset.presetName}");
                 }
+                else
+                {
+                    currentWiggleStrength = 5f;
+                    currentWiggleSpeed = 25f;
+                }
+
+                wiggleActive = true;
+
+                if (wiggleRoutine != null) StopCoroutine(wiggleRoutine);
+                wiggleRoutine = StartCoroutine(ContinuousWiggle());
             }
             else if (trimmedTag == "NO_WIGGLE")
             {
                 wiggleActive = false;
-                if (wiggleRoutine != null) StopCoroutine(wiggleRoutine);
-                wiggleRoutine = null;
+                if (wiggleRoutine != null)
+                {
+                    StopCoroutine(wiggleRoutine);
+                    wiggleRoutine = null;
+                }
             }
             
             else
@@ -831,8 +862,9 @@ public class CaseSceneManager : MonoBehaviour
             int matIndex = textInfo.characterInfo[c].materialReferenceIndex;
             Vector3[] vertices = textInfo.meshInfo[matIndex].vertices;
 
-            float offsetX = Mathf.Sin((Time.time + c) * wiggleSpeed) * wiggleStrength;
-            float offsetY = Mathf.Cos((Time.time + c) * wiggleSpeed * 0.5f) * wiggleStrength * 0.5f;
+            float offsetX = Mathf.Sin((Time.time + c) * currentWiggleSpeed) * currentWiggleStrength;
+            float offsetY = Mathf.Cos((Time.time + c) * currentWiggleSpeed * 0.5f)
+                            * currentWiggleStrength * 0.5f;
             Vector3 offset = new Vector3(offsetX, offsetY, 0);
 
             vertices[vertexIndex + 0] += offset;
@@ -853,9 +885,10 @@ public class CaseSceneManager : MonoBehaviour
     {
         while (wiggleActive)
         {
-            ApplyWiggleEffect();
-            yield return null;
+            ApplyWiggleEffect(); // same code that modifies TMP vertices
+            yield return null;   // every frame
         }
+
         wiggleRoutine = null;
     }
 

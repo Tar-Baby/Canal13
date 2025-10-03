@@ -15,7 +15,7 @@ Lucía: "El que la hace, se olvida. El que la recibe, nunca"
 #EXPRESSION_LUCÍA_FELIZOJOSCERRADOS
 Lucía: Que pase nuestra invitada especial!
 #EXPRESSION_LUCÍA_QUE PASEEE
-#WIGGLE
+#WIGGLE_NORMAL
 Lucía: UN APLAUSO PARA ROCÍOOOOO!!!
 #NO_WIGGLE
 
@@ -105,7 +105,7 @@ Lucía: Ya ya, posi posi...
 Lucía: La plena que esto se pone cada vez mejor.
 #EXPRESSION_LUCÍA_QUE PASEEE
 #EXPRESSION_ROCÍO_ENAMORADA4
-#WIGGLE
+#WIGGLE_NORMAL
 Lucía: QUE PASE EL PRIMER NOVIOOOOO!!! //Reaccion del publico Aplausos
 #NO_WIGGLE
 //#HIDE_LUCÍA
@@ -125,8 +125,8 @@ Héctor: Nos conocimos en nuestros ensayos de baile urbano, desde que la vi qued
 - Lucía: Y tienes alguna idea de por qué estás aquí?
 Héctor: Pues la verdad no, Rocío dijo que tenía una sorpresa para mí y que podía salir en televisión. Y heme aquí.
 Lucía: Pues enorme sorpresa la que te vas a llevar.
-#WIGGLE
-Lucía:QUE PASE EL SEGUNDO NOVIOOOOO!!!
+#WIGGLE_NORMAL
+Lucía: QUE PASE EL SEGUNDO NOVIOOOOO!!!
 #NO_WIGGLE
 Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
@@ -199,12 +199,12 @@ Lucía: Rocío por qué estás tan callada, vas a dejar que este sinvergüenza s
 Rocío: ... es que... Lucía... nunca nadie se había preocupado tanto por mí!
 Lucía: No seas ridícula, por favor.
 
-Carmen (via intercom): Eh... Lucía, producción me comenta que tienen un Testigo Sorpresa.
+Carmen (vía intercom): Eh... Lucía, producción me comenta que tienen un Testigo Sorpresa.
 Narrador: Todos en la sala quedan desconcertados y confundidos.
 Lucía: Maravillosas noticias Carmencita, hazlo pasar. 
 Isaac: Espera, no puedes meter a cualquier random aquí. Este problema es de los tres nada más.
 Lucía: Este es mi show, papito, y aquí mando YO!!! 
-#WIGGLE
+#WIGGLE_NORMAL
 Lucía: QUE PASE EL TESTIGOOOO!!!!
 #NO_WIGGLE
 

@@ -3645,7 +3645,13 @@ MonoBehaviour:
   typewriterSpeed: 0.05
   debugMode: 1
   wiggleStrength: 2.22
-  wiggleSpeed: 26
+  wigglePresets:
+  - presetName: Normal
+    strength: 2.22
+    speed: 26
+  - presetName: Crazy
+    strength: 33
+    speed: 9.32
   _spriteDatabase: {fileID: 11400000, guid: ef69e25d6198a2c4d858bf02baba312c, type: 2}
   _characterPortraits:
   - {fileID: 233441314}
