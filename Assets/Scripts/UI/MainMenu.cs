@@ -8,14 +8,27 @@ public class MainMenu : MonoBehaviour
     
     [SerializeField] GameObject fadeOut;
     [SerializeField] GameObject fadeIn;
+    [SerializeField] private GameObject background;
+    [SerializeField] private GameObject title;
+    [SerializeField] private GameObject buttonNuevoJuego;
+    [SerializeField] private GameObject buttonOpciones;
+    [SerializeField] private GameObject buttonSalir;
+    [SerializeField] private GameObject panelNegro;
+    [SerializeField] private GameObject textoCita;
     [SerializeField] private AudioSource buttonClick;
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        fadeIn.SetActive(true);
+        panelNegro.SetActive(true);
+        textoCita.SetActive(true); // 7 segundos de animacion
+        DisableElements();
+        StartCoroutine(DisableCita());
+        StartCoroutine(EnableElements());
+        StartCoroutine(PlayFade());
         StartCoroutine(StopFade());
+        
     }
 
     public void StartGame()
@@ -47,7 +60,42 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator StopFade()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(10);
         fadeIn.SetActive(false);
     }
+
+    IEnumerator PlayFade()
+    {
+        yield return new WaitForSeconds(7);
+        fadeIn.SetActive(true);
+        
+    }
+
+    public void DisableElements()
+    {
+        background.SetActive(false);
+        title.SetActive(false);
+        buttonNuevoJuego.SetActive(false);
+        buttonOpciones.SetActive(false);
+        buttonSalir.SetActive(false);
+    }
+
+    IEnumerator EnableElements()
+    {
+        yield return new WaitForSeconds(7);
+        background.SetActive(true);
+        title.SetActive(true);
+        buttonNuevoJuego.SetActive(true);
+        buttonOpciones.SetActive(true);
+        buttonSalir.SetActive(true);
+        
+    }
+
+    IEnumerator DisableCita()
+    {
+        yield return new WaitForSeconds(7);
+        panelNegro.SetActive(false);
+        textoCita.SetActive(false);
+    }
+    
 }
