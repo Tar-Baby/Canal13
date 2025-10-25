@@ -4,7 +4,9 @@ VAR public_reaction = "neutral"
 
 //#FADEALL
 // Inicio del programa principal
+#MUSIC_DEFAULT SHOW THEME
 Narrador: Al aire en 3...2...1...
+#SFX_AUDIENCE CHEERING 2_REVERB
 #SHOW_LUCÍA_LEFT
 //#EXPRESSION_LUCÍA_SALUDO este es su expresion default en este caso
 Lucía: Hola a todos, bienvenidos al gran estreno de "{show_name}" el día de hoy tenemos un programa espectacular! 
@@ -15,6 +17,7 @@ Lucía: "El que la hace, se olvida. El que la recibe, nunca"
 #EXPRESSION_LUCÍA_FELIZOJOSCERRADOS
 Lucía: Que pase nuestra invitada especial!
 #EXPRESSION_LUCÍA_QUE PASEEE
+#SFX_AUDIENCE CHEERING 3_REVERB
 #WIGGLE_NORMAL
 Lucía: UN APLAUSO PARA ROCÍOOOOO!!!
 #NO_WIGGLE
@@ -31,12 +34,14 @@ Rocío: Verás Lucía, estoy enfrentando la decisión más difícil en la vida d
 
 // OPCIONES DEL USUARIO (en rosado en el diagrama)
 * [Vaya, si lo pones así... dime más!!!]
+    #SFX_RATING UP SMALL_ECHO
     ~ episode_rating += 5
     // Esta es la respuesta del usuario/jugador
     -> continue_story //usar estos Diverts para sacar el Final Bueno y Final Malo
 
 * [Ay, tampoco exageres pues mijita.]
     ~ episode_rating += 10
+    #SFX_RATING UP MEDIUM_ECHO
     // Esta es la respuesta del usuario/jugador
     -> continue_story
 
@@ -61,12 +66,14 @@ Rocío:  Y la verdad es que ambos me hacen muy feliz. Los amo a los dos!
 //#HIDE_LUCÍA para probar que funcione el FadeOut
 * [Tranquila reina nosotros te ayudaremos a resolver este triángulo amoroso.]
     ~ episode_rating += 5
+    #SFX_RATING UP SMALL_ECHO
     #EXPRESSION_ROCÍO_ENAMORADA3
     #EXPRESSION_LUCÍA_CONMOVIDASOFT
     Rocío: Gracias Lucía, sabía que podía contar con tu apoyo!
     
 * [Los amas a los dos, Rocío? Hmm... no lo sé, algo me huele raro aquí.]
     ~ episode_rating += 10
+    #SFX_RATING UP MEDIUM_ECHO
     #EXPRESSION_ROCÍO_NERVIOSA1
     #EXPRESSION_LUCÍA_CONFUNDIDA1
     Rocío: Ay no seas así, déjame explicarte antes de que saltes a conclusiones.
@@ -80,12 +87,14 @@ Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno par
 
 * [Tal y cómo lo sospeché. Eres una bandida!]
     ~ episode_rating += 10   // reaccion del publico Risas
+    #SFX_RATING UP MEDIUM_ECHO
     #EXPRESSION_LUCÍA_PAPEADORA1
     #EXPRESSION_ROCÍO_TRISTE1
     Rocío: Lucíaaaa no me digas así!!
     
 * [No sé si termino de comprender, pero tengo miedo de preguntar.]
     ~ episode_rating -= 5
+    #SFX_RATING DOWN SMALL_ECHO
     #EXPRESSION_LUCÍA_DUDOSA2
     #EXPRESSION_ROCÍO_DUDOSA1
     Rocío: Ash, no es tan complicado.
@@ -113,14 +122,16 @@ Narrador: Llega Héctor y abraza a Rocío antes de tomar asiento.
 Héctor: Buenas con todos, un gusto haber sido invitado.
 
 *[Uy, tú de ley eres el del Gasto porque con esas fachas... olvídate papito. De Gusto no tienes nada.]
+    #SFX_RATING UP MEDIUM_ECHO
     ~ episode_rating += 10 // reaccion del publico Risas
     Rocío: Lucía, contrólate por favor!
     Héctor: Ehh disculpa, cómo dices?
     Lucía: Olvídalo, pronto verás a lo que me refiero.
     
 *[Bienvenido Héctor, cuéntanos cómo conociste a Rocío.]
-Héctor: Nos conocimos en nuestros ensayos de baile urbano, desde que la vi quedé perdidamente enamorado de ella.
+    #SFX_RATING UP SMALL_ECHO
     ~ episode_rating += 5 // reaccion del publico Ternura
+    Héctor: Nos conocimos en nuestros ensayos de baile urbano, desde que la vi quedé perdidamente enamorado de ella.
 
 - Lucía: Y tienes alguna idea de por qué estás aquí?
 Héctor: Pues la verdad no, Rocío dijo que tenía una sorpresa para mí y que podía salir en televisión. Y heme aquí.
@@ -138,12 +149,14 @@ Lucía: Ave maría purísima, se armó la grande.
 Rocío: Se van a lastimar, alguien haga algo!!!
 
 * [Dejar que se saquen la madre]
+#SFX_RATING UP LARGE_ECHO
 ~ episode_rating += 20
 // info a un lado que diga (i: decidiste no interrumpir la pelea)
 
 * [Llamar a seguridad]
 // info a un lado que diga (i: decidiste interrumpir la pelea)
-~ episode_rating -= 10
+#SFX_RATING DOWN LARGE_ECHO
+~ episode_rating -= 20
 
 - Lucía: Ya mucha tontera, se me calman los dos. O resuelven esto como adultos o los expulso de mi set!!!
 Narrador: Los dos vuelven a sus asientos y todos hacen silencio en la sala.
@@ -156,11 +169,13 @@ Rocío: Porque uno es tan guapo que pone celosas a todas mis amigas de lo bueno 
 Rocío: No veo por qué no podemos continuar con esto tan especial que tenemos. Es como dice el dicho. "Lo que no es en tu año, no te hace daño" (guiño, guiño)
 
 * [Sé que eres una buena chica, solo necesitas amor, comprensión y ternura.]
-    ~ episode_rating += 5 // reaccion del publico Enojo
+     #SFX_RATING DOWN MEDIUM_ECHO
+    ~ episode_rating -= 10 // reaccion del publico Enojo
     // info a un lado que diga (i: decidiste apoyar a Rocío)
     Rocío: Gracias Lucía, eres la mejor!
     
 * [Dios mío, pero qué conchuda que eres!]
+      #SFX_RATING UP MEDIUM_ECHO
     ~ episode_rating += 10 // reaccion del publico Risas public_reaction = "enojo"
     // info a un lado que diga (i: decidiste regañar a Rocío)
     Rocío: Lucíaaa qué te pasa, no me hagas quedar como la mala.
@@ -171,10 +186,12 @@ Isaac: Te lo agradezco Lucía, pues yo soy el verdadero novio de Rocío y estoy 
     //public_reaction = "ternura"
 
 * [Eso es muy simp beta cuck de tu parte, pero lo respeto.]
+    #SFX_RATING DOWN SMALL_ECHO
     ~ episode_rating -= 5
     //public_reaction = "ternura"
     
 * [Estás conciente de que te está poniendo los cachos, verdad?]
+    #SFX_RATING UP SMALL_ECHO
     ~ episode_rating += 5
     //public_reaction = "risas"
     Rocío: Lucíaaaaaa :(
@@ -187,6 +204,7 @@ Narrador: Lámpara este man oe. Lucía pone cara de enojo...
 
 Lucía: Ok, primero que nada la palabra "Hipergamia" queda prohibida en mi set.
 Lucía: Segundo, acaso estás diciendo que las mujeres somos todas unas infieles y unas incapaces? Eso no te lo voy a permitir!
+    #SFX_RATING UP MEDIUM_ECHO
     ~ episode_rating += 10
     //public_reaction = "aplausos"
 

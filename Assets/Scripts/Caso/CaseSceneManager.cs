@@ -29,11 +29,11 @@ public class CaseSceneManager : MonoBehaviour
     [Header("Case INK")]
     [SerializeField] private TextAsset caseInkScript; // El archivo .json de Ink para la lógica de este caso (ej. main_show.json)
 
-    [Header("Settings")]
+    [Header("Text Effects Settings")]
     [SerializeField] private float typewriterSpeed = 0.05f; // Velocidad del efecto de máquina de escribir
     [SerializeField] private bool debugMode = true; // Modo depuración para logs adicionales
     [SerializeField] private float wiggleStrength = 5f;
-   
+    
     [System.Serializable]
     public class WigglePreset
     {
@@ -48,6 +48,43 @@ public class CaseSceneManager : MonoBehaviour
 
     private bool wiggleActive = false;
     private Coroutine wiggleRoutine;
+    
+    [System.Serializable]
+    public class NamedAudio
+    {
+        public string key;  // the label you’ll use in Ink, e.g. THEME1, APPLAUSE
+        public AudioClip clip;  // assign the actual AudioClip here
+    }
+    [Header("Audio Libraries")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private List<NamedAudio> musicLibrary;
+    [SerializeField] private List<NamedAudio> sfxLibrary;
+    
+    [System.Serializable]
+    public class SoundEffectPreset
+    {
+        public string presetName;          // e.g. "ECHO", "REVERB", "PHONE"
+        [Header("Filter Settings")]
+        public bool useEcho;
+        public float echoDelay = 300f;
+        public float echoDecay = 0.4f;
+
+        public bool useReverb;
+        public AudioReverbPreset reverbType = AudioReverbPreset.Room;
+
+        public bool useLowPass;
+        public float cutoffFrequency = 5000f;
+
+        // future additions: pitch, volume, distortion etc.
+    }
+    
+    [Header("SFX Filters & Presets")]
+    [SerializeField] private AudioSource sfx_Source;
+    [SerializeField] private AudioEchoFilter sfxEchoFilter;
+    [SerializeField] private AudioReverbFilter sfxReverbFilter;
+    [SerializeField] private AudioLowPassFilter sfxLowPassFilter;
+    [SerializeField] private List<SoundEffectPreset> sfxPresets;
     
     [Header("Character Sprites & Portraits")]
     [SerializeField]
@@ -81,6 +118,7 @@ public class CaseSceneManager : MonoBehaviour
     {
         SetupCaseUI(); // Configura la UI del caso (oculta elementos al inicio)
         AutoConnectReferences(); // Intenta autoconectar las referencias si no están asignadas manualmente
+        UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
         
         // --- INICIO DE CÓDIGO PARA AUTO-INICIO DE PRUEBA (SOLO PARA DESARROLLO EN EL EDITOR) ---
         // Este bloque se ejecuta si estás en el editor de Unity y ejecutas la escena 'Caso' directamente.
@@ -692,6 +730,93 @@ public class CaseSceneManager : MonoBehaviour
                     StopCoroutine(wiggleRoutine);
                     wiggleRoutine = null;
                 }
+            }
+            
+            else if (trimmedTag.StartsWith("MUSIC_"))
+            {
+                string name = trimmedTag.Substring("MUSIC_".Length);
+
+                if (name.Equals("STOP", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    musicSource.Stop();
+                    Debug.Log("[MUSIC] Stop");
+                }
+                else
+                {
+                    var clipData = musicLibrary.FirstOrDefault(m =>
+                        m.key.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+
+                    if (clipData != null && clipData.clip != null)
+                    {
+                        musicSource.clip = clipData.clip;
+                        musicSource.loop = true;
+                        musicSource.Play();
+                        Debug.Log($"[MUSIC] Playing {name}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[MUSIC] '{name}' not found in music library");
+                    }
+                }
+            }
+            else if (trimmedTag.StartsWith("SFX_"))
+            {
+                // Format: #SFX_NAME_PRESET
+                string[] parts = trimmedTag.Split('_');
+                string clipKey = parts.Length > 1 ? parts[1] : "";
+                string presetKey = parts.Length > 2 ? parts[2] : "";
+
+                var clipData = sfxLibrary.FirstOrDefault(s =>
+                    s.key.Equals(clipKey, System.StringComparison.OrdinalIgnoreCase));
+
+                if (clipData == null || clipData.clip == null)
+                {
+                    Debug.LogWarning($"[SFX] '{clipKey}' not found");
+                    return;
+                }
+
+                // Disable all filters first
+                sfxEchoFilter.enabled = false;
+                sfxReverbFilter.enabled = false;
+                sfxLowPassFilter.enabled = false;
+
+                // Apply Preset if present
+                if (!string.IsNullOrEmpty(presetKey))
+                {
+                    var preset = sfxPresets.FirstOrDefault(p =>
+                        p.presetName.Equals(presetKey, System.StringComparison.OrdinalIgnoreCase));
+
+                    if (preset != null)
+                    {
+                        if (preset.useReverb)
+                        {
+                            sfxReverbFilter.enabled = true;
+                            sfxReverbFilter.reverbPreset = preset.reverbType;
+                        }
+
+                        if (preset.useEcho)
+                        {
+                            sfxEchoFilter.enabled = true;
+                            sfxEchoFilter.delay = preset.echoDelay;
+                            sfxEchoFilter.decayRatio = preset.echoDecay;
+                        }
+
+                        if (preset.useLowPass)
+                        {
+                            sfxLowPassFilter.enabled = true;
+                            sfxLowPassFilter.cutoffFrequency = preset.cutoffFrequency;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[SFX] Preset '{presetKey}' not found, using default filters.");
+                    }
+                }
+
+                // Now play the clip (non-blocking)
+                sfx_Source.clip = clipData.clip;
+                sfx_Source.Play();
+                Debug.Log($"[SFX] Playing '{clipKey}' with preset '{presetKey}'");
             }
             
             else

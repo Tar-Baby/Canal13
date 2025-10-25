@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bubble_white_01_57_waifu2x_art_noise2_scale_0: 3462492564062071041
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
