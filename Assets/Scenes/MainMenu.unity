@@ -495,7 +495,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 567e0ac0e9bd66f42bb100e27b915394, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 567e0ac0e9bd66f42bb100e27b915394, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -744,7 +744,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -752,6 +751,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1247128239
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +794,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: eb40d126f84e796468f81f3bb1ab3de8, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: eb40d126f84e796468f81f3bb1ab3de8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1290,7 +1290,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.8805031, g: 0.60771984, b: 0, a: 1}
     m_PressedColor: {r: 1, g: 0.25490198, b: 0.90588236, a: 1}
     m_SelectedColor: {r: 1, g: 0.25490198, b: 0.90588236, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1304,7 +1304,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1606267013}
   m_OnClick:
     m_PersistentCalls:

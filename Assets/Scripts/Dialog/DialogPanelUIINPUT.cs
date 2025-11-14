@@ -14,7 +14,9 @@ public class DialogPanelUIINPUT : MonoBehaviour
     [SerializeField] private Button[] choiceButtons = new Button[4]; // CAMBIADO: Array de 4 botones
     [SerializeField] private Button finalButton; // Botón "Comenzar"
     [SerializeField] private GameObject namePanel; // panel de nombre de speaker
-    [SerializeField] private TextMeshProUGUI speakerName;
+    [SerializeField] private TextMeshProUGUI speakerNameText;
+    [SerializeField] private RectTransform namePanelRect;
+    [SerializeField] private float horizontalPadding = 30f; 
     
     [Header("Settings")]
     [SerializeField] private float typewriterSpeed = 0.05f;
@@ -82,7 +84,7 @@ public class DialogPanelUIINPUT : MonoBehaviour
     
     private void ShowSpeakerName()
     {
-        speakerName.text = dialogManagerINPUT.GetCurrentSpeaker();
+        speakerNameText.text = dialogManagerINPUT.GetCurrentSpeaker();
     }
 
     private void SetupButtons()
@@ -119,6 +121,40 @@ public class DialogPanelUIINPUT : MonoBehaviour
         {
             finalButton.onClick.AddListener(OnFinalButtonClicked); //Leer AddListener
         }
+    }
+    
+    private Coroutine _resizeRoutine;
+    private void UpdateNameBox(string speakerName)
+    {
+        // Set the text
+        speakerNameText.text = dialogManagerINPUT.GetCurrentSpeaker();
+
+        // Force TMP to recalc width
+        speakerNameText.ForceMeshUpdate();
+        float targetWidth = speakerNameText.preferredWidth + horizontalPadding;
+
+        // Smooth resize
+        if (_resizeRoutine != null) StopCoroutine(_resizeRoutine);
+        _resizeRoutine = StartCoroutine(SmoothResize(targetWidth));
+    }
+    
+    private IEnumerator SmoothResize(float targetWidth)
+    {
+        float start = namePanelRect.rect.width;
+        float t = 0f;
+        float duration = 0.25f; // How fast the box resizes
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float p = Mathf.Clamp01(t / duration);
+            float width = Mathf.Lerp(start, targetWidth, p);
+            namePanelRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+            yield return null;
+        }
+
+        namePanelRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, targetWidth);
+        _resizeRoutine = null;
     }
 
     private void Update()
@@ -183,10 +219,41 @@ public class DialogPanelUIINPUT : MonoBehaviour
 
     public void DisplayDialogLine(string dialogLine)
     {
-        currentText = dialogLine;
         hasShownText = false;
+
+        string speakerName = "";
+        string dialogueContent = dialogLine;
+
+// Split the line into "Name" and "Text" only once
+        if (dialogLine.Contains(":"))
+        {
+            string[] parts = dialogLine.Split(new char[] { ':' }, 2);
+            speakerName = parts[0].Trim();
+            dialogueContent = parts[1].Trim();
+        }
+
+// Set the speaker name in the name box (optional)
+        if (!string.IsNullOrEmpty(speakerName))
+        {
+            if (speakerNameText != null && namePanelRect != null)
+            {
+                UpdateNameBox(speakerName);
+            }
+            if (namePanel != null)
+                namePanel.SetActive(true);
+        }
+        else
+        {
+            // Hide name panel if no speaker name
+            if (namePanel != null)
+                namePanel.SetActive(false);
+        }
+
+// Store only the dialogue text for typing
+        currentText = dialogueContent;
         
-        ShowSpeakerName();
+        
+        //ShowSpeakerName();
         Debug.Log(dialogManagerINPUT.GetCurrentSpeaker()); //tener el nombre del speaker
         
         if (choicesPanel != null)
@@ -198,14 +265,13 @@ public class DialogPanelUIINPUT : MonoBehaviour
             finalButton.gameObject.SetActive(false);
         }
         
-        ShowContinueButton();
-        
         if (dialogText != null)
         {
             dialogText.text = "";
         }
         
         StartCoroutine(TypewriterEffect());
+        ShowContinueButton();
     }
 
     private IEnumerator TypewriterEffect()

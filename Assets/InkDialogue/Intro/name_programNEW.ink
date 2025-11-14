@@ -76,10 +76,9 @@ Lolita: Iré por mis llaves, no tardo.
         Carmen: Definitivamente todos amarán "{show_name}", será un éxito rotundo!
 }
 
-
-Lolita: Está bien chicas, ahora sí vamos a comer. Conozco un buen lugar por el centro.
-Carmen: ...Espera, vienes con nosotras?
-Lolita: Iré por mis llaves, no tardo.
+Carmen: Yo recibiré a los panelistas y guiaré a nuestros técnicos.
+Lucía: Perfecto, yo iré a camerinos a alistarme.
+Lolita: Las dejo para que continúen sus preparativos, estaré observando desde el monitor. Rómpanse una pierna ;)
 
 -> END
 

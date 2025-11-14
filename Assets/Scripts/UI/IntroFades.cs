@@ -21,8 +21,10 @@ public class IntroFades : MonoBehaviour
     IEnumerator StopIntroFade()
     {
         yield return new WaitForSeconds(5);
+        welcomeMusic.Play();
+        yield return new WaitForSeconds(1);
         fadeIn.SetActive(false);
         LobbyFondo.SetActive(true);
-        welcomeMusic.Play();
+        
     }
 }

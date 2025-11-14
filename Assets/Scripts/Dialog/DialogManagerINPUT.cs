@@ -5,6 +5,8 @@ using System.Collections;
 //using UnityEngine.UIElements;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro; // Necesario para TextMeshProUGUI
+using System.Linq; // For LINQ operations like .FirstOrDefault
 
 public class DialogManagerINPUT : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class DialogManagerINPUT : MonoBehaviour
 
     [Header("Auto Start Settings")]
     [SerializeField] private bool autoStartOnPlay = true;
-    [SerializeField] private float delayBeforeStart = 1f;
+    [SerializeField] private float delayBeforeStart = 10f;
 
     [Header("Show Components")]
     [SerializeField] private TVShowCharacterManager characterManager;
@@ -23,12 +25,34 @@ public class DialogManagerINPUT : MonoBehaviour
     [Header("UI Components")]
     [SerializeField] public GameObject backingPanel;
     [SerializeField] public DialogPanelUIINPUT dialoguePanelUIINPUT;   //importante la clase del objeto!
+    [SerializeField] private TextMeshProUGUI speakerNameText;
+    [SerializeField] private TextMeshProUGUI caseText; // Referencia al TextMeshProUGUI "CaseText" (o DialogueText)
 
     [Header ("Show Mechanics")]
     [SerializeField] private int currentEpisodeRating = 0;  //renombrar a episodeCurrentRating
     
     [Header("Android Settings")]
     [SerializeField] private bool hideSystemKeyboard = false;
+    
+    [Header("Text Effects Settings")]
+    [SerializeField] private float typewriterSpeed = 0.05f; // Velocidad del efecto de máquina de escribir
+    [SerializeField] private bool debugMode = true; // Modo depuración para logs adicionales
+    [SerializeField] private float wiggleStrength = 5f;
+    
+    [System.Serializable]
+    public class WigglePreset
+    {
+        public string presetName;
+        public float strength = 5f;
+        public float speed = 25f;
+    }
+    
+    [SerializeField] private List<WigglePreset> wigglePresets = new List<WigglePreset>();
+    private float currentWiggleStrength = 5f;
+    private float currentWiggleSpeed = 25f;
+
+    private bool wiggleActive = false;
+    private Coroutine wiggleRoutine;
 
     private Story story;
     private bool dialogPlaying = false;
@@ -42,6 +66,79 @@ public class DialogManagerINPUT : MonoBehaviour
     // Variables para restaurar estado al cancelar
     private List<Choice> savedChoices;
     private string savedDialogLine;
+    
+    public static System.Action<List<string>> OnTagsProcessed;
+    
+    [Header("Character Sprites & Portraits")]
+    [SerializeField]
+    private CharacterSpriteDatabase _spriteDatabase;
+    [SerializeField]
+    private List<CharacterPortrait> _characterPortraits; // All character slots
+
+    // Internal tracking of which character is in which slot
+    private Dictionary<string, CharacterPortrait> _activeCharacters =
+        new Dictionary<string, CharacterPortrait>();
+    private CharacterPortrait _currentSpeakerPortrait;
+    
+    [System.Serializable]
+    public class NamedAudio
+    {
+        public string key;  // the label you’ll use in Ink, e.g. THEME1, APPLAUSE
+        public AudioClip clip;  // assign the actual AudioClip here
+    }
+    [Header("Audio Libraries")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private List<NamedAudio> musicLibrary;
+    [SerializeField] private List<NamedAudio> sfxLibrary;
+    
+    [System.Serializable]
+    public class SoundEffectPreset
+    {
+        public string presetName;          // e.g. "ECHO", "REVERB", "PHONE"
+        [Header("Filter Settings")]
+        public bool useEcho;
+        public float echoDelay = 300f;
+        public float echoDecay = 0.4f;
+
+        public bool useReverb;
+        public AudioReverbPreset reverbType = AudioReverbPreset.Room;
+
+        public bool useLowPass;
+        public float cutoffFrequency = 5000f;
+
+        // future additions: pitch, volume, distortion etc.
+    }
+    
+    [Header("SFX Filters & Presets")]
+    [SerializeField] private AudioSource sfx_Source;
+    [SerializeField] private AudioEchoFilter sfxEchoFilter;
+    [SerializeField] private AudioReverbFilter sfxReverbFilter;
+    [SerializeField] private AudioLowPassFilter sfxLowPassFilter;
+    [SerializeField] private List<SoundEffectPreset> sfxPresets;
+    
+    // ===========================
+// INK TAG PROCESSING
+// ===========================
+    private void HandleInkTags(List<string> tags)
+    {
+        if (tags == null || tags.Count == 0) return;
+
+        // 1. Broadcast tags globally so UI or other systems can respond
+        OnTagsProcessed?.Invoke(tags);
+
+        // 2. Optional internal handling (examples)
+        foreach (string rawTag in tags)
+        {
+            string tag = rawTag.Trim().ToLower();
+
+ 
+            
+            {
+                Debug.Log($"[Ink Tag] {tag}");
+            }
+        }
+    }
 
     #region Unity Lifecycle
 
@@ -59,16 +156,20 @@ public class DialogManagerINPUT : MonoBehaviour
     {
         DialogEvents.OnEnterDialog += EnterDialog;
         DialogEvents.OnUpdateInkVariable += UpdateInkVariable;
+        DialogManagerINPUT.OnTagsProcessed += HandleTags;
+       
     }
 
     private void OnDisable()
     {
         DialogEvents.OnEnterDialog -= EnterDialog;
         DialogEvents.OnUpdateInkVariable -= UpdateInkVariable;
+        DialogManagerINPUT.OnTagsProcessed -= HandleTags;
     }
 
     private void Start()
     {
+        UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
         if (characterManager == null)
             characterManager = FindFirstObjectByType<TVShowCharacterManager>();
         if (sceneManager == null)
@@ -78,6 +179,12 @@ public class DialogManagerINPUT : MonoBehaviour
         {
             StartCoroutine(AutoStartDialog());
         }
+        
+        foreach (var portrait in _characterPortraits)
+        {
+            portrait.Clear();
+        }
+        _activeCharacters.Clear();
     }
 
     #endregion
@@ -208,6 +315,7 @@ public class DialogManagerINPUT : MonoBehaviour
         }
 
         ContinueOrExitStory();
+        
     }
 
     public void ContinueDialog()
@@ -350,6 +458,10 @@ public class DialogManagerINPUT : MonoBehaviour
         while (story.canContinue)
         {
             string line = story.Continue().Trim();
+            if (story.currentTags != null && story.currentTags.Count > 0)
+            {
+                HandleInkTags(story.currentTags);
+            }
             ProcessSpeakerFromLine(line);
 
             if (!string.IsNullOrEmpty(line))
@@ -386,28 +498,28 @@ public class DialogManagerINPUT : MonoBehaviour
         {
             if (characterManager != null)
             {
-                characterManager.ChangeCharacterExpression("Lucia", 1);
+                characterManager.ChangeCharacterExpression("Lucía", 1);
                 characterManager.ChangeCharacterExpression("Carmen", 1);
-                characterManager.ChangeCharacterExpression("Leila", 0);
-                characterManager.PlayCharacterVoice("Lucia", 0);
+                characterManager.ChangeCharacterExpression("Lolita", 0);
+                characterManager.PlayCharacterVoice("Lucía", 0);
             }
         }
         else if (choiceText.Contains("El Gran Debut"))
         {
             if (characterManager != null)
             {
-                characterManager.ChangeCharacterExpression("Lucia", 3);
+                characterManager.ChangeCharacterExpression("Lucía", 3);
                 characterManager.ChangeCharacterExpression("Carmen", 1);
-                characterManager.ChangeCharacterExpression("Leila", 1);
+                characterManager.ChangeCharacterExpression("Lolita", 1);
             }
         }
         else if (choiceText.Contains("No decidir"))
         {
             if (characterManager != null)
             {
-                characterManager.ChangeCharacterExpression("Lucia", 2);
+                characterManager.ChangeCharacterExpression("Lucía", 2);
                 characterManager.ChangeCharacterExpression("Carmen", 2);
-                characterManager.ChangeCharacterExpression("Leila", 2);
+                characterManager.ChangeCharacterExpression("Lolita", 2);
             }
             Debug.Log("Opción 'No decidir' seleccionada");
         }
@@ -425,8 +537,14 @@ public class DialogManagerINPUT : MonoBehaviour
         {
             string line = story.Continue().Trim();
 
+
             ProcessSpeakerFromLine(line);
             CheckEpisodeRatingChanges();
+            
+            if (story.currentTags != null && story.currentTags.Count > 0)
+            {
+                HandleInkTags(story.currentTags);
+            }
 
             if (!string.IsNullOrEmpty(line))
             {
@@ -456,11 +574,19 @@ public class DialogManagerINPUT : MonoBehaviour
         if (story.canContinue)
         {
             string currentLine = story.Continue().Trim();
+            string speakerName = "";
 
-            ProcessSpeakerFromLine(currentLine);
+            // Process speaker and rating vars
+            speakerName = ProcessSpeakerFromLine(currentLine);
             CheckEpisodeRatingChanges();
 
+            // >>> NEW: Handle Ink tags for this line <<<
+            if (story.currentTags != null && story.currentTags.Count > 0)
+            {
+                HandleInkTags(story.currentTags);
+            }
 
+            // Show line if valid
             if (!string.IsNullOrEmpty(currentLine))
             {
                 DialogEvents.DisplayDialog(currentLine);
@@ -469,7 +595,14 @@ public class DialogManagerINPUT : MonoBehaviour
                 {
                     characterManager.OnDialogCharacterSpeak(currentSpeaker);
                 }
+                
+                // --- Animate current speaker ---
+                if (speakerNameText != null) speakerNameText.text = speakerName;
+                
+                //  Update portraits immediately (fade/scale starts here)
+                UpdateSpeakerAnimation(speakerName);
 
+                // If the current line produces choices, show them
                 if (story.currentChoices.Count > 0)
                 {
                     ShowChoices();
@@ -477,11 +610,13 @@ public class DialogManagerINPUT : MonoBehaviour
             }
             else
             {
+                // Skip blank lines
                 ContinueOrExitStory();
             }
         }
         else
         {
+            // END or CHOICES
             if (story.currentChoices.Count > 0)
             {
                 ShowChoices();
@@ -548,7 +683,7 @@ public class DialogManagerINPUT : MonoBehaviour
         }
     }
 
-    private void ProcessSpeakerFromLine(string line)
+    private string ProcessSpeakerFromLine(string line)
     {
         if (line.Contains(":"))
         {
@@ -559,8 +694,8 @@ public class DialogManagerINPUT : MonoBehaviour
 
                 switch (speakerName)
                 {
-                    case "Lucia":
-                        currentSpeaker = "Lucia";
+                    case "Lucía":
+                        currentSpeaker = "Lucía";
                         break;
                     case "Carmen":
                         currentSpeaker = "Carmen";
@@ -568,14 +703,14 @@ public class DialogManagerINPUT : MonoBehaviour
                     case "Lolita":
                         currentSpeaker = "Lolita";
                         break;
-                    case "Rocio": 
-                        currentSpeaker = "Rocio";
+                    case "Rocío": 
+                        currentSpeaker = "Rocío";
                         break;
                     case "Isaac": 
                         currentSpeaker = "Isaac";
                         break;
-                    case "Hector": 
-                        currentSpeaker = "Hector";
+                    case "Héctor": 
+                        currentSpeaker = "Héctor";
                         break;
                     default:
                         currentSpeaker = speakerName;
@@ -583,6 +718,8 @@ public class DialogManagerINPUT : MonoBehaviour
                 }
             }
         }
+
+        return currentSpeaker;
     }
 
     private void ShowChoices()
@@ -715,6 +852,10 @@ public class DialogManagerINPUT : MonoBehaviour
         while (story.canContinue)
         {
             string line = story.Continue().Trim();
+            if (story.currentTags != null && story.currentTags.Count > 0)
+            {
+                HandleInkTags(story.currentTags);
+            }
             ProcessSpeakerFromLine(line);
 
             if (!string.IsNullOrEmpty(line))
@@ -887,4 +1028,393 @@ public class DialogManagerINPUT : MonoBehaviour
     }
 
     #endregion
+    
+
+    private void UpdateSpeakerAnimation(string currentSpeaker)
+    {
+        Debug.Log($"[UpdateSpeakerAnimation] Speaker = '{currentSpeaker}'");
+
+        if (string.IsNullOrEmpty(currentSpeaker) ||
+            currentSpeaker.Equals("Narrador", System.StringComparison.OrdinalIgnoreCase))
+        {
+            foreach (var kvp in _activeCharacters)
+            {
+                // only adjust scale, leave fadeIn to finish
+                kvp.Value.SetIdleState();
+
+                // keep everyone bright, but preserve alpha (fade still runs)
+                kvp.Value.ApplySpeakerTint(true);
+            }
+            _currentSpeakerPortrait = null;
+            return;
+        }
+
+        foreach (var kvp in _activeCharacters)
+        {
+            if (string.Equals(kvp.Key, currentSpeaker, System.StringComparison.OrdinalIgnoreCase))
+            {
+                kvp.Value.SetTalkingState();   // current speaker pops & stays enlarged
+                kvp.Value.ApplySpeakerTint(true);  // brighten speaker
+                _currentSpeakerPortrait = kvp.Value;
+            }
+            else
+            {
+                kvp.Value.SetIdleState();      // everyone else idle
+                kvp.Value.ApplySpeakerTint(false); // smoothly dim others
+            }
+        }
+    }
+    
+    private void HandleTags(List<string> tags)
+    {
+        foreach (var tag in tags)
+        {
+            string trimmedTag = tag.Trim().ToUpper();
+
+            // Format: #SHOW_CHARACTERNAME_SLOTNAME
+            // Example: #SHOW_HERO_LEFT, #SHOW_VILLAIN_RIGHT
+            if (trimmedTag.StartsWith("SHOW_"))
+            {
+                string[] parts = trimmedTag.Split('_', 3); // SHOW_NAME_SLOT
+                if (parts.Length == 3)
+                {
+                    string characterName = parts[1];
+                    string slotName = parts[2];
+                    ShowCharacter(characterName, slotName);
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid SHOW tag: {tag}");
+                }
+            }
+            // Format: #HIDE_CHARACTERNAME or #HIDE_ALL
+            // Example: #HIDE_HERO, #HIDE_ALL
+            else if (trimmedTag.StartsWith("HIDE_"))
+            {
+                string[] parts = trimmedTag.Split('_', 2);
+                if (parts.Length == 2)
+                {
+                    string characterToHide = parts[1];
+                    if (characterToHide == "ALL")
+                    {
+                        HideAllCharacters();
+                    }
+                    else
+                    {
+                        HideCharacter(characterToHide);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid HIDE tag: {tag}");
+                }
+            }
+            // Format: #EXPRESSION_CHARACTERNAME_EXPRESSIONNAME
+            // Example: #EXPRESSION_HERO_HAPPY
+            else if (trimmedTag.StartsWith("EXPRESSION_"))
+            {
+                string[] parts = trimmedTag.Split('_', 3);
+                if (parts.Length == 3)
+                {
+                    string characterName = parts[1];
+                    string expressionName = parts[2];
+                    SetCharacterExpression(characterName, expressionName);
+                }
+                else
+                {
+                    Debug.LogWarning($"Invalid EXPRESSION tag: {tag}");
+                }
+            }
+            // Format: #FADEALL
+            else if (trimmedTag == "FADEALL")
+            {
+                FadeAllCharactersToIdle();
+            }
+            // Add more tag handlers here (e.g., #MOVE_CHARACTER_SLOT)
+
+            
+            else if (trimmedTag.StartsWith("WIGGLE"))
+            {
+                string[] parts = trimmedTag.Split('_');
+                string presetName = parts.Length > 1 ? parts[1] : "DEFAULT";
+
+                WigglePreset preset = wigglePresets
+                    .FirstOrDefault(p => p.presetName.Equals(presetName, System.StringComparison.OrdinalIgnoreCase));
+
+                if (preset != null)
+                {
+                    currentWiggleStrength = preset.strength;
+                    currentWiggleSpeed = preset.speed;
+                    Debug.Log($"[Wiggle] Using preset {preset.presetName}");
+                }
+                else
+                {
+                    currentWiggleStrength = 5f;
+                    currentWiggleSpeed = 25f;
+                }
+
+                wiggleActive = true;
+
+                if (wiggleRoutine != null) StopCoroutine(wiggleRoutine);
+                wiggleRoutine = StartCoroutine(ContinuousWiggle());
+            }
+            else if (trimmedTag == "NO_WIGGLE")
+            {
+                wiggleActive = false;
+                if (wiggleRoutine != null)
+                {
+                    StopCoroutine(wiggleRoutine);
+                    wiggleRoutine = null;
+                }
+            }
+            
+            else if (trimmedTag.StartsWith("MUSIC_"))
+            {
+                string name = trimmedTag.Substring("MUSIC_".Length);
+
+                if (name.Equals("STOP", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    musicSource.Stop();
+                    Debug.Log("[MUSIC] Stop");
+                }
+                else
+                {
+                    var clipData = musicLibrary.FirstOrDefault(m =>
+                        m.key.Equals(name, System.StringComparison.OrdinalIgnoreCase));
+
+                    if (clipData != null && clipData.clip != null)
+                    {
+                        musicSource.clip = clipData.clip;
+                        musicSource.loop = true;
+                        musicSource.Play();
+                        Debug.Log($"[MUSIC] Playing {name}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[MUSIC] '{name}' not found in music library");
+                    }
+                }
+            }
+            else if (trimmedTag.StartsWith("SFX_"))
+            {
+                // Format: #SFX_NAME_PRESET
+                string[] parts = trimmedTag.Split('_');
+                string clipKey = parts.Length > 1 ? parts[1] : "";
+                string presetKey = parts.Length > 2 ? parts[2] : "";
+
+                var clipData = sfxLibrary.FirstOrDefault(s =>
+                    s.key.Equals(clipKey, System.StringComparison.OrdinalIgnoreCase));
+
+                if (clipData == null || clipData.clip == null)
+                {
+                    Debug.LogWarning($"[SFX] '{clipKey}' not found");
+                    return;
+                }
+
+                // Disable all filters first
+                sfxEchoFilter.enabled = false;
+                sfxReverbFilter.enabled = false;
+                sfxLowPassFilter.enabled = false;
+
+                // Apply Preset if present
+                if (!string.IsNullOrEmpty(presetKey))
+                {
+                    var preset = sfxPresets.FirstOrDefault(p =>
+                        p.presetName.Equals(presetKey, System.StringComparison.OrdinalIgnoreCase));
+
+                    if (preset != null)
+                    {
+                        if (preset.useReverb)
+                        {
+                            sfxReverbFilter.enabled = true;
+                            sfxReverbFilter.reverbPreset = preset.reverbType;
+                        }
+
+                        if (preset.useEcho)
+                        {
+                            sfxEchoFilter.enabled = true;
+                            sfxEchoFilter.delay = preset.echoDelay;
+                            sfxEchoFilter.decayRatio = preset.echoDecay;
+                        }
+
+                        if (preset.useLowPass)
+                        {
+                            sfxLowPassFilter.enabled = true;
+                            sfxLowPassFilter.cutoffFrequency = preset.cutoffFrequency;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[SFX] Preset '{presetKey}' not found, using default filters.");
+                    }
+                }
+
+                // Now play the clip (non-blocking)
+                sfx_Source.clip = clipData.clip;
+                sfx_Source.Play();
+                Debug.Log($"[SFX] Playing '{clipKey}' with preset '{presetKey}'");
+            }
+            
+            else
+            {
+                Debug.Log($"Unhandled Ink tag: {tag}");
+            }
+        }
+    }
+    
+    private void ShowCharacter(string characterName, string slotName)
+    {
+        // Find correct slot
+        CharacterPortrait targetSlot = _characterPortraits.FirstOrDefault(
+            p => p.name.EndsWith($"_{slotName}", System.StringComparison.OrdinalIgnoreCase));
+
+        if (targetSlot == null)
+        {
+            Debug.LogError($"No character slot found matching '{slotName}'");
+            return;
+        }
+
+        var charEntry = _spriteDatabase.GetCharacterEntry(characterName);
+        if (charEntry == null)
+        {
+            Debug.LogError($"Character '{characterName}' not found in Sprite Database!");
+            return;
+        }
+
+        // Already active?
+        if (_activeCharacters.TryGetValue(characterName, out CharacterPortrait existingPortrait))
+        {
+            if (existingPortrait == targetSlot)
+            {
+                Debug.Log($"Character {characterName} already in {slotName}.");
+                return;
+            }
+            else
+            {
+                // move from old slot
+                Debug.Log($"Moving {characterName} from {existingPortrait.name} to {targetSlot.name}.");
+                existingPortrait.SetHiddenState(); 
+                _activeCharacters.Remove(characterName);
+            }
+        }
+
+        // Occupy the slot
+        _activeCharacters[characterName] = targetSlot;
+        targetSlot.Setup(characterName, charEntry.GetExpressionSprite("entrada"));
+
+        // ⚠️ Removed targetSlot.SetIdleState(); (no extra idle forced)
+
+        Debug.Log($"Showing {characterName} in {targetSlot.name}");
+    }
+
+    private void HideCharacter(string characterName)
+    {
+        if (_activeCharacters.TryGetValue(characterName,
+                                          out CharacterPortrait portrait))
+        {
+            portrait.SetHiddenState();
+            _activeCharacters.Remove(characterName);
+            Debug.Log($"Hiding character: {characterName}");
+            if (_currentSpeakerPortrait == portrait)
+            {
+                _currentSpeakerPortrait = null;
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Character '{characterName}' is not currently active.");
+        }
+    }
+
+    private void HideAllCharacters()
+    {
+        foreach (var pair in _activeCharacters)
+        {
+            pair.Value.SetHiddenState();
+        }
+        _activeCharacters.Clear();
+        _currentSpeakerPortrait = null;
+        Debug.Log("Hiding all characters.");
+    }
+
+    private void SetCharacterExpression(string characterName,
+                                       string expressionName)
+    {
+        if (_activeCharacters.TryGetValue(characterName,
+                                          out CharacterPortrait portrait))
+        {
+            CharacterSpriteDatabase.CharacterEntry charEntry =
+                _spriteDatabase.GetCharacterEntry(characterName);
+            if (charEntry != null)
+            {
+                Sprite newSprite = charEntry.GetExpressionSprite(expressionName);
+                if (newSprite != null)
+                {
+                    portrait.SetSprite(newSprite);
+                    Debug.Log(
+                        $"Set {characterName} expression to {expressionName}");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning(
+                $"Character '{characterName}' not active to change expression.");
+        }
+    }
+
+    private void FadeAllCharactersToIdle()
+    {
+        foreach (var pair in _activeCharacters)
+        {
+            pair.Value.SetIdleState();
+        }
+        _currentSpeakerPortrait = null;
+    }
+    
+    private void ApplyWiggleEffect()
+    {
+        caseText.ForceMeshUpdate();
+        var textInfo = caseText.textInfo;
+        int charCount = textInfo.characterCount;
+
+        for (int c = 0; c < charCount; c++)
+        {
+            if (!textInfo.characterInfo[c].isVisible) continue;
+
+            int vertexIndex = textInfo.characterInfo[c].vertexIndex;
+            int matIndex = textInfo.characterInfo[c].materialReferenceIndex;
+            Vector3[] vertices = textInfo.meshInfo[matIndex].vertices;
+
+            float offsetX = Mathf.Sin((Time.time + c) * currentWiggleSpeed) * currentWiggleStrength;
+            float offsetY = Mathf.Cos((Time.time + c) * currentWiggleSpeed * 0.5f)
+                            * currentWiggleStrength * 0.5f;
+            Vector3 offset = new Vector3(offsetX, offsetY, 0);
+
+            vertices[vertexIndex + 0] += offset;
+            vertices[vertexIndex + 1] += offset;
+            vertices[vertexIndex + 2] += offset;
+            vertices[vertexIndex + 3] += offset;
+        }
+
+        for (int m = 0; m < textInfo.meshInfo.Length; m++)
+        {
+            var meshInfo = textInfo.meshInfo[m];
+            meshInfo.mesh.vertices = meshInfo.vertices;
+            caseText.UpdateGeometry(meshInfo.mesh, m);
+        }
+    }
+
+    
+    private IEnumerator ContinuousWiggle()
+    {
+        while (wiggleActive)
+        {
+            ApplyWiggleEffect(); // same code that modifies TMP vertices
+            yield return null;   // every frame
+        }
+
+        wiggleRoutine = null;
+    }
+
 }

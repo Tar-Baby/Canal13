@@ -1939,7 +1939,7 @@ AudioSource:
   m_GameObject: {fileID: 885531580}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4974510973650241931, guid: aaf78ad21ae482d4789a9ea3c219b1de, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -3312,7 +3312,7 @@ AudioSource:
   m_GameObject: {fileID: 1700520146}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4434959770965046837, guid: aaf78ad21ae482d4789a9ea3c219b1de, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -3843,6 +3843,7 @@ GameObject:
   - component: {fileID: 1999413454}
   - component: {fileID: 1999413456}
   - component: {fileID: 1999413455}
+  - component: {fileID: 1999413457}
   m_Layer: 5
   m_Name: ShowFondoPlaceholder
   m_TagString: Untagged
@@ -3866,7 +3867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: 125.8}
+  m_AnchoredPosition: {x: 0.5, y: -293.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999413455
@@ -3889,7 +3890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 619156cbc82ebe3469e18ead9ccb6a37, type: 3}
+  m_Texture: {fileID: 2800000, guid: 47a8e3a7fa12817418a5f4b756b1c6f7, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3904,6 +3905,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999413453}
   m_CullTransparentMesh: 1
+--- !u!95 &1999413457
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999413453}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf8ea42cf5dc3fc45805bc0e4d0d2d40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2100238435
 GameObject:
   m_ObjectHideFlags: 0
@@ -3997,11 +4020,17 @@ MonoBehaviour:
   - key: Rating down large
     clip: {fileID: 8300000, guid: 48d73f94147cf934280fbc1ced58d908, type: 3}
   - key: Audience Cheering 1
-    clip: {fileID: 8300000, guid: cbf53de1ff438e14ba4f6332a0600028, type: 3}
+    clip: {fileID: 8300000, guid: ef61a24513b494844a707d3965150d0a, type: 3}
   - key: Audience Cheering 2
-    clip: {fileID: 8300000, guid: a2dc695260f7d034bb824a21c3ee06e5, type: 3}
+    clip: {fileID: 8300000, guid: 8c2b33b5d43e6ec4ab8b09ffa19003cf, type: 3}
   - key: Audience Cheering 3
-    clip: {fileID: 8300000, guid: fe7b69d01bf889c4f8bd5e5a46747eb8, type: 3}
+    clip: {fileID: 8300000, guid: 1a25253f5d0cacc4890be16e7b3d7d42, type: 3}
+  - key: Audience Shock 1
+    clip: {fileID: 8300000, guid: 159ebe43e7f668c4ea434d71c056a2de, type: 3}
+  - key: Audience Awww 1
+    clip: {fileID: 8300000, guid: a406894305da9394d9f3966656c03b51, type: 3}
+  - key: Audience Small Laughter 1
+    clip: {fileID: 8300000, guid: aebdda376dd7e2648a109afb2d43dd63, type: 3}
   sfx_Source: {fileID: 885531581}
   sfxEchoFilter: {fileID: 885531585}
   sfxReverbFilter: {fileID: 885531584}
