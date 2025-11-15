@@ -311,14 +311,21 @@ public class DialogPanelUIINPUT : MonoBehaviour
     private void ShowChoices(List<string> choices)
     {
         HideAllInteractiveElements();
-        StartCoroutine(ShowChoicesDelayed(choices, 0.1f));
+        PersistentCoroutineRunner.Instance.StartCoroutine(ShowChoicesDelayed(choices, 2f));
     }
 
     // MODIFICADO: Mejor debug y manejo de 4 opciones
     private IEnumerator ShowChoicesDelayed(List<string> choices, float delay)
     {
         yield return new WaitForSeconds(delay);
-        
+
+        // Safety: confirm the object or its dependencies are still valid
+        if (this == null || choicesPanel == null)
+            yield break;
+
+        if (!gameObject) yield break;
+
+        // Your existing logic below
         if (debugMode)
         {
             Debug.Log($"[DialogPanelUI] ShowChoicesDelayed: {choices.Count} choices, {choiceButtons.Length} buttons");
@@ -327,14 +334,11 @@ public class DialogPanelUIINPUT : MonoBehaviour
                 Debug.Log($"  Choice {i}: '{choices[i]}'");
             }
         }
-        
-        if (choicesPanel != null)
-        {
-            choicesPanel.SetActive(true);
-        }
+
+        choicesPanel.SetActive(true);
 
         int numChoices = Mathf.Min(choices.Count, choiceButtons.Length);
-        
+
         for (int i = 0; i < choiceButtons.Length; i++)
         {
             if (choiceButtons[i] != null)
@@ -342,36 +346,17 @@ public class DialogPanelUIINPUT : MonoBehaviour
                 if (i < numChoices)
                 {
                     choiceButtons[i].gameObject.SetActive(true);
-                    
-                    TextMeshProUGUI buttonText = choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+                    TextMeshProUGUI buttonText =
+                        choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>();
                     if (buttonText != null)
                     {
                         buttonText.text = choices[i];
-                        if (debugMode) Debug.Log($"[DialogPanelUI] Button {i} activated: '{choices[i]}'");
-                    }
-                    else
-                    {
-                        Text legacyText = choiceButtons[i].GetComponentInChildren<Text>();
-                        if (legacyText != null)
-                        {
-                            legacyText.text = choices[i];
-                            if (debugMode) Debug.Log($"[DialogPanelUI] Button {i} activated (legacy): '{choices[i]}'");
-                        }
-                        else
-                        {
-                            if (debugMode) Debug.LogError($"[DialogPanelUI] Button {i} has no text component!");
-                        }
                     }
                 }
                 else
                 {
                     choiceButtons[i].gameObject.SetActive(false);
-                    if (debugMode) Debug.Log($"[DialogPanelUI] Button {i} hidden (not needed)");
                 }
-            }
-            else
-            {
-                if (debugMode) Debug.LogError($"[DialogPanelUI] choiceButtons[{i}] is NULL!");
             }
         }
     }

@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         panelNegro.SetActive(true);
-        textoCita.SetActive(true); // 7 segundos de animacion
+        textoCita.SetActive(true); // 13 segundos de animacion
         DisableElements();
         StartCoroutine(DisableCita());
         StartCoroutine(EnableElements());
@@ -60,13 +60,13 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator StopFade()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(16);
         fadeIn.SetActive(false);
     }
 
     IEnumerator PlayFade()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(13);
         fadeIn.SetActive(true);
         
     }
@@ -82,7 +82,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator EnableElements()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(13);
         background.SetActive(true);
         title.SetActive(true);
         buttonNuevoJuego.SetActive(true);
@@ -93,7 +93,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator DisableCita()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(13);
         panelNegro.SetActive(false);
         textoCita.SetActive(false);
     }

@@ -89,6 +89,7 @@ public class DialogManagerINPUT : MonoBehaviour
     [Header("Audio Libraries")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource sfxButtonSource;
     [SerializeField] private List<NamedAudio> musicLibrary;
     [SerializeField] private List<NamedAudio> sfxLibrary;
     
@@ -1197,62 +1198,47 @@ public class DialogManagerINPUT : MonoBehaviour
             }
             else if (trimmedTag.StartsWith("SFX_"))
             {
-                // Format: #SFX_NAME_PRESET
+                // Example tags:
+                // #SFX_DOOR
+                // #SFX_DOOR_ECHO
+                // #SFX_AUDIENCE_CHEER_REVERB
                 string[] parts = trimmedTag.Split('_');
                 string clipKey = parts.Length > 1 ? parts[1] : "";
                 string presetKey = parts.Length > 2 ? parts[2] : "";
 
                 var clipData = sfxLibrary.FirstOrDefault(s =>
                     s.key.Equals(clipKey, System.StringComparison.OrdinalIgnoreCase));
-
                 if (clipData == null || clipData.clip == null)
                 {
-                    Debug.LogWarning($"[SFX] '{clipKey}' not found");
+                    Debug.LogWarning($"[SFX] '{clipKey}' not found.");
                     return;
                 }
 
-                // Disable all filters first
-                sfxEchoFilter.enabled = false;
-                sfxReverbFilter.enabled = false;
-                sfxLowPassFilter.enabled = false;
+                // Route based on category in the tag
+                AudioSource src = sfxSource;
+                //if (trimmedTag.Contains("SOURCE")) src = sfxSource;
+                //else
+                if (trimmedTag.Contains("BUTTON")) src = sfxButtonSource;
 
-                // Apply Preset if present
+                // Disable filters first
+                DisableAllFilters(src);
+
+                // Optional preset
                 if (!string.IsNullOrEmpty(presetKey))
                 {
                     var preset = sfxPresets.FirstOrDefault(p =>
                         p.presetName.Equals(presetKey, System.StringComparison.OrdinalIgnoreCase));
-
                     if (preset != null)
-                    {
-                        if (preset.useReverb)
-                        {
-                            sfxReverbFilter.enabled = true;
-                            sfxReverbFilter.reverbPreset = preset.reverbType;
-                        }
-
-                        if (preset.useEcho)
-                        {
-                            sfxEchoFilter.enabled = true;
-                            sfxEchoFilter.delay = preset.echoDelay;
-                            sfxEchoFilter.decayRatio = preset.echoDecay;
-                        }
-
-                        if (preset.useLowPass)
-                        {
-                            sfxLowPassFilter.enabled = true;
-                            sfxLowPassFilter.cutoffFrequency = preset.cutoffFrequency;
-                        }
-                    }
+                        ApplyPresetToSource(src, preset);
                     else
-                    {
-                        Debug.LogWarning($"[SFX] Preset '{presetKey}' not found, using default filters.");
-                    }
+                        Debug.LogWarning($"[SFX] Preset '{presetKey}' not found.");
                 }
 
-                // Now play the clip (non-blocking)
-                sfx_Source.clip = clipData.clip;
-                sfx_Source.Play();
-                Debug.Log($"[SFX] Playing '{clipKey}' with preset '{presetKey}'");
+                // Play clip (filters apply automatically if active)
+                src.clip = clipData.clip;
+                src.Play();
+
+                Debug.Log($"[SFX] {clipKey} (preset: {presetKey}) on {src.name}");
             }
             
             else
@@ -1416,5 +1402,40 @@ public class DialogManagerINPUT : MonoBehaviour
 
         wiggleRoutine = null;
     }
+    
+    private void DisableAllFilters(AudioSource src)
+    {
+        foreach (var f in src.GetComponents<AudioBehaviour>())
+            if (f is AudioEchoFilter || f is AudioReverbFilter || f is AudioLowPassFilter)
+                ((Behaviour)f).enabled = false;
+    }
 
+    private void ApplyPresetToSource(AudioSource src, SoundEffectPreset preset)
+    {
+        if (preset == null) return;
+
+        // Each source has its own attached filters
+        var echo = src.GetComponent<AudioEchoFilter>();
+        var reverb = src.GetComponent<AudioReverbFilter>();
+        var low = src.GetComponent<AudioLowPassFilter>();
+
+        if (echo && reverb && low)
+        {
+            echo.enabled = preset.useEcho;
+            if (preset.useEcho)
+            {
+                echo.delay = preset.echoDelay;
+                echo.decayRatio = preset.echoDecay;
+            }
+
+            reverb.enabled = preset.useReverb;
+            if (preset.useReverb)
+                reverb.reverbPreset = preset.reverbType;
+
+            low.enabled = preset.useLowPass;
+            if (preset.useLowPass)
+                low.cutoffFrequency = preset.cutoffFrequency;
+        }
+    }
+    
 }

@@ -6,7 +6,7 @@ VAR public_reaction = "neutral"
 // Inicio del programa principal
 #MUSIC_DEFAULT SHOW THEME
 Narrador: Al aire en 3...2...1...
-#SFX_AUDIENCE CHEERING 2
+#SFX_AUDIENCE CHEERING 2_REVERB
 #SHOW_LUCÍA_LEFT
 //#EXPRESSION_LUCÍA_SALUDO este es su expresion default en este caso
 Lucía: Hola a todos, bienvenidos al gran estreno de "{show_name}" el día de hoy tenemos un programa espectacular! 
@@ -17,7 +17,7 @@ Lucía: "El que la hace, se olvida. El que la recibe, nunca"
 #EXPRESSION_LUCÍA_FELIZOJOSCERRADOS
 Lucía: Que pase nuestra invitada especial!
 #EXPRESSION_LUCÍA_QUE PASEEE
-#SFX_AUDIENCE CHEERING 1
+#SFX_AUDIENCE CHEERING 1_REVERB
 #WIGGLE_NORMAL
 Lucía: UN APLAUSO PARA ROCÍOOOOO!!!
 #NO_WIGGLE
@@ -49,12 +49,12 @@ Rocío: Verás Lucía, estoy enfrentando la decisión más difícil en la vida d
 // Aquí continúa independientemente de la opción elegida
 #EXPRESSION_ROCÍO_ENAMORADA1
 #EXPRESSION_LUCÍA_CONMOVIDASOFT
-#SFX_AUDIENCE AWWW 1
+#SFX_AUDIENCE AWWW 1_REVERB
 Rocío: Estoy enamorada...
 // reaccion del publico Ternura
 #EXPRESSION_ROCÍO_ENAMORADA2
 #EXPRESSION_LUCÍA_SORPRENDIDA1
-#SFX_AUDIENCE SHOCK 1
+#SFX_AUDIENCE SHOCK 1_REVERB
 Rocío: De dos a la vez... 
 // reaccion del publico Asombro
 
@@ -89,8 +89,8 @@ Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno par
 
 * [Tal y cómo lo sospeché. Eres una bandida!]
     ~ episode_rating += 10   // reaccion del publico Risas
-    #SFX_AUDIENCE SMALL LAUGHTER 1
-    //#SFX_RATING UP MEDIUM_ECHO
+    #SFX_RATING UP MEDIUM_ECHO
+    #SFX_AUDIENCE SMALL LAUGHTER 1_REVERB
     #EXPRESSION_LUCÍA_PAPEADORA1
     #EXPRESSION_ROCÍO_TRISTE1
     Rocío: Lucíaaaa no me digas así!!
@@ -117,7 +117,7 @@ Lucía: Ya ya, posi posi...
 Lucía: La plena que esto se pone cada vez mejor.
 #EXPRESSION_LUCÍA_QUE PASEEE
 #EXPRESSION_ROCÍO_ENAMORADA4
-#SFX_AUDIENCE CHEERING 3
+#SFX_AUDIENCE CHEERING 3_REVERB
 #WIGGLE_NORMAL
 Lucía: QUE PASE EL PRIMER NOVIOOOOO!!! //Reaccion del publico Aplausos
 #NO_WIGGLE

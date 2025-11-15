@@ -20,7 +20,7 @@ public class IntroFades : MonoBehaviour
     
     IEnumerator StopIntroFade()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(6);
         welcomeMusic.Play();
         yield return new WaitForSeconds(1);
         fadeIn.SetActive(false);
