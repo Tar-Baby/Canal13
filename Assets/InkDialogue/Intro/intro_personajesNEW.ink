@@ -141,7 +141,7 @@ Lolita: Pero hey, sin presiones.
     Lolita: Y no recibirás ni un centavo.
     Carmen: Ay nooo :c 
     Lolita: Lo siento chicas, yo no hago las reglas. Solo sigo órdenes de los ejecutivos del Canal 13.
-    Lucia: Tranquila Lolita, entiendo.
+    Lucía: Tranquila Lolita, entiendo.
     -> preguntas
     
 *-> contexto
@@ -166,6 +166,6 @@ Lolita: A ver, dinos qué piensas hacer con el "superpoder" de la televisión?
 #SFX_JINGLE CORRECTO
     Carmen: Así se habla!
 
--reemplzar y poner entrada para proximo ink
+-Lucía: Dejemos la charla para después, Carmencita salgamos a comer algo y a que te dé el sol. Te veo pálida.
 
  -> END

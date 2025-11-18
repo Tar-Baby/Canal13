@@ -1,11 +1,11 @@
 VAR show_name = ""
 
-// Texto inicial
-Lucía: Entendido, tal parece que ya tenemos todo en orden. Vamos por un encebollado, yo invito <3
-Carmen: Ayyy, muchas gracias jefecita!
+Carmen: Awww, muchas gracias jefecita!
 Lolita: Quietas ahí.
-Lucía: (Chale, nos pilló saliendo antes de la hora de almuerzo.)
+Lucía: Y ahora qué?
 Lolita: A dónde creen que van, no les parece que olvidan algo de suma importancia?
+Carmen: Ehhh, cómo dices?
+Lucía: De qué hablas Lolita?
 Lolita: Quizás estar en el set de grabación les refresque la memoria. Ya saben qué le falta a esta producción?
 Lucía: La verdad no tengo la más mínima idea de qué podría ser.
 Carmen: Yo tampoco.
@@ -36,36 +36,37 @@ Lucía: Hmmm, qué nombre puedo ponerle al show?
     -> wait_for_custom_name
     
 
-* [No decidir nombre ahora]
-    ~ show_name = ""
-    Lucia: Mejor lo decidimos después...
-    Carmen: ¿Estás segura? El público estará esperando...
-    Lolita: La indecisión puede ser... peligrosa.
+//* [No decidir nombre ahora]
+//    ~ show_name = ""
+//    Lucia: Mejor lo decidimos después...
+//    Carmen: ¿Estás segura? El público estará//esperando...
+   // Lolita: La indecisión puede ser... peligrosa.
 
--   // <- GATHER: aquí se "reúnen" las ramas y continúa la historia
-
-{ show_name != "" :
-    Lucia: Bien, el programa "{show_name}" está listo para comenzar.
-- else:
-    Lucia: Bien, aunque aún no tenemos nombre, podemos seguir adelante.
-}
-
-Lolita: Está bien chicas, ahora sí vamos a comer. Conozco un buen lugar por el centro.
-Carmen: ...Espera, vienes con nosotras?
+-  Lolita: Espléndido, ahora sí podemos ir a comer. Conozco un gran lugar por el centro, yo invito muchachas!
+Lucía: Espera, vienes con nosotras?
 Lolita: Iré por mis llaves, no tardo.
+Carmen: Genial, al regresar yo recibiré a los panelistas y guiaré a nuestros técnicos.
+Lucía: Perfecto, yo mientras iré a camerinos a alistarme.
+Lolita: Y yo Las estaré observando desde el monitor. Rómpanse una pierna ;)
 
+#WIGGLE_NORMAL
+Lucía: SEREMOS EL SHOW NÚMERO UNO!!!!
+#NO_WIGGLE
+
+Narrador: Y así, nuestras heroínas emprendieron su viaje en el glamuroso mundo de los reflectores y el estrellato.
+Narrador: Qué les deparará el futuro? Solo hay una forma de averiguarlo!
+ // <- GATHER: aquí se "reúnen" las ramas y continúa la historia
+
+//{ show_name != "" :
+//    Lucia: Bien, el programa "{show_name}" está //listo para comenzar.
+//- else:
+ //   Lucia: Bien, aunque aún no tenemos nombre, //podemos seguir adelante.
+//}
 
 * -> END
 
 = wait_for_custom_name
 // Este knot espera que el DialogManager establezca show_name externamente
-{ show_name != "":
-    Lucia: ¡Excelente elección! "{show_name}" tiene potencial.
-    Carmen: ¡Qué original! Definitivamente llamará la atención.
-    Lolita: Un nombre único para un show único... *sonrisa misteriosa*
-- else:
-    Lucia: Hmm, parece que necesitas más tiempo para decidir...
-}
 
 // Después de los diálogos de respuesta, continúa con el resto
 { show_name != "":
@@ -77,13 +78,7 @@ Lolita: Iré por mis llaves, no tardo.
         Carmen: Definitivamente todos amarán "{show_name}", será un éxito rotundo!
 }
 
-Carmen: Yo recibiré a los panelistas y guiaré a nuestros técnicos.
-Lucía: Perfecto, yo iré a camerinos a alistarme.
-Lolita: Las dejo para que continúen sus preparativos, estaré observando desde el monitor. Rómpanse una pierna ;)
+-> DONE
 
-#WIGGLE_NORMAL
-Lucía: SEREMOS EL SHOW NÚMERO UNO!!!!
-#NO_WIGGLE
 
--> END
 
