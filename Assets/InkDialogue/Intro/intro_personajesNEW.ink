@@ -152,7 +152,7 @@ Lolita: Pero hey, sin presiones.
 - Carmen: Bueno si esas fueron tus dudas, creo que podemos continuar con los preparativos.
 Lolita: El tiempo es oro, al fin y al cabo, el mundo del espectáculo es todo un negocio.
 Carmen: Espera un momento, no lo entiendes Lolita.
-Carmen: Tenemos el poder de dar un mensaje.
+Carmen: Cuando estamos al aire, tenemos el poder de dar un mensaje.
 Lolita: Ay, ya va a comenzar otra vez...
 Lucía: Creo que Carmen tiene un punto.
 Carmen: Tú sabes a lo que me refiero!
@@ -166,6 +166,6 @@ Lolita: A ver, dinos qué piensas hacer con el "superpoder" de la televisión?
 #SFX_JINGLE CORRECTO
     Carmen: Así se habla!
 
--holi
+-reemplzar y poner entrada para proximo ink
 
  -> END
