@@ -74,9 +74,10 @@ Lolita: Pero hey, sin presiones.
 * [Quiénes son ustedes?]
     #EXPRESSION_CARMEN_TRISTE1
     #EXPRESSION_LOLITA_SERIACENTRO1
-    Carmen: Somos...
+    Carmen: Oye, eso no es gracioso.
+    Carmen: Sabes que soy tu Asistente de Producción y muy buena amiga tuya desde hace años!
     #EXPRESSION_LOLITA_SONRISACENTRO
-    Lolita: ...
+    Lolita: Bueno, ya que insistes.
     -> contexto
     
 * [Lolita, por qué eres verde?]
@@ -116,13 +117,14 @@ Lolita: Pero hey, sin presiones.
 * [Cuál es mi rol dentro del show?]
     Carmen: Eres la Presentadora! La estrella del programa!
     Carmen: Tú tratas con los invitados y mantienes contento al público.
-    Lolita: Tus decisiones influirán en el desarrollo del conflicto y . 
+    Lolita: Tus decisiones influirán en el desarrollo del conflicto y las reacciones de la audiencia. 
     Lolita: Como puedes observar, es una gran responsabilidad.
     Carmen: Puedes revisar tus Niveles de Rating en vivo y en directo!!!
+    Lolita: Sé que te irá de maravilla, Lucía.
     -> preguntas
 
 * [Cuánto me van a pagar?] 
-    Lolita: Veras, todo depende del rating que generes.
+    Lolita: Todo depende del rating que alcances en cada capítulo.
     Lolita: Si llegas a...
     #WIGGLE_NORMAL
     Lolita: 100 Puntos de Rating!!!! 
@@ -137,21 +139,21 @@ Lolita: Pero hey, sin presiones.
     Carmen: Ay nooo :c 
     Lolita: Lo siento chicas, yo no hago las reglas. Solo sigo órdenes de los ejecutivos del Canal 13.
     Lucia: Tranquila Lolita, entiendo.
-    
     -> preguntas
     
 *-> contexto
 
 
-
-
 === dilema ===
 #EXPRESSION_CARMEN_FELIZ1
-- Carmen: Bueno si esas son todas tus dudas, creo que podemos continuar con los preparativos.
-Lolita: El tiempo es oro, Al fin y al cabo, el mundo del espectáculo es todo un negocio. Le das al público lo que pide y nosotros te co
-Carmen: Espera un momento, no lo entiendes Lolita, es una gran responsabilidad. Tienes el poder de llegar a muchos hogares y dar un mensaje a las familias, a los demás seres humanos. Puedes
-Carmen: No olvides por qué estamos aqui hoy. Sé que Lucy.
-Lolita: A ver, por 
+- Carmen: Bueno si esas fueron tus dudas, creo que podemos continuar con los preparativos.
+Lolita: El tiempo es oro, al fin y al cabo, el mundo del espectáculo es todo un negocio.
+Carmen: Espera un momento, no lo entiendes Lolita.
+Carmen: Tenemos el poder de dar un mensaje.
+Lolita: Ay, ya va a comenzar otra vez...
+Lucía: Creo que Carmen tiene un punto.
+Carmen: Tú sabes a lo que me refiero.
+Lolita: A ver, dinos qué piensas hacer con el "superpoder" de la televisión?
 
 *[Quiero hacer plata!]
 #SFX_JINGLE CORRECTO
@@ -161,6 +163,6 @@ Lolita: A ver, por
 #SFX_JINGLE CORRECTO
     Carmen: Así se habla!
 
-
+-holi
 
  -> END
