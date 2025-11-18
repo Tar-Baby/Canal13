@@ -16,7 +16,7 @@ public class DialogManagerINPUT : MonoBehaviour
 
     [Header("Auto Start Settings")]
     [SerializeField] private bool autoStartOnPlay = true;
-    [SerializeField] private float delayBeforeStart = 10f;
+    [SerializeField] private float delayBeforeStart = 15f;
 
     [Header("Show Components")]
     [SerializeField] private TVShowCharacterManager characterManager;
@@ -768,10 +768,11 @@ public class DialogManagerINPUT : MonoBehaviour
     {
         // Aquí puedes cargar la siguiente escena o iniciar el contenido principal
         Debug.Log($"¡Comenzando el show: {GetCurrentShowName()}!");
+        DialogEvents.DialogFinished(); //version input para ver que trip
         SceneManager.LoadScene("Caso");
 
 
-        DialogEvents.DialogFinished(); //version input para ver que trip
+        
     }
 
     public void LoadNewScript(TextAsset newInkJSON)

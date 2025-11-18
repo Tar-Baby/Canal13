@@ -19,7 +19,8 @@ Lucía: Hmmm, qué nombre puedo ponerle al show?
     Lucía: El show se llamará "{show_name}"
     Carmen: ...
     Lolita: ...ese nombre...
-    Carmen y Lolita: 7 palabras... E S E N C I A
+    Carmen: 7 palabras... E S E N C I A
+    Lolita: No está nada mal.
     Carmen: Definitivamente todos amarán "{show_name}", será un éxito rotundo!
 
 
@@ -31,7 +32,7 @@ Lucía: Hmmm, qué nombre puedo ponerle al show?
 
 
 * [Escribir nombre]
-    Lolita: ¡Perfecto! Escribe el nombre que quieras para nuestro show.
+    Carmen: ¡Perfecto! Escribe el nombre que quieras para nuestro show.
     -> wait_for_custom_name
     
 
@@ -79,6 +80,10 @@ Lolita: Iré por mis llaves, no tardo.
 Carmen: Yo recibiré a los panelistas y guiaré a nuestros técnicos.
 Lucía: Perfecto, yo iré a camerinos a alistarme.
 Lolita: Las dejo para que continúen sus preparativos, estaré observando desde el monitor. Rómpanse una pierna ;)
+
+#WIGGLE_NORMAL
+Lucía: SEREMOS EL SHOW NÚMERO UNO!!!!
+#NO_WIGGLE
 
 -> END
 

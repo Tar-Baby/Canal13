@@ -15,13 +15,63 @@ MonoBehaviour:
   characters:
   - characterName: "Luc\xEDa"
     expressions:
+    - expressionName: Default
+      sprite: {fileID: 21300000, guid: 82b80532f18c924428a302c2fb8f20ba, type: 3}
     - expressionName: Entrada
       sprite: {fileID: 21300000, guid: 82b80532f18c924428a302c2fb8f20ba, type: 3}
+    - expressionName: Asustada1
+      sprite: {fileID: 21300000, guid: 164898018b809d440b31812bd98af723, type: 3}
+    - expressionName: Confundida1
+      sprite: {fileID: 21300000, guid: 472ba7af4a8f74e43923f8f11d8b2323, type: 3}
+    - expressionName: Preocupada1
+      sprite: {fileID: 21300000, guid: 0523d0e7b870b8c4194e086ea1a2a64c, type: 3}
+    - expressionName: Preocupada2
+      sprite: {fileID: 21300000, guid: 9514c1ea9e2273b41834d1bfe771ab8f, type: 3}
+    - expressionName: Impresionada1
+      sprite: {fileID: 21300000, guid: 65bd2b77f315f6f4798c3520f4c71394, type: 3}
+    - expressionName: Emocionada1
+      sprite: {fileID: 21300000, guid: 9a4ac5d9366480543af1ab63381009af, type: 3}
+    - expressionName: Chiste1
+      sprite: {fileID: 21300000, guid: b111f2869abaf9e4d902127328f1df9d, type: 3}
+    - expressionName: Hypeada1
+      sprite: {fileID: 21300000, guid: 7efba87e864d1864498e1f137c8adb0b, type: 3}
   - characterName: Lolita
     expressions:
+    - expressionName: Default
+      sprite: {fileID: 21300000, guid: 16ad35b354ac3e146be30f9e582852de, type: 3}
     - expressionName: Entrada
-      sprite: {fileID: 21300000, guid: 57a489c0bef464746bdc112b69cd577a, type: 3}
+      sprite: {fileID: 21300000, guid: 775e8aea6e79601458f4da7349586065, type: 3}
+    - expressionName: SonrisaCentro
+      sprite: {fileID: 21300000, guid: 16ad35b354ac3e146be30f9e582852de, type: 3}
+    - expressionName: Aliviada1
+      sprite: {fileID: 21300000, guid: 6e0128dc2e83fc8469a60a02e6efd041, type: 3}
+    - expressionName: Preocupada1
+      sprite: {fileID: 21300000, guid: aaac335ac9306104aa9c163a49c27857, type: 3}
+    - expressionName: SeriaCentro1
+      sprite: {fileID: 21300000, guid: d13a4c4ae26d5414b90cbaf998c8edfa, type: 3}
+    - expressionName: Cansada1
+      sprite: {fileID: 21300000, guid: 99efede4045bbe444b546d36134f1fe9, type: 3}
+    - expressionName: Enojada1
+      sprite: {fileID: 21300000, guid: 611308812cd100146b197955ce151408, type: 3}
   - characterName: Carmen
     expressions:
+    - expressionName: Default
+      sprite: {fileID: 21300000, guid: f6911450e8e0f3e4e9bda0a1ff83e6f0, type: 3}
     - expressionName: Entrada
       sprite: {fileID: 21300000, guid: f6911450e8e0f3e4e9bda0a1ff83e6f0, type: 3}
+    - expressionName: Confiada1
+      sprite: {fileID: 21300000, guid: 6915ccff766b9564b94e6e91bfd5246d, type: 3}
+    - expressionName: Activada1
+      sprite: {fileID: 21300000, guid: 466d816b56a6a4746ba00ad7faeb72e6, type: 3}
+    - expressionName: Avergonzada1
+      sprite: {fileID: 21300000, guid: 71c211bdaad48e74f9fc4b3f1a86fcf5, type: 3}
+    - expressionName: Feliz1
+      sprite: {fileID: 21300000, guid: 01340f76d2c2b154fbadf06deb304556, type: 3}
+    - expressionName: Hypeada1
+      sprite: {fileID: 21300000, guid: 3d41efeace150bd45a22f62fb6691100, type: 3}
+    - expressionName: Triste1
+      sprite: {fileID: 21300000, guid: ea9fb996e82b57c4ba9925b4c7355dab, type: 3}
+    - expressionName: Chismosa1
+      sprite: {fileID: 21300000, guid: 281f0e98dfa16864ca9adfecc78353a2, type: 3}
+    - expressionName: Risa1
+      sprite: {fileID: 21300000, guid: 10f2c3814c344b8409ef0a7f7f034095, type: 3}

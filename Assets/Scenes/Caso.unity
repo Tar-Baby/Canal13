@@ -4462,7 +4462,7 @@ MonoBehaviour:
   - key: Rating up small
     clip: {fileID: 8300000, guid: d48f5d47b0396f44e844b828390f5b3c, type: 3}
   - key: Rating up medium
-    clip: {fileID: 8300000, guid: c94ea359f3cc9b8448aba93803d18e4f, type: 3}
+    clip: {fileID: 8300000, guid: b4f83964f874abc4586d970d4bc9fe0a, type: 3}
   - key: Rating up large
     clip: {fileID: 8300000, guid: 4e650c0d780738f428b43a70ace5a8c1, type: 3}
   - key: Rating down small
@@ -4483,6 +4483,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a406894305da9394d9f3966656c03b51, type: 3}
   - key: Audience Small Laughter 1
     clip: {fileID: 8300000, guid: aebdda376dd7e2648a109afb2d43dd63, type: 3}
+  - key: Fail Soft
+    clip: {fileID: 8300000, guid: da8604d28ae430247898c632ffc2cdf3, type: 3}
   sfx_Source: {fileID: 885531581}
   sfxEchoFilter: {fileID: 885531585}
   sfxReverbFilter: {fileID: 885531584}
