@@ -41,7 +41,7 @@ Carmen: Será el debut más épico en la historia de la televisión!
 #EXPRESSION_LOLITA_ALIVIADA1
 Lolita: Ja, no cantemos victoria todavía. Eso lo dictará el público...
 #EXPRESSION_LUCÍA_HYPEADA1
-Lucía: Tienes razón, debemos dar nuestro máximo esfuerzo si queremos presentarle a nuestra audiencia un show inolvidable.
+Lucía: Tienes razón, debemos dar nuestro máximo esfuerzo si queremos presentarle a nuestra audiencia un show inolvidable!
 #EXPRESSION_CARMEN_FELIZ1
 #SFX_JINGLE INTERES
 #EXPRESSION_LOLITA_SONRISACENTRO
@@ -78,6 +78,9 @@ Lolita: Pero hey, sin presiones.
     Carmen: Sabes que soy tu Asistente de Producción y muy buena amiga tuya desde hace años!
     #EXPRESSION_LOLITA_SONRISACENTRO
     Lolita: Bueno, ya que insistes.
+    Lolita: Mi nombre es Lola Cortéz, tengo 33 años de edad. Trabajo de Directora de Producción en el departamento de Horario Estelar del prestigioso Canal 13.
+    Lolita: Mi casa se encuentra en la sección noroeste de Mo-
+    Lucía: Ok, ok ya entendí.
     -> contexto
     
 * [Lolita, por qué eres verde?]
@@ -152,7 +155,7 @@ Carmen: Espera un momento, no lo entiendes Lolita.
 Carmen: Tenemos el poder de dar un mensaje.
 Lolita: Ay, ya va a comenzar otra vez...
 Lucía: Creo que Carmen tiene un punto.
-Carmen: Tú sabes a lo que me refiero.
+Carmen: Tú sabes a lo que me refiero!
 Lolita: A ver, dinos qué piensas hacer con el "superpoder" de la televisión?
 
 *[Quiero hacer plata!]
