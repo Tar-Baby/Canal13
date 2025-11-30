@@ -79,8 +79,8 @@ Lolita: Pero hey, sin presiones.
     #EXPRESSION_LOLITA_SONRISACENTRO
     Lolita: Bueno, ya que insistes.
     Lolita: Mi nombre es Lola Cortéz, tengo 33 años de edad. Trabajo de Directora de Producción en el departamento de Horario Estelar del prestigioso Canal 13.
-    Lolita: Mi casa se encuentra en la sección noroeste de Mo-
-    Lucía: Ok, ok ya entendí.
+    Lolita: Actualmente me encuentro soltera. Mi casa se encuentra en la sección noroeste de Mo-
+    Lucía: Ehhh, ok, ok ya entendí.
     -> contexto
     
 * [Lolita, por qué eres verde?]
@@ -158,13 +158,14 @@ Lucía: Creo que Carmen tiene un punto.
 Carmen: Tú sabes a lo que me refiero!
 Lolita: A ver, dinos qué piensas hacer con el "superpoder" de la televisión?
 
+*[Quiero ayudar a las personas!]
+#SFX_JINGLE CORRECTO
+    Carmen: Así se habla!
+
 *[Quiero hacer plata!]
 #SFX_JINGLE CORRECTO
     Lolita: Esa es la actitud!
     
-*[Quiero hacer un cambio!]
-#SFX_JINGLE CORRECTO
-    Carmen: Así se habla!
 
 -Lucía: Dejemos la charla para después, Carmencita salgamos a comer algo y a que te dé el sol. Te veo pálida.
 

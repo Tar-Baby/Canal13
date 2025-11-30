@@ -18,6 +18,8 @@ public class TVShowScene
     [Header("Audio")]
     public AudioClip ambientSound;
     public bool hasSpecialLighting = false;
+    
+
 }
 
 public class TVShowSceneManager : MonoBehaviour
@@ -54,6 +56,8 @@ public class TVShowSceneManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private float transitionDuration; //= 1f;
     [SerializeField] private bool debugMode = true;
+    [Header("Ownership")]
+    [SerializeField] private bool ownsContinueButton = false; // set false to avoid double ownership
     
     //private DialogManager dialogManager;
     private DialogManagerINPUT dialogManagerINPUT;
@@ -174,12 +178,20 @@ public class TVShowSceneManager : MonoBehaviour
             cancelCustomNameButton.onClick.RemoveAllListeners();
             cancelCustomNameButton.onClick.AddListener(() => OnCancelCustomName());
         }
+        
+        if (continuarButton != null && ownsContinueButton)
+        {
+            continuarButton.onClick.RemoveAllListeners();
+            continuarButton.onClick.AddListener(() => OnContinueToDemoShow());
+        }
 
         if (continuarButton != null)
         {
             continuarButton.onClick.RemoveAllListeners();
             continuarButton.onClick.AddListener(() => OnContinueToDemoShow());
         }
+        
+        
 
         if (debugMode)
         {
@@ -357,6 +369,10 @@ public class TVShowSceneManager : MonoBehaviour
         // No cambiar escena automáticamente, solo ocultar paneles
         HideAllPanels();
         isTransitioning = false; // Asegurar que no esté en transición
+        
+        if (continuarButton != null)
+            continuarButton.gameObject.SetActive(false); // ensure hidden by default here
+    
     }
 
     public void ChangeToScene(int sceneIndex)

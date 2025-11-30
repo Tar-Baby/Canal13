@@ -7,6 +7,7 @@ using Ink.Runtime;
 using UnityEngine.SceneManagement; // Necesario para cargar escenas (al final del caso)
 using System.Linq; // For LINQ operations like .FirstOrDefault
 
+
 public class CaseSceneManager : MonoBehaviour
 {
     [Header("Case UI References")]
@@ -116,6 +117,7 @@ public class CaseSceneManager : MonoBehaviour
     
     private Coroutine typewriterRoutine;
 
+    
     private void Start()
     {
         SetupCaseUI(); // Configura la UI del caso (oculta elementos al inicio)

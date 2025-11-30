@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class DialogPanelUIINPUT : MonoBehaviour
 {
@@ -18,6 +19,15 @@ public class DialogPanelUIINPUT : MonoBehaviour
     [SerializeField] private RectTransform namePanelRect;
     [SerializeField] private float horizontalPadding = 30f; 
     
+    [Header("Screen Fade")]
+    // Full-screen black panel with CanvasGroup (alpha = 0 to start)
+    [SerializeField] private CanvasGroup blackFade;
+    [SerializeField] private float fadeOutDuration = 2f;
+    [Header("Audio Mixer (Music)")]
+    // Assign your AudioMixer and ensure the Music group's Volume is exposed as musicVolumeParam
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private string musicVolumeParam = "MusicVolume";
+    
     [Header("Settings")]
     [SerializeField] private float typewriterSpeed = 0.05f;
     [SerializeField] private bool debugMode = true; // AGREGADO: Para debug
@@ -27,6 +37,7 @@ public class DialogPanelUIINPUT : MonoBehaviour
     private DialogManagerINPUT dialogManagerINPUT;
     private bool hasShownText = false;
     private bool isFinalScreen = false;
+    private bool isFadingOut = false;
 
     private void OnEnable()
     {
@@ -80,6 +91,14 @@ public class DialogPanelUIINPUT : MonoBehaviour
             namePanel.SetActive(false);
         }
         
+        // Ensure black fade panel is transparent and not blocking at start
+        if (blackFade != null)
+            {
+            blackFade.alpha = 0f;
+            blackFade.blocksRaycasts = false;
+            blackFade.interactable = false;
+            }
+        
     }
     
     private void ShowSpeakerName()
@@ -119,6 +138,7 @@ public class DialogPanelUIINPUT : MonoBehaviour
         
         if (finalButton != null)
         {
+            finalButton.onClick.RemoveAllListeners();
             finalButton.onClick.AddListener(OnFinalButtonClicked); //Leer AddListener
         }
     }
@@ -459,12 +479,61 @@ public class DialogPanelUIINPUT : MonoBehaviour
 
     private void OnFinalButtonClicked()
     {
-        if (dialogManagerINPUT != null)
-        {
-            //finalButton.GetComponent<Button>().onClick.Invoke();
-            dialogManagerINPUT.StartDemoShow();
-        }
+        if (isFadingOut) return;
+        isFadingOut = true;
+        // Prevent more UI interaction during fade
+        HideAllInteractiveElements();
+        StartCoroutine(FadeOutSceneAudioAndScreen());
     }
+    
+    // Fades Music mixer to -80 dB and screen to black, then calls StartDemoShow.
+    private IEnumerator FadeOutSceneAudioAndScreen()
+    {
+        float t = 0f;
+        // Prepare black panel
+                     if (blackFade != null) 
+                     {
+             blackFade.gameObject.SetActive(true);
+             blackFade.blocksRaycasts = true;
+             blackFade.interactable = true;
+            }
+        // Read current dB if mixer assigned
+        float startDb = 0f;
+        float endDb = -30f;
+        if (audioMixer != null)
+        {
+                       audioMixer.GetFloat(musicVolumeParam, out startDb);
+        }
+        while (t < fadeOutDuration)
+                    {
+                        t += Time.deltaTime;
+                        float u = Mathf.Clamp01(t / fadeOutDuration);
+            
+                            // Audio mixer fade
+                                if (audioMixer != null)
+                            {
+                                float newDb = Mathf.Lerp(startDb, endDb, u);
+                                audioMixer.SetFloat(musicVolumeParam, newDb);
+                            }
+            
+                            // Screen fade
+                                if (blackFade != null) blackFade.alpha = u;
+            
+                            yield return null;
+                   }
+        
+                    // Ensure final states
+                       if (audioMixer != null) audioMixer.SetFloat(musicVolumeParam, endDb);
+                if (blackFade != null) blackFade.alpha = 1f;
+        
+                    // Continue your flow
+                        if (dialogManagerINPUT != null)
+                    {
+                        dialogManagerINPUT.StartDemoShow();
+                    }
+        
+                    isFadingOut = false;
+            }
 
     #endregion
 
