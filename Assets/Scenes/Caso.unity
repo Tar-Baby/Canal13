@@ -4453,7 +4453,7 @@ MonoBehaviour:
   sfxAudienceSource: {fileID: 317884524}
   musicLibrary:
   - key: Default show theme
-    clip: {fileID: 8300000, guid: df18b5a64c40f1c41b665b749a7f903b, type: 3}
+    clip: {fileID: 8300000, guid: b7d7b5cd5d643ad4fadfbd2280b51dad, type: 3}
   - key: Silly
     clip: {fileID: 8300000, guid: 94aad76bce630f741b92b18e04cd44a9, type: 3}
   - key: Action

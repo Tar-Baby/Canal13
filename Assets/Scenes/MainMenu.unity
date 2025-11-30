@@ -496,7 +496,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4434959770965046837, guid: aaf78ad21ae482d4789a9ea3c219b1de, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 9f4251df5b2e2e74ba809d00e165efb6, type: 3}
+  m_Resource: {fileID: 8300000, guid: 59f51b16818aed248a14781df88a4356, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1436,6 +1436,11 @@ MonoBehaviour:
   panelNegro: {fileID: 1748033483}
   textoCita: {fileID: 1870182092}
   buttonClick: {fileID: 1247128241}
+  audioMixer: {fileID: 24100000, guid: aaf78ad21ae482d4789a9ea3c219b1de, type: 2}
+  exposedParam: MusicVolume
+  fadeDuration: 4
+  targetVolumeDb: -30
+  minVolumeDb: -80
 --- !u!1 &1732139562
 GameObject:
   m_ObjectHideFlags: 0

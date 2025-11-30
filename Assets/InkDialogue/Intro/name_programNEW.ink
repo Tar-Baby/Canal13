@@ -46,12 +46,14 @@ Lucía: Hmmm, qué nombre puedo ponerle al show?
 
 
 { show_name != "" :
-    Lucia: Bien, el programa "{show_name}" está listo para comenzar.
+    Lucía: Lo tengo! El programa se llamará "{show_name}"
+    Lolita: Debo admitir, que esta vez te luciste.
+    Carmen: "{show_name}" me gusta como suena eso! Sé que todos nos amarán!
 - else:
     Lucia: Bien, aunque aún no tenemos nombre, podemos seguir adelante.
 }
 
-
+ 
 * -> END
 
 = wait_for_custom_name
@@ -75,7 +77,7 @@ Lucía: Espera, vienes con nosotras?
 Lolita: Iré por mis llaves, no tardo. Pero al volver quiero verlas manos a la obra.
 Carmen: Por supuesto, yo recibiré a los panelistas y guiaré a nuestros técnicos.
 Lucía: Yo mientras iré a camerinos a alistarme.
-Lolita: Y yo Las estaré observando desde el monitor. Rómpanse una pierna ;)
+Lolita: Y yo las estaré observando desde el monitor. Rómpanse una pierna ;)
 
 #WIGGLE_NORMAL
 Lucía: SEREMOS EL SHOW NÚMERO UNO!!!!

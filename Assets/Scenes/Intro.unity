@@ -4043,6 +4043,10 @@ MonoBehaviour:
   LobbyFondo: {fileID: 963747357}
   textTyping: {fileID: 1879265450}
   welcomeMusic: {fileID: 1938416958}
+  audioMixer: {fileID: 24100000, guid: aaf78ad21ae482d4789a9ea3c219b1de, type: 2}
+  exposedParam: MusicVolume
+  defaultVolumeDb: 0
+  currentVolumeDb: -10
 --- !u!114 &1457451948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4443,7 +4447,7 @@ MonoBehaviour:
   sfxButtonSource: {fileID: 1103156018}
   musicLibrary:
   - key: Bienvenida
-    clip: {fileID: 8300000, guid: fbef2e278368d3d4c8ef09794b960c8c, type: 3}
+    clip: {fileID: 8300000, guid: 73bc0b1a61628994f9b6772db99d31ee, type: 3}
   sfxLibrary:
   - key: Button1
     clip: {fileID: 8300000, guid: eb40d126f84e796468f81f3bb1ab3de8, type: 3}
@@ -5142,7 +5146,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4434959770965046837, guid: aaf78ad21ae482d4789a9ea3c219b1de, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 9b8c473d0aedbc844a9e2ac057552898, type: 3}
+  m_Resource: {fileID: 8300000, guid: 73bc0b1a61628994f9b6772db99d31ee, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
