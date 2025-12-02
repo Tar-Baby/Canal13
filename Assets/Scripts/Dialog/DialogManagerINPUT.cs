@@ -224,8 +224,11 @@ public class DialogManagerINPUT : MonoBehaviour
                 story = new Story(inkScripts[i].text);
                 BindExternalFunctions();
                 Debug.Log($"Initialized with {inkNames[i]} (Index: {i})");
+                InkService.Instance?.SetActiveStory(story);
                 return;
             }
+
+            InkService.Instance.SetActiveStory(story);
         }
         
         Debug.LogError("No hay ningún script de Ink asignado!");
@@ -265,6 +268,9 @@ public class DialogManagerINPUT : MonoBehaviour
                 story = new Story(inkScripts[i].text);
                 BindExternalFunctions();
                 
+                // Register new active story with service
+                InkService.Instance?.SetActiveStory(story);
+                
                 RestoreVariables(previousVariables);
                 
                 Debug.Log($"Loaded {inkNames[i]} (Index: {i})");
@@ -272,6 +278,8 @@ public class DialogManagerINPUT : MonoBehaviour
                 EnterDialog("");
                 return;
             }
+
+            InkService.Instance.SetActiveStory(story);
         }
         
         Debug.Log("No hay más scripts de Ink disponibles. Finalizando diálogos.");

@@ -88,7 +88,9 @@ MonoBehaviour:
     - expressionName: Dudosa1
       sprite: {fileID: 21300000, guid: 0aaee7564e007a9448838a66f08c6e66, type: 3}
   - characterName: "H\xE9ctor"
-    expressions: []
+    expressions:
+    - expressionName: Default
+      sprite: {fileID: 21300000, guid: 07390569805001d4f9247ac3853d6d76, type: 3}
   - characterName: Isaac
     expressions: []
   - characterName: Xavier

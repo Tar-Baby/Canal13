@@ -145,6 +145,8 @@ public class CaseSceneManager : MonoBehaviour
             StartCase(); // Inicia el caso automáticamente para depuración.
              // empezamos con 10 los Casos
         }
+        
+        
 #if UNITY_EDITOR 
         
         
@@ -159,7 +161,8 @@ public class CaseSceneManager : MonoBehaviour
         #endif
         // --- FIN DE CÓDIGO PARA AUTO-INICIO DE PRUEBA ---
     }
-
+    
+    
     private void AutoConnectReferences()
     {
         // Intenta encontrar los GameObjects por su nombre si no han sido asignados en el Inspector.

@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject panelNegro;
     [SerializeField] private GameObject textoCita;
     [SerializeField] private AudioSource buttonClick;
-
+    [SerializeField] private GameObject Chicas;
     [Header("Audio Mixer Settings")]
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private string exposedParam = "MusicVolume";
@@ -120,12 +120,14 @@ IEnumerator FadeOutMixer()
         buttonNuevoJuego.SetActive(false);
         buttonOpciones.SetActive(false);
         buttonSalir.SetActive(false);
+        Chicas.SetActive(false);
     }
 
     IEnumerator EnableElements()
     {
         yield return new WaitForSeconds(20);
         background.SetActive(true);
+        Chicas.SetActive(true);
         title.SetActive(true);
         buttonNuevoJuego.SetActive(true);
         buttonOpciones.SetActive(true);
