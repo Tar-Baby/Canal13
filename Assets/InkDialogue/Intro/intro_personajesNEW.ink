@@ -78,7 +78,7 @@ Lolita: Pero hey, sin presiones.
     Carmen: Sabes que soy tu Asistente de Producción y muy buena amiga tuya desde hace años!
     #EXPRESSION_LOLITA_SONRISACENTRO
     Lolita: Bueno, ya que insistes.
-    Lolita: Mi nombre es Lola Cortéz, tengo 33 años de edad. Trabajo de Directora de Producción en el departamento de Horario Estelar del prestigioso Canal 13.
+    Lolita: Mi nombre es Lola Cortez, tengo 33 años de edad. Trabajo de Directora de Producción en el departamento de Horario Estelar del prestigioso Canal 13.
     Lolita: Actualmente me encuentro soltera. Mi casa se encuentra en la sección noroeste de Mo-
     Lucía: Ehhh, ok, ok ya entendí.
     -> contexto

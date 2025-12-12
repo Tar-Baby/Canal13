@@ -121,7 +121,9 @@ Lucía: La plena que esto se pone cada vez mejor.
 #WIGGLE_NORMAL
 Lucía: QUE PASE EL PRIMER NOVIOOOOO!!! //Reaccion del publico Aplausos
 #NO_WIGGLE
-//#HIDE_LUCÍA
+#HIDE_LUCÍA
+#SHOW_HÉCTOR_LEFT
+#SHOW_LUCÍA_CENTER
 Narrador: Llega Héctor y abraza a Rocío antes de tomar asiento.
 Héctor: Buenas con todos, un gusto haber sido invitado.
 
@@ -143,6 +145,8 @@ Lucía: Pues enorme sorpresa la que te vas a llevar.
 #WIGGLE_NORMAL
 Lucía: QUE PASE EL SEGUNDO NOVIOOOOO!!!
 #NO_WIGGLE
+#HIDE_LUCÍA
+#SHOW_ISAAC_CENTER
 Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
 Narrador: Llega Isaac y se acerca para besar a Rocío.
