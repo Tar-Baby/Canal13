@@ -230,8 +230,85 @@ Narrador: Todos en la sala quedan desconcertados y confundidos.
 Lucía: Maravillosas noticias Carmencita, hazlo pasar. 
 Isaac: Espera, no puedes meter a cualquier random aquí. Este problema es de los tres nada más.
 Lucía: Este es mi show, papito, y aquí mando YO!!! 
+#MUSIC_ACTION
 #WIGGLE_NORMAL
 Lucía: QUE PASE EL TESTIGOOOO!!!!
 #NO_WIGGLE
+Xavier: Hola mucho gusto, soy Xavier el novio de Rocío.
+Lucía: (viendo con rabia a Rocio) Tienes...otro...novio...???
+Narrador: Todos voltean a ver a Rocío con indignación.
+Rocío: Lo conoci ayer...jeje... es que... tiene carro y ya pues... (risas nerviosas)
+
+* [Alcahuetear a Rocío]
+    #SFX_RATING DOWN LARGE_ECHO
+    ~ episode_rating -= 20
+    ->alcahueta
+    
+* [Funar a Rocío]
+    #SFX_RATING UP LARGE_ECHO
+    ~ episode_rating += 20
+    ->funaRocio
+    
+    
+=== funaRocio ===
+Lucía: Sabes Rocío, a lo largo de este caso he sido demasiado paciente contigo. Te di el beneficio de la duda pero ya es suficiente.
+Narrador: Rocío no puede más y estalla en cólera.
+Rocío: Bueno ya, sí lo admito soy una interesada!
+Lucía: Ya era hora de que lo reconocieras...
+Rocío: Y ahora a dónde me van a mandar, a la Penitenciaria?
+Todos al unísono: ¡NO!
+Rocío: ¿Entonces a dónde me van a mandar, a DespiérTC para que Caterva me putee?
+Todos al unísono: ¡TAMPOCO!
+Lucía: A ver, a veeeer Rocío, sin lisuras!!!!
+Isaac: Rocío, mi vida no es necesario que grites. Eso no es digno de una mujer de alto valor como tú.
+Lucía: Héctor, la próxima vez que Isaac diga una ridiculez como esa. Tienes total libertad de meterle un puñete en toda la jeta.
+Héctor: (Con una sonrisa discreta) Te lo agradezco Lucía.
+
+-> opinionExterna
+    
+=== alcahueta ===
+Lucía: Estoy de tu parte Rocío, sé que has cometido errores pero aún puedes redimirte.
+Rocío: Lucía, yo quiero un hombre bueno, que me cuide, que me proteja...
+
+* [Que te MATENGA]
+    #SFX_RATING UP MEDIUM_ECHO
+    ~ episode_rating += 10
+    
+* [Que te AME]
+    #SFX_RATING UP SMALL_ECHO
+    ~ episode_rating += 5
+
+- Lucía: Hmmm debe haber alguna forma de resolver esto de manera racional y madura.
+
+-> opinionExterna
+
+=== opinionExterna ===
+Lucía: Creo que es momento de pedir una opinión externa.
+* [Que pasen los expertos!]
+    Lolita (vía intercom): Lo lamento Lucía, me temo que no hemos aprobado el presupuesto para eso todavía.
+    Lucía: Y hasta ahora me lo dicen?
+    Carmen (vía intercom): Jeje, se me pasó por alto. Una disculpa jefecita.
+    Lolita (vía intercom): Mejor intenta pidiéndole al público su opinión, de seguro tienen algo interesante que decir.
+    ->opinionExterna
+    
+* [Preguntémosle al público!]
+    #SFX_RATING UP MEDIUM_ECHO
+    ~ episode_rating += 10
+    Narrador: Le dan el micrófono a un miembro random del público.
+    Lucía: Hola qué tal, gracias por acompañarnos hoy en el show. Cómo te llamas?
+    Poncharelo: Un gusto mi estimada Lucía, me llamo Poncharelo.
+    Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
+    Poncharelo: Pues sinceramente, yo pienso que son unos pobres (dramatic vine sfx), tristes (dramatic vine sfx)... sinvergüenzas!
+    Poncharelo: (Señalando a Rocío) Mijita se me hace tú lo que quieres es un cajero automático o una cara bonita, no una pareja.
+    #SFX_RATING UP MEDIUM_ECHO
+    ~ episode_rating += 10
+    Narrador: La audiencia aplaude.
+    Poncharelo: (Señalando a Isaac, Hector y Xavier) Y ustedes pelados. despierten de ese dulce sueño porque son tremendos migajeros.
+    Lucía: Ah caray, se los está papeando...
+    Narrador: El público enloquece.
+
+- Rocío: Bueno Lucía, qué piensas hacer al respecto?
+
+-> DONE
 
 -> END

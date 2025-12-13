@@ -5009,6 +5009,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 94aad76bce630f741b92b18e04cd44a9, type: 3}
   - key: Action
     clip: {fileID: 8300000, guid: 686dd6304f6856044b73ad983dbbb938, type: 3}
+  - key: Mystery
+    clip: {fileID: 8300000, guid: 0bfbdbb3afb0c7d4e953a37dc840326c, type: 3}
   sfxLibrary:
   - key: Rating up small
     clip: {fileID: 8300000, guid: d48f5d47b0396f44e844b828390f5b3c, type: 3}
