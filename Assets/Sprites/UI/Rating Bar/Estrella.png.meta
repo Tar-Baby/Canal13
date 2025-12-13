@@ -116,10 +116,10 @@ TextureImporter:
       name: Estrella_0
       rect:
         serializedVersion: 2
-        x: 2846
-        y: 645
-        width: 994
-        height: 1051
+        x: 2767
+        y: 639
+        width: 1034
+        height: 1042
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
