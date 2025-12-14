@@ -235,7 +235,8 @@ Lucía: Este es mi show, papito, y aquí mando YO!!!
 Lucía: QUE PASE EL TESTIGOOOO!!!!
 #NO_WIGGLE
 Xavier: Hola mucho gusto, soy Xavier el novio de Rocío.
-Lucía: (viendo con rabia a Rocio) Tienes...otro...novio...???
+Lucía: (viendo con rabia a Rocio).
+Lucía: Tienes...otro...novio...???
 Narrador: Todos voltean a ver a Rocío con indignación.
 // reaccion del publico: Indignacion
 Rocío: Lo conoci ayer...jeje... es que... tiene carro y ya pues... (risas nerviosas)
@@ -302,8 +303,11 @@ Lucía: Creo que es momento de pedir una opinión externa.
     Lucía: Hola qué tal, gracias por acompañarnos hoy en el show. Cómo te llamas?
     Poncharelo: Un gusto mi estimada Lucía, me llamo Poncharelo.
     Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
-    Poncharelo: Pues sinceramente, yo pienso que son unos pobres (dramatic vine sfx), tristes (dramatic vine sfx)... sinvergüenzas!
-    Poncharelo: (Señalando a Rocío) Mijita se me hace tú lo que quieres es un cajero automático o una cara bonita, no una pareja.
+    Poncharelo: Pues sinceramente, yo pienso que estos son unos...
+    Poncharelo: Pobres. (dramatic vine sfx)
+    Poncharelo: Tristes. (dramatic vine sfx)
+    Poncharelo: Sinvergüenzas! (dramatic vine sfx)
+    Poncharelo: (Señalando a Rocío) Mijita se me hace tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
     // reaccion del publico: Aplausos
     Narrador: La audiencia aplaude.
     Poncharelo: (Señalando a Isaac, Hector y Xavier) Y ustedes pelados. despierten de ese dulce sueño porque son tremendos migajeros.

@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SceneFader : MonoBehaviour
 {
@@ -18,7 +16,6 @@ public class SceneFader : MonoBehaviour
 
     private void Awake()
     {
-        // Patrón Singleton — solo uno en toda la vida del juego
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -28,72 +25,44 @@ public class SceneFader : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        // Color inicial: transparente
         if (fadeImage != null)
         {
             fadeImage.color = new Color(fadeColor.r, fadeColor.g, fadeColor.b, 0f);
+        }
+    }
+
+    private void Start()
+    {
+        if (fadeImage != null)
             StartCoroutine(FadeInAtStart());
-        }
-    }
-        
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    // ---------------------------------------------
+    // MÉTODOS PÚBLICOS
+    // ---------------------------------------------
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (fadeImage == null)
-        {
-            // Busca una nueva FadeImage en la nueva escena
-            Image found = FindObjectOfType<Image>(true);
-            if (found != null)
-            {
-                fadeImage = found;
-                Debug.Log("[SceneFader] FadeImage reconectado en la nueva escena.");
-            }
-            else
-            {
-                Debug.LogWarning("[SceneFader] No se encontró FadeImage en esta escena.");
-            }
-        }
-    }
-    
-    // =========================================================
-    // 🔶 USO PRINCIPAL
-    // =========================================================
-
-    /// <summary>
-    /// Hace un fade out → cambia a una escena → fade in.
-    /// </summary>
     public void FadeToScene(string sceneName)
     {
-        if (!isFading)
+        if (!isFading && fadeImage != null)
             StartCoroutine(FadeOutAndLoad(sceneName));
     }
 
-    /// <summary>
-    /// Hace un fade in u out dentro de la misma escena (sin cambiarla)
-    /// </summary>
     public void FadeIn(float duration = -1f)
     {
-        if (!isFading)
+        if (!isFading && fadeImage != null)
             StartCoroutine(Fade(1f, 0f, duration > 0 ? duration : fadeDuration));
     }
 
     public void FadeOut(float duration = -1f)
     {
-        if (!isFading)
+        if (!isFading && fadeImage != null)
             StartCoroutine(Fade(0f, 1f, duration > 0 ? duration : fadeDuration));
     }
 
-    // =========================================================
-    // 🔶 CORRUTINAS DE FADE
-    // =========================================================
+    // ---------------------------------------------
+    // CORRUTINAS
+    // ---------------------------------------------
 
     private IEnumerator FadeOutAndLoad(string sceneName)
     {
@@ -113,12 +82,6 @@ public class SceneFader : MonoBehaviour
 
     private IEnumerator Fade(float startAlpha, float endAlpha, float duration)
     {
-        if (fadeImage == null)
-        {
-            Debug.LogWarning("SceneFader: No Fade Image assigned!");
-            yield break;
-        }
-
         float elapsed = 0f;
         Color c = fadeColor;
 
@@ -133,7 +96,7 @@ public class SceneFader : MonoBehaviour
 
         fadeImage.color = new Color(c.r, c.g, c.b, endAlpha);
     }
-    
+
     private IEnumerator FadeInAtStart()
     {
         yield return Fade(1f, 0f, fadeDuration);
