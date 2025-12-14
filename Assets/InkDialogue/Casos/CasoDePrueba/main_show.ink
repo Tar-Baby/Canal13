@@ -9,7 +9,7 @@ Narrador: Al aire en 3...2...1...
 #SFX_AUDIENCE CHEERING 2_REVERB
 #SHOW_LUCÍA_LEFT
 //#EXPRESSION_LUCÍA_SALUDO este es su expresion default en este caso
-Lucía: Hola a todos, bienvenidos al gran estreno de "{show_name}" el día de hoy tenemos un programa espectacular! 
+Lucía: Hola a todos, bienvenidos al gran estreno del nuevo show estelar de CANAL 13. El día de hoy tenemos un programa espectacular! 
 #EXPRESSION_LUCÍA_FRASEALT
 Lucía: Y quisiera comenzar con una frase, se trata de un antiguo proverbio montubio que dice así:
 #EXPRESSION_LUCÍA_FRASE
@@ -129,6 +129,7 @@ Héctor: Buenas con todos, un gusto haber sido invitado.
 
 *[Uy, tú de ley eres el del Gasto porque con esas fachas... olvídate papito. De Gusto no tienes nada.]
     #SFX_RATING UP MEDIUM_ECHO
+    #SFX_SITCOMLAUGHTER
     ~ episode_rating += 20 // reaccion del publico Risas
     Rocío: Lucía, contrólate por favor!
     Héctor: Ehh disculpa, cómo dices?
@@ -258,9 +259,9 @@ Narrador: Rocío no puede más y estalla en cólera.
 Rocío: Bueno ya, sí lo admito soy una interesada!
 Lucía: Ya era hora de que lo reconocieras...
 Rocío: Y ahora a dónde me van a mandar, a la Penitenciaria?
-Todos al unísono: ¡NO!
+Todos al unísono: NO!
 Rocío: Entonces a dónde me van a mandar, a DespiérTC para que Caterva me putee?
-Todos al unísono: ¡TAMPOCO!
+Todos al unísono: TAMPOCO!
 Lucía: A ver, a veeeer Rocío, sin lisuras!!!!
 Isaac: Rocío, mi vida no es necesario que grites. Eso no es digno de una mujer de alto valor como tú.
 Lucía: Héctor, la próxima vez que Isaac diga una ridiculez como esa. Tienes total libertad de meterle un puñete en toda la jeta.
@@ -299,28 +300,63 @@ Lucía: Creo que es momento de pedir una opinión externa.
 * [Preguntémosle al público!]
     #SFX_RATING UP MEDIUM_ECHO
     ~ episode_rating += 10
-    Narrador: Le dan el micrófono a un miembro random del público.
-    Lucía: Hola qué tal, gracias por acompañarnos hoy en el show. Cómo te llamas?
+    Narrador: Le dan el micrófono a un miembro random del público y este sube al escenario.
+    Lucía: Hola qué tal, gracias por acompañarnos hoy en el show. Cuál es tu nombre?
     Poncharelo: Un gusto mi estimada Lucía, me llamo Poncharelo.
     Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
-    Poncharelo: Pues sinceramente, yo pienso que estos son unos...
+    Poncharelo: Escúcheme Señorita C-Dura, puedo llamarla así? 
+    Lucía: Pero claro!
+    Poncharelo: Pues si me permite decirlo...
+    #SFX_DRAMA1
+    Poncharelo: Estoy verdaderamente arrecho!
+    Lucía: Hey, cuidado con ese vocabulario por favor.
+    Poncharelo: Discúlpeme, Señorita C-Dura. Pero yo pienso que estos son unos...
     #SFX_DRAMATIC VINE
     Poncharelo: Pobres.
     #SFX_DRAMATIC VINE
     Poncharelo: Tristes.
     #SFX_DRAMATIC VINE
     Poncharelo: Sinvergüenzas!
-    Poncharelo: (Señalando a Rocío) Mijita se me hace que tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
+    Poncharelo: *Señalando a Rocío* Usted mijita!
+    Rocío: Yo qué, sapo?
+    #SFX_AIRHORN
+    Poncharelo: Se me hace que tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
     // reaccion del publico: Aplausos
     Narrador: La audiencia aplaude.
-    Poncharelo: (Señalando a Isaac, Hector y Xavier) Y ustedes pelados. despierten de ese dulce sueño porque son tremendos cachudos.
-    Lucía: Ah caray, se los está papeando...
+    #SFX_DRAMA3
+    Poncharelo: *Señalando a Isaac, Héctor y Xavier* Y ustedes pelados. 
+    // cada no de ellos con expresiones distintas, isaac smug enojado, hector asustado y xavier confundido
+    Isaac: ...
+    Héctor: ...
+    Xavier: ...
+    #SFX_DRAMA2
+    Poncharelo: Despierten de ese dulce sueño porque son tremendos cachudos!!!
+    #SFX_DRAMATIC VINE
+    Poncharelo: Dejen de pelearse por esta trepadora.
     Narrador: El público enloquece.
-    Poncharelo: 
-    Lucía: 
+    Lucía: Ah caray, se los está papeando...
+    Lucía: Te agradezco Poncharelo por tu honesta reacción a nuestro caso de hoy. 
+    Poncharelo: No hay de qué, Señorita Lucía.
+    Narrador: Poncharelo vuelve a su asiento.
+    #MUSIC_DEFAULT SHOW THEME
+
 
 //todos se cargan a Rocio hasta que aparece un ultimo testigo. Alguien que vi el show en este momento y esta afuera del estudio tratando de entrar.
-- Rocío: Bueno Lucía, qué piensas hacer al respecto?
+- Xavier: ...Bueno, creo que yo me retiro.
+Lucía: Espera, te vas tan rápido?
+// Money Sound Effect
+Xavier: Es que me cobran 5 latas la hora en el parqueadero.
+Lucía: ... 
+Isaac: Otro chiro tenía que ser.
+Lucía: Hmmm
+Hector:
+
+Lucía: Esperen un momento, no soy la unica que escucha eso. Verdad?
+
+Rocío: Qué cosa
+
+//Cortes comerciales y se habla 
+
 
 #MUSIC_MYSTERY
 Lolita (vía intercom): Lucía, tenemos una situación.

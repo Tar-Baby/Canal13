@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5d4832d7ca2b5504f90e8a9c9f7e90d0
+guid: 351a955949584cc418a8d6b5150e5635
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3305646747576716273
-    second: gWRmtq greyscale_0
+      213: -7445403428695475085
+    second: OnPhWL (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gWRmtq greyscale_0
+      name: OnPhWL (1)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 6618
-        height: 2643
+        width: 1588
+        height: 370
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f04b3c11ccbff12d0800000000000000
-      internalID: -3305646747576716273
+      spriteID: 37c712f670d9ca890800000000000000
+      internalID: -7445403428695475085
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      gWRmtq greyscale_0: -3305646747576716273
+      OnPhWL (1)_0: -7445403428695475085
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

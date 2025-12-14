@@ -4924,6 +4924,18 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 0d16700f28208c44db8cd75b5dfa1041, type: 3}
   - key: Dramatic Vine
     clip: {fileID: 8300000, guid: 6487a61aeacdffc438c3534f4290ba70, type: 3}
+  - key: Drama1
+    clip: {fileID: 8300000, guid: 4d26d126716a9e846afbffe18a7e6483, type: 3}
+  - key: Drama2
+    clip: {fileID: 8300000, guid: 58d4996629455f3458fd73489c984145, type: 3}
+  - key: Drama3
+    clip: {fileID: 8300000, guid: 1334e54521b2fd1498c55657cc553c66, type: 3}
+  - key: Drama4
+    clip: {fileID: 8300000, guid: c7517c3cb988faf4fa20c7408b1a122f, type: 3}
+  - key: Airhorn
+    clip: {fileID: 8300000, guid: 0d16700f28208c44db8cd75b5dfa1041, type: 3}
+  - key: SitcomLaughter
+    clip: {fileID: 8300000, guid: 2814d4b8e12392d44a36bd7c68a20d8d, type: 3}
   sfx_Source: {fileID: 885531581}
   sfxEchoFilter: {fileID: 885531585}
   sfxReverbFilter: {fileID: 885531584}
