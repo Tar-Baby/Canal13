@@ -304,15 +304,20 @@ Lucía: Creo que es momento de pedir una opinión externa.
     Poncharelo: Un gusto mi estimada Lucía, me llamo Poncharelo.
     Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
     Poncharelo: Pues sinceramente, yo pienso que estos son unos...
-    Poncharelo: Pobres. (dramatic vine sfx)
-    Poncharelo: Tristes. (dramatic vine sfx)
-    Poncharelo: Sinvergüenzas! (dramatic vine sfx)
-    Poncharelo: (Señalando a Rocío) Mijita se me hace tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
+    #SFX_DRAMATIC VINE
+    Poncharelo: Pobres.
+    #SFX_DRAMATIC VINE
+    Poncharelo: Tristes.
+    #SFX_DRAMATIC VINE
+    Poncharelo: Sinvergüenzas!
+    Poncharelo: (Señalando a Rocío) Mijita se me hace que tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
     // reaccion del publico: Aplausos
     Narrador: La audiencia aplaude.
-    Poncharelo: (Señalando a Isaac, Hector y Xavier) Y ustedes pelados. despierten de ese dulce sueño porque son tremendos migajeros.
+    Poncharelo: (Señalando a Isaac, Hector y Xavier) Y ustedes pelados. despierten de ese dulce sueño porque son tremendos cachudos.
     Lucía: Ah caray, se los está papeando...
     Narrador: El público enloquece.
+    Poncharelo: 
+    Lucía: 
 
 //todos se cargan a Rocio hasta que aparece un ultimo testigo. Alguien que vi el show en este momento y esta afuera del estudio tratando de entrar.
 - Rocío: Bueno Lucía, qué piensas hacer al respecto?
