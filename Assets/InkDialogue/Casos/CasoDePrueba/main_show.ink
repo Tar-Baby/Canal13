@@ -96,8 +96,8 @@ Rocío: Mira, la razón por la que tengo dos novios es sencilla. Tengo a uno par
     Rocío: Lucíaaaa no me digas así!!
     
 * [No sé si termino de comprender, pero tengo miedo de preguntar.]
-    ~ episode_rating -= 5
-    #SFX_RATING DOWN SMALL_ECHO
+    ~ episode_rating -= 10
+    #SFX_RATING DOWN MEDIUM_ECHO
     #EXPRESSION_LUCÍA_DUDOSA2
     #EXPRESSION_ROCÍO_DUDOSA1
     Rocío: Ash, no es tan complicado.
@@ -129,7 +129,7 @@ Héctor: Buenas con todos, un gusto haber sido invitado.
 
 *[Uy, tú de ley eres el del Gasto porque con esas fachas... olvídate papito. De Gusto no tienes nada.]
     #SFX_RATING UP MEDIUM_ECHO
-    ~ episode_rating += 10 // reaccion del publico Risas
+    ~ episode_rating += 20 // reaccion del publico Risas
     Rocío: Lucía, contrólate por favor!
     Héctor: Ehh disculpa, cómo dices?
     Lucía: Olvídalo, pronto verás a lo que me refiero.
@@ -137,6 +137,7 @@ Héctor: Buenas con todos, un gusto haber sido invitado.
 *[Bienvenido Héctor, cuéntanos cómo conociste a Rocío.]
     #SFX_RATING UP SMALL_ECHO
     ~ episode_rating += 5 // reaccion del publico Ternura
+    #SFX_AUDIENCE AWWW 1_REVERB
     Héctor: Nos conocimos en nuestros ensayos de baile urbano, desde que la vi quedé perdidamente enamorado de ella.
 
 - Lucía: Y tienes alguna idea de por qué estás aquí?
@@ -158,6 +159,7 @@ Rocío: Se van a lastimar, alguien haga algo!!!
 
 * [Dejar que se saquen la madre]
 #SFX_RATING UP LARGE_ECHO
+#SFX_PELEA CAMPANA
 ~ episode_rating += 20
 // info a un lado que diga (i: decidiste no interrumpir la pelea)
 
@@ -212,8 +214,6 @@ Narrador: Lámpara este man oe. Lucía pone cara de enojo...
 
 Lucía: Ok, primero que nada la palabra "Hipergamia" queda prohibida en mi set.
 Lucía: Segundo, acaso estás diciendo que las mujeres somos todas unas infieles y unas incapaces? Eso no te lo voy a permitir!
-    #SFX_RATING UP MEDIUM_ECHO
-    ~ episode_rating += 10
     //public_reaction = "aplausos"
 
 Héctor: Lucía, me permites romperle la nariz a este ridículo?
@@ -237,6 +237,7 @@ Lucía: QUE PASE EL TESTIGOOOO!!!!
 Xavier: Hola mucho gusto, soy Xavier el novio de Rocío.
 Lucía: (viendo con rabia a Rocio) Tienes...otro...novio...???
 Narrador: Todos voltean a ver a Rocío con indignación.
+// reaccion del publico: Indignacion
 Rocío: Lo conoci ayer...jeje... es que... tiene carro y ya pues... (risas nerviosas)
 
 * [Alcahuetear a Rocío]
@@ -257,7 +258,7 @@ Rocío: Bueno ya, sí lo admito soy una interesada!
 Lucía: Ya era hora de que lo reconocieras...
 Rocío: Y ahora a dónde me van a mandar, a la Penitenciaria?
 Todos al unísono: ¡NO!
-Rocío: ¿Entonces a dónde me van a mandar, a DespiérTC para que Caterva me putee?
+Rocío: Entonces a dónde me van a mandar, a DespiérTC para que Caterva me putee?
 Todos al unísono: ¡TAMPOCO!
 Lucía: A ver, a veeeer Rocío, sin lisuras!!!!
 Isaac: Rocío, mi vida no es necesario que grites. Eso no es digno de una mujer de alto valor como tú.
@@ -273,10 +274,13 @@ Rocío: Lucía, yo quiero un hombre bueno, que me cuide, que me proteja...
 * [Que te MATENGA]
     #SFX_RATING UP MEDIUM_ECHO
     ~ episode_rating += 10
+    // reaccion del publico: Risas
     
 * [Que te AME]
     #SFX_RATING UP SMALL_ECHO
     ~ episode_rating += 5
+    #SFX_AUDIENCE AWWW 1_REVERB
+    // reaccion del publico: Awww
 
 - Lucía: Hmmm debe haber alguna forma de resolver esto de manera racional y madura.
 
@@ -300,14 +304,23 @@ Lucía: Creo que es momento de pedir una opinión externa.
     Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
     Poncharelo: Pues sinceramente, yo pienso que son unos pobres (dramatic vine sfx), tristes (dramatic vine sfx)... sinvergüenzas!
     Poncharelo: (Señalando a Rocío) Mijita se me hace tú lo que quieres es un cajero automático o una cara bonita, no una pareja.
-    #SFX_RATING UP MEDIUM_ECHO
-    ~ episode_rating += 10
+    // reaccion del publico: Aplausos
     Narrador: La audiencia aplaude.
     Poncharelo: (Señalando a Isaac, Hector y Xavier) Y ustedes pelados. despierten de ese dulce sueño porque son tremendos migajeros.
     Lucía: Ah caray, se los está papeando...
     Narrador: El público enloquece.
 
+//todos se cargan a Rocio hasta que aparece un ultimo testigo. Alguien que vi el show en este momento y esta afuera del estudio tratando de entrar.
 - Rocío: Bueno Lucía, qué piensas hacer al respecto?
+
+#MUSIC_MYSTERY
+Lolita (vía intercom): Lucía, tenemos una situación.
+Lucía: Qué sucede?
+Lolita (vía intercom): Es increíble, recibimos una llamada de alguien que estaba viendo el programa y nos pide urgen. 
+Lucía: Pues, 
+Carmen (vía intercom): Está en el backstage ahora mismo...
+Lucía: Ah, está bien. Que pase.
+
 
 -> DONE
 
