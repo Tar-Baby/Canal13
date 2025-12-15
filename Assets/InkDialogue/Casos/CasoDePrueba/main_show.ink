@@ -154,7 +154,7 @@ Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
 Narrador: Llega Isaac y se acerca para besar a Rocío.
 Héctor: Hijo de la gran...
-#HIDE_HECTOR
+#HIDE_HÉCTOR
 #HIDE_ISAAC
 #SHOW_LUCÍA_LEFT
 #SFX_FIGHTINGSOUNDS
@@ -165,7 +165,7 @@ Narrador: Héctor se abalanza sobre él y comienzan a caerse a golpes.
 #SFX_AUDIENCE SHOCK 1_REVERB
 Lucía: Ave maría purísima, se armó la grande.
 #EXPRESSION_ROCÍO_TRISTE1
-#EXPRESSION_LUCÍA_INCOMODA2
+#EXPRESSION_LUCÍA_INCOMODA1
 Rocío: Se van a lastimar, alguien haga algo!!!
 
 * [Dejar que se saquen la madre]
@@ -179,10 +179,17 @@ Rocío: Se van a lastimar, alguien haga algo!!!
 #SFX_RATING DOWN LARGE_ECHO
 ~ episode_rating -= 20
 
-- Lucía: Ya mucha tontera, se me calman los dos. O resuelven esto como adultos o los expulso de mi set!!!
+- 
+#EXPRESSION_LUCÍA_ENOJADA1
+Lucía: Ya mucha tontera, se me calman los dos. O resuelven esto como adultos o los EXPULSO de mi set!!!
+#HIDE_ROCÍO
+#SHOW_ISAAC_RIGHT
+#SHOW_HÉCTOR_CENTER
 Narrador: Los dos vuelven a sus asientos y todos hacen silencio en la sala.
-
+#EXPRESSION_LUCÍA_RESIGNADA1
 Lucía: Está bien, podemos proseguir... Rocío, les debes una explicación a estos muchachos.
+#HIDE_LUCÍA
+#SHOW_ROCÍO_LEFT
 Narrador: Hector e Isaac dirigen su mirada a Rocío.
 
 Rocío: Jeje hola chicos, pues verán... los dos son maravillosos y me siento tan afortunada de tenerlos!!!
@@ -211,7 +218,7 @@ Isaac: Te lo agradezco Lucía, pues yo soy el verdadero novio de Rocío y estoy 
     ~ episode_rating -= 5
     //public_reaction = "ternura"
     
-* [Estás conciente de que te está poniendo los cachos, verdad?]
+* [Estás conciente de que tus cachos los tienes por ella, verdad?]
     #SFX_RATING UP SMALL_ECHO
     ~ episode_rating += 5
     //public_reaction = "risas"
@@ -324,6 +331,7 @@ Lucía: Creo que es momento de pedir una opinión externa.
     
 
 -   Narrador: Hora de recibir una llamada aleatoria de uno de los televidentes!
+    #SFX_TELEFONO1
     Lucía: Hola qué tal, gracias por ver el gran estreno de nuestro show. Cuál es tu nombre?
     Poncharelo: Un gusto mi estimada Lucía, me llamo Poncharelo.
     Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
@@ -387,7 +395,7 @@ Narrador: El público enloquece.
 -Lucía: Ah caray, se los está papeando...
 Lucía: Te agradezco Poncharelo por tu honesta reacción a nuestro caso de hoy. 
 Poncharelo: No hay de qué, Señorita Lucía.
-
+#SFX_TELEFONO1
 Narrador: Poncharelo cuelga el teléfono.
 Xavier: ... Bueno, creo que yo me retiro.
 #EXPRESSION_LUCÍA_DUDOSA2
@@ -413,7 +421,7 @@ Lucía: Volveremos después de estos breves cortes comerciales!
 
 //Pausa comercial y charla critica    
 #MUSIC_CHILL
-#FADEALL
+#HIDE_ALL
 Narrador: Los panelistas se retiran a camerinos. Héctor cabizbajo, Isaac con una expresión de alivio y Rocío con semblante reflexivo.
 #SHOW_LOLITA_LEFT
 #SHOW_CARMEN_CENTER
@@ -423,9 +431,30 @@ Narrador: Carmen y Lolita se acercan al escenario.
 Carmen: Estás haciéndolo de maravilla, Lucy!!!
 #NO_WIGGLE
 Lolita: El show ha superado mis expectativas, estupendo trabajo.
-Lucía: Gracias por su apoyo chicas, estoy divi
-Lucía: No soy la unica que ha estado escuchando cosas. Verdad?
+Lucía: Gracias por su apoyo chicas, está potente este debut televisivo.
+Lucía: Oigan...no soy la única que ha estado escuchando cosas a lo largo del programa. Verdad?
 Lolita: Qué clase de cosas?
+Lucía: Un bombardeo constante de ruidos extraños...
+Carmen: Oh, fui yo!!!!
+Lucía: Qué? Cómo?
+Carmen: Con esto! Una pequeña consola que me permite volverme loca con los efectos de sonido.
+#WIGGLE_NORMAL
+Carmen: AMO MI TRABAJO JAJAJAJAJAJA
+#NO_WIGGLE
+Lucía: Por qué no mejor dejas esa cosa tranquila? Me da dolor de cabeza.
+Carmen: Pero es lo que el público quiere, esto nos está dando muchísimo rating!
+Lolita: Ay Carmencita, tan ingenua como siempre jaja
+Carmen: Iré a mi cabina chicas, hablamos luego!
+
+Lolita: Lucía comienzo a pensar que entre más desgraciada eres, mejor nos va con el rating! Acaso no es fantástico?
+Lucía: Hey, no he sido taaaan desgraciada tampoco. 
+Lucía: Recuerda que la premisa de nuestro programa es ayudar a los invitados.
+Lolita: Seamos honesas, si las personas realmente quisieran resolver sus problemas, buscarían ayuda profesional especializada...
+Lolita: No vendrían a la televisión.
+Lucía: Y entonces por qué acuden a nosotros?
+#MUSIC_STOP
+Lolita: ...
+Lolita: Porque todos quieren ser famosos.
 
 //La gran revelacion 
 Carmen (vía intercom): Volvemos al aire en 3...2...1
@@ -434,35 +463,53 @@ Carmen (vía intercom): Volvemos al aire en 3...2...1
 #WIGGLE_NORMAL
 Lucía: Estamos de regreso con su chisme favorito aquí en CANAL 13!!!
     #NO_WIGGLE
-    Rocío: En fin como les iba diciendo. 
-    Rocío: Antes de ser interrumpida.
+    Rocío: En fin como les iba diciendo. Antes de ser interrumpida.
     Rocío: Esta Rosa es para...
+    #MUSIC_MYSTERY
+    Narrador: Repentinamente, todo queda a oscuras
+    Carmen (gritando desde la cabina): Creo que nos cortaron la luz...
     
     
     
+ -> END   
 
 //todos se cargan a Rocio hasta que aparece un ultimo testigo. Alguien que vi el show en este momento y esta afuera del estudio tratando de entrar.
-   
+ //  
 
-* [Ay, tampoco exageres pues mijita.]
-~ episode_rating -= 10
-#SFX_RATING UP MEDIUM_ECHO
+//* [Ay, tampoco exageres pues mijita.]
+//~ episode_rating -= 10
+//#SFX_RATING UP MEDIUM_ECHO
 
 
     
-* [Oye pero sí eres descarada]
-~ episode_rating += 10
-    #SFX_RATING UP MEDIUM_ECHO
-    #SFX_AUDIENCE SMALL LAUGHTER 1_REVERB
+//* [Oye pero sí eres descarada]
+//~ episode_rating += 10
+//    #SFX_RATING UP MEDIUM_ECHO
+//    #SFX_AUDIENCE SMALL LAUGHTER 1_REVERB
 
--#MUSIC_MYSTERY
-Lolita (vía intercom): Lucía, tenemos una situación.
-Lucía: Qué sucede?
-Lolita (vía intercom): Es increíble, recibimos una llamada de alguien que estaba viendo el programa y nos pide urgen. 
-Lucía: Pues, 
-Carmen (vía intercom): Está en el backstage ahora mismo...
-Lucía: Ah, está bien. Que pase.
+//-#MUSIC_MYSTERY
+//Lolita (vía intercom): Lucía, tenemos una situación.
+//Lucía: Qué sucede?
+//Lolita (vía intercom): Es increíble, recibimos una llamada de alguien que estaba viendo el programa y nos pide urgen. 
+//Lucía: Pues, 
+//Carmen (vía intercom): Está en el backstage ahora mismo...
+//Lucía: Ah, está bien. Que pase.
 
 
+//Carmen: ALTO AHI. CRIMINAL!!!
+//Carmen: Se trata de un estafador muy peligroso.
+//Lolita: Tal pareceq que muchas de las personas que nos staban sintonizando lograron reconocerlo y enseguida contactaron a la policia
+//Lolita: Todo apunta a que Rocio hubiera sido su proxima victima.
+//Lucia: Lo que no termino de entender es por que arriesgarte de esta forma...Sabiendo que eres un criminal tan buscado
+//Isaac: Parte de mi queria ser descubierto al fin, creo que estaba cansado de vivir en las sombras.
+//Lucia: Y por que hacerlo en television?
+//Isaac: Ja, es como lo que estaban hablando durante el corte.
+//Carmen: Hey, es de mala educacion oir conversaciones ajenas!!! >:(
+//Isaac: Todos queremmos brillar ante los reflectores, todos queremos que nuestro nombre sean conocidos y que nunca olviden nuestro rostro. Pero no todos estan dispuestos a pagar el verdadero precio de la fama...
+//Isaac: Supongo que fui debil...
+//Isaac: Dime algo Lucia, crees tener lo que se necesita para sobrevivir al monstruo que corrompe todo lo hermoso que toca.
+//Lucia: Yo...ehm...
+//Carmen: Tu vas preso papitooo.
+//Rocio: La verdad, sentí que era mala persona por mentirle a los hombres. Pero ahora que veo que hay gente que hace cosas peores ya no me siento tan mal conmigo misma :)
 
--> END
+

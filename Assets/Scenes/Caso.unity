@@ -5228,6 +5228,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5221c3e2e08b0a04abe7f679ce03f272, type: 3}
   - key: Yamete
     clip: {fileID: 8300000, guid: 6f836a5c345459e448a79c7976b7953b, type: 3}
+  - key: Telefono1
+    clip: {fileID: 8300000, guid: 2b5b00086da6c9b4f9fdd7d4dc0f73e5, type: 3}
   sfx_Source: {fileID: 885531581}
   sfxEchoFilter: {fileID: 885531585}
   sfxReverbFilter: {fileID: 885531584}
