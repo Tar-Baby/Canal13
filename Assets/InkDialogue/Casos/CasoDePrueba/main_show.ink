@@ -240,7 +240,7 @@ Lucía: (viendo con rabia a Rocio).
 Lucía: Tienes...otro...novio...???
 Narrador: Todos voltean a ver a Rocío con indignación.
 // reaccion del publico: Indignacion
-Rocío: Lo conoci ayer...jeje... es que... tiene carro y ya pues... (risas nerviosas)
+Rocío: Lo conocí ayer...jeje... es que... tiene carro y ya pues... (risas nerviosas)
 
 * [Alcahuetear a Rocío]
     #SFX_RATING DOWN LARGE_ECHO
@@ -263,20 +263,21 @@ Todos al unísono: NO!
 Rocío: Entonces a dónde me van a mandar, a DespiérTC para que Caterva me putee?
 Todos al unísono: TAMPOCO!
 Lucía: A ver, a veeeer Rocío, sin lisuras!!!!
-Isaac: Rocío, mi vida no es necesario que grites. Eso no es digno de una mujer de alto valor como tú.
+Isaac: Hey, mi vida no es necesario que grites. Eso no es digno de una mujer de alto valor como tú.
 Lucía: Héctor, la próxima vez que Isaac diga una ridiculez como esa. Tienes total libertad de meterle un puñete en toda la jeta.
 Héctor: (Con una sonrisa discreta) Te lo agradezco Lucía.
 
 -> opinionExterna
     
 === alcahueta ===
-Lucía: Estoy de tu parte Rocío, sé que has cometido errores pero aún puedes redimirte.
+Lucía: Estoy de tu lado Rocío, sé que has cometido errores pero aún puedes redimirte.
 Rocío: Lucía, yo quiero un hombre bueno, que me cuide, que me proteja...
 
 * [Que te MATENGA]
     #SFX_RATING UP MEDIUM_ECHO
     ~ episode_rating += 10
-    // reaccion del publico: Risas
+    #SFX_AUDIENCE SMALL LAUGHTER 1_REVERB
+    
     
 * [Que te AME]
     #SFX_RATING UP SMALL_ECHO
@@ -340,14 +341,18 @@ Lucía: Creo que es momento de pedir una opinión externa.
 
     Poncharelo: No hay de qué, Señorita Lucía.
     Narrador: Poncharelo vuelve a su asiento.
-    Xavier: ...Bueno, creo que yo me retiro.
+    Xavier: ... Bueno, creo que yo me retiro.
     Lucía: Espera, te vas tan rápido?
     #SFX_MONEY1
     Xavier: Es que me cobran 5 latas la hora en el parqueadero.
-    Lucía: ... 
-    Isaac: Otro chiro tenía que ser.
+    #SFX_AUDIENCE SHOCK 1_REVERB
+    #WIGGLE_NORMAL
+    Lucía: 5 LATAS???!!! 
+    #NO_WIGGLE
+    #SFX_SITCOMLAUGHTER
+    Isaac: Uhhh, otro chiro tenía que ser.
     Lucía: Hmmm
-    Hector:
+    Hector: Ya no caeré en tus burdas provocaciones!
 
     Lucía: Bueno mis queridos televidentes, espero estén disfrutando del programa.
     #MUSIC_STOP
