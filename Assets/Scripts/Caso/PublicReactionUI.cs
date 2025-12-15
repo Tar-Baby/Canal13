@@ -15,6 +15,10 @@ public class PublicReactionUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ratingText;
     [SerializeField] private TextMeshProUGUI changeText;
     [SerializeField] private RectTransform ratingBarContainer;
+    [SerializeField] private GameObject starBurstPrefab;
+    private GameObject activeStarBurst; // guarda la referencia actual en escena
+    [SerializeField] private AudioSource starSound;
+    
 
     [Header("Particle Text Effect")]
     [SerializeField] private GameObject changeTextParticlePrefab;
@@ -107,6 +111,17 @@ public class PublicReactionUI : MonoBehaviour
         barraLlenar.fillAmount = targetValue;
         UpdateRatingDisplay(newTotal);
         currentRating = newTotal;
+        
+// --- Efecto especial mientras esté en 100 ---
+        if (currentRating >= maxRating)
+        {
+            EnableStarEffect();
+        }
+        else
+        {
+            DisableStarEffect();
+        }
+        
     }
 
     // --- Animación texto principal (+10 / -5) ---
@@ -318,6 +333,122 @@ private IEnumerator AnimateParticleRect(RectTransform rect, TextMeshProUGUI tmp,
     }
 
     Destroy(rect.gameObject);
+}
+
+
+private void TriggerStarEffect()
+{
+    if (starBurstPrefab == null || estrella == null) return;
+
+    // Crear el efecto exactamente donde está la estrella
+    GameObject burst = Instantiate(starBurstPrefab, estrella.transform.parent);
+    starSound.Play();
+    StartCoroutine(RotateStarBurst());
+    burst.transform.position = estrella.transform.position;
+    burst.transform.localScale = Vector3.one; // igual al tamaño del UI
+
+    // Si es UI y está en el canvas, alinear correctamente
+    if (burst.TryGetComponent<RectTransform>(out RectTransform burstRect) &&
+        estrella.TryGetComponent<RectTransform>(out RectTransform starRect))
+    {
+        burstRect.anchorMin = starRect.anchorMin;
+        burstRect.anchorMax = starRect.anchorMax;
+        burstRect.anchoredPosition = starRect.anchoredPosition;
+    }
+
+    // Destruir el efecto automático después de unos segundos
+    //Destroy(burst, 2f);
+}
+
+
+private IEnumerator RotateStarBurst()
+{
+    float timer = 0f;
+    while (timer < 0.6f)
+    {
+        estrella.transform.Rotate(0f, 0f, 360f * Time.deltaTime * 2);
+        timer += Time.deltaTime;
+        yield return null;
+    }
+    estrella.transform.rotation = Quaternion.identity;
+}
+
+
+// Activa el efecto sobre la estrella
+private void EnableStarEffect()
+{
+    if (starBurstPrefab == null || estrella == null) return;
+
+    // Si ya está activo, evitare duplicarlo
+    if (activeStarBurst != null) return;
+
+    // Instanciar efecto y guardarlo
+    starSound.Play();
+    activeStarBurst = Instantiate(starBurstPrefab, estrella.transform.parent);
+    activeStarBurst.transform.position = estrella.transform.position;
+    activeStarBurst.transform.localScale = Vector3.one;
+
+    // Si es UI (RectTransform), que coincida con el anclaje de la estrella
+    if (activeStarBurst.TryGetComponent<RectTransform>(out RectTransform burstRect) &&
+        estrella.TryGetComponent<RectTransform>(out RectTransform starRect))
+    {
+        burstRect.anchorMin = starRect.anchorMin;
+        burstRect.anchorMax = starRect.anchorMax;
+        burstRect.anchoredPosition = starRect.anchoredPosition;
+    }
+
+    // Asegurar que el sistema de partículas arranque
+    var system = activeStarBurst.GetComponent<ParticleSystem>();
+    if (system != null)
+        system.Play();
+
+    // Puedes añadir una animación sutil de rotación/brillo a la estrella
+    StartCoroutine(StarShineLoop());
+}
+
+// Desactiva el efecto al bajar del 100%
+private void DisableStarEffect()
+{
+    if (activeStarBurst != null)
+    {
+        // Detener emisión y destruir tras unos segundos
+        var ps = activeStarBurst.GetComponent<ParticleSystem>();
+        if (ps != null)
+            ps.Stop();
+
+        Destroy(activeStarBurst, 1.5f);
+        activeStarBurst = null;
+    }
+
+    StopCoroutine(StarShineLoop());
+}
+
+// Animación de rotación/brillo constante de la estrella mientras hay 100%
+private IEnumerator StarShineLoop()
+{
+    float rotationSpeed = 60f;  // grados por segundo
+    float glowPulse = 1f;       // intensidad del pulso
+    float t = 0f;
+
+    Image starImg = estrella.GetComponent<Image>();
+    Color baseColor = starImg.color;
+    
+    while (activeStarBurst != null)
+    {
+        // Rotar suavemente
+        estrella.transform.Rotate(new Vector3(0f, 0f, rotationSpeed * Time.deltaTime));
+
+        // Pulso de brillo
+        t += Time.deltaTime * 2f;
+        float glow = (Mathf.Sin(t) + 1f) * 0.5f * glowPulse;
+        starImg.color = Color.Lerp(baseColor, Color.white, glow);
+
+        yield return null;
+    }
+
+    // Restaurar valores originales
+    estrella.transform.rotation = Quaternion.identity;
+    starImg.color = baseColor;
 }
 
     public int GetCurrentRating() => currentRating;
