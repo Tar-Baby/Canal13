@@ -1,9 +1,9 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using System.Collections;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PublicReactionUI : MonoBehaviour
 {
@@ -16,9 +16,11 @@ public class PublicReactionUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI changeText;
     [SerializeField] private RectTransform ratingBarContainer;
     [SerializeField] private GameObject starBurstPrefab;
-    private GameObject activeStarBurst; // guarda la referencia actual en escena
     [SerializeField] private AudioSource starSound;
-    
+    //[SerializeField] private OverlayParticlesBridge overlayParticles;
+
+    private GameObject activeStarBurst; // referencia del efecto activo
+    private Coroutine starShineRoutine;
 
     [Header("Particle Text Effect")]
     [SerializeField] private GameObject changeTextParticlePrefab;
@@ -41,6 +43,9 @@ public class PublicReactionUI : MonoBehaviour
     private void OnDisable()
     {
         DialogEvents.OnEpisodeRatingChanged -= OnReactionChanged;
+
+        // Por si se desactiva el objeto mientras el efecto está activo.
+        DisableStarEffect();
     }
 
     private void Start()
@@ -65,6 +70,8 @@ public class PublicReactionUI : MonoBehaviour
 
     private IEnumerator AnimateRatingChange(int newTotal, int change)
     {
+        int previousRating = currentRating;
+
         // --- Mostrar texto de cambio ---
         if (change != 0 && changeText != null)
         {
@@ -77,23 +84,29 @@ public class PublicReactionUI : MonoBehaviour
             {
                 StartCoroutine(ShakeBar(0.6f, 20f));
                 StartCoroutine(ShakeUI(changeText.rectTransform, 0.6f, 20f));
-                StartCoroutine(SpawnChangeTextParticlesAdvanced(change, negativeColor));
+                StartCoroutine(
+                    SpawnChangeTextParticlesAdvanced(change, negativeColor)
+                );
                 StartCoroutine(DelayedGameOverTransition(0.5f));
             }
             else if (change < 0)
             {
                 StartCoroutine(ShakeBar(0.3f, 10f));
                 StartCoroutine(ShakeUI(changeText.rectTransform, 0.3f, 12f));
-                StartCoroutine(SpawnChangeTextParticlesAdvanced(change, negativeColor));
+                StartCoroutine(
+                    SpawnChangeTextParticlesAdvanced(change, negativeColor)
+                );
             }
             else if (change > 0)
             {
-                StartCoroutine(SpawnChangeTextParticlesAdvanced(change, positiveColor));
+                StartCoroutine(
+                    SpawnChangeTextParticlesAdvanced(change, positiveColor)
+                );
             }
         }
 
         // --- Animar la barra ---
-        float startValue = barraLlenar.fillAmount;
+        float startValue = barraLlenar != null ? barraLlenar.fillAmount : 0f;
         float targetValue = Mathf.Clamp01((float)newTotal / maxRating);
         float elapsedTime = 0f;
 
@@ -101,33 +114,37 @@ public class PublicReactionUI : MonoBehaviour
         {
             float t = elapsedTime / animationDuration;
             float currentValue = Mathf.Lerp(startValue, targetValue, t);
-            barraLlenar.fillAmount = currentValue;
+
+            if (barraLlenar != null)
+                barraLlenar.fillAmount = currentValue;
+
             UpdateRatingDisplay((int)(currentValue * maxRating));
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        barraLlenar.fillAmount = targetValue;
+        if (barraLlenar != null)
+            barraLlenar.fillAmount = targetValue;
+
         UpdateRatingDisplay(newTotal);
         currentRating = newTotal;
-        
-// --- Efecto especial mientras esté en 100 ---
-        if (currentRating >= maxRating)
-        {
+
+        // --- Activar al llegar (o pasar) 100 y mantener hasta bajar de 100 ---
+        bool wasMax = previousRating >= maxRating;
+        bool isMax = currentRating >= maxRating;
+
+        if (!wasMax && isMax)
             EnableStarEffect();
-        }
-        else
-        {
+        else if (wasMax && !isMax)
             DisableStarEffect();
-        }
-        
     }
 
     // --- Animación texto principal (+10 / -5) ---
     private IEnumerator AnimateChangeText()
     {
-        if (changeText == null) yield break;
+        if (changeText == null)
+            yield break;
 
         changeText.gameObject.SetActive(true);
         changeText.alpha = 1f;
@@ -141,7 +158,11 @@ public class PublicReactionUI : MonoBehaviour
         while (elapsed < scaleDuration)
         {
             float t = elapsed / scaleDuration;
-            changeText.transform.localScale = Vector3.Lerp(originalScale, targetScale, t);
+            changeText.transform.localScale = Vector3.Lerp(
+                originalScale,
+                targetScale,
+                t
+            );
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -188,7 +209,8 @@ public class PublicReactionUI : MonoBehaviour
 
     private IEnumerator ShakeBar(float duration, float magnitude)
     {
-        if (ratingBarContainer == null) yield break;
+        if (ratingBarContainer == null)
+            yield break;
 
         Vector3 originalPos = ratingBarContainer.localPosition;
         float elapsed = 0f;
@@ -197,7 +219,8 @@ public class PublicReactionUI : MonoBehaviour
         {
             float offsetX = Random.Range(-1f, 1f) * magnitude;
             float offsetY = Random.Range(-1f, 1f) * magnitude;
-            ratingBarContainer.localPosition = originalPos + new Vector3(offsetX, offsetY, 0f);
+            ratingBarContainer.localPosition =
+                originalPos + new Vector3(offsetX, offsetY, 0f);
 
             elapsed += Time.deltaTime;
             yield return null;
@@ -208,7 +231,8 @@ public class PublicReactionUI : MonoBehaviour
 
     private IEnumerator ShakeUI(RectTransform target, float duration, float magnitude)
     {
-        if (target == null) yield break;
+        if (target == null)
+            yield break;
 
         Vector3 originalPos = target.localPosition;
         float elapsed = 0f;
@@ -226,230 +250,263 @@ public class PublicReactionUI : MonoBehaviour
     }
 
     // --- Partículas centradas: área central, movimiento vertical +/- ---
-private IEnumerator SpawnChangeTextParticlesAdvanced(int change, Color color)
-{
-    if (changeTextParticlePrefab == null) yield break;
-
-    bool isPositive = change > 0;
-    // más densidad visual
-    int totalParticles = particleCount * 3;
-    RectTransform canvasRect = changeText.canvas.GetComponent<RectTransform>();
-
-    // Franja central de spawn
-    float widthRange = canvasRect.rect.width * 0.95f;   // casi todo el ancho
-    float heightOffset = canvasRect.rect.height * 0.25f; // franja central (30 % del alto total)
-    float spawnPadding = widthRange / totalParticles * 0.8f;
-
-    List<float> usedPositions = new List<float>();
-
-    for (int i = 0; i < totalParticles; i++)
+    private IEnumerator SpawnChangeTextParticlesAdvanced(int change, Color color)
     {
-        GameObject particle = Instantiate(changeTextParticlePrefab, changeText.transform.parent);
-        particle.SetActive(true);
+        if (changeTextParticlePrefab == null || changeText == null)
+            yield break;
 
-        TextMeshProUGUI tmp = particle.GetComponent<TextMeshProUGUI>();
-        RectTransform rect = particle.GetComponent<RectTransform>();
+        bool isPositive = change > 0;
 
-        tmp.text = isPositive ? $"+{change}" : change.ToString();
-        tmp.color = color;
-        tmp.alpha = 0f;
+        // más densidad visual
+        int totalParticles = particleCount * 3;
+        RectTransform canvasRect = changeText.canvas.GetComponent<RectTransform>();
 
-        // 🟦 Posición aleatoria pero centrada (sin amontonarse demasiado)
-        float startX;
-        int maxTries = 10;
-        do
+        // Franja central de spawn
+        float widthRange = canvasRect.rect.width * 0.95f; // casi todo el ancho
+        float heightOffset = canvasRect.rect.height * 0.25f; // franja central
+        float spawnPadding = (widthRange / totalParticles) * 0.8f;
+
+        List<float> usedPositions = new List<float>();
+
+        for (int i = 0; i < totalParticles; i++)
         {
-            startX = Random.Range(-widthRange / 2f, widthRange / 2f);
-            maxTries--;
-        } while (usedPositions.Exists(pos => Mathf.Abs(pos - startX) < spawnPadding) && maxTries > 0);
+            GameObject particle = Instantiate(
+                changeTextParticlePrefab,
+                changeText.transform.parent
+            );
+            particle.SetActive(true);
 
-        usedPositions.Add(startX);
-        float startY = Random.Range(-heightOffset, heightOffset);
-        rect.localPosition = new Vector3(startX, startY, 0f);
+            TextMeshProUGUI tmp = particle.GetComponent<TextMeshProUGUI>();
+            RectTransform rect = particle.GetComponent<RectTransform>();
 
-        // 🎨 Escala inicial con GRAN variedad
-        float startScale = Random.Range(0.1f, 2.8f);
-        rect.localScale = Vector3.one * startScale;
+            if (tmp == null || rect == null)
+            {
+                Destroy(particle);
+                continue;
+            }
 
-        // Dirección vertical pura
-        Vector3 direction = isPositive ? Vector3.up : Vector3.down;
+            tmp.text = isPositive ? $"+{change}" : change.ToString();
+            tmp.color = color;
+            tmp.alpha = 0f;
 
-        float speed = Random.Range(80f, 130f);
-        float lifetime = Random.Range(1.0f, 1.7f);
-        float targetScale = Random.Range(0.8f, 1.6f);
+            float startX;
+            int maxTries = 10;
+            do
+            {
+                startX = Random.Range(-widthRange / 2f, widthRange / 2f);
+                maxTries--;
+            } while (
+                usedPositions.Exists(pos => Mathf.Abs(pos - startX) < spawnPadding)
+                && maxTries > 0
+            );
 
-        float delay = Random.Range(0f, 0.1f);
-        StartCoroutine(AnimateParticleRect(rect, tmp, direction, speed, lifetime, targetScale, delay));
-    }
+            usedPositions.Add(startX);
+            float startY = Random.Range(-heightOffset, heightOffset);
+            rect.localPosition = new Vector3(startX, startY, 0f);
 
-    yield break;
-}
+            float startScale = Random.Range(0.1f, 2.8f);
+            rect.localScale = Vector3.one * startScale;
 
-private IEnumerator AnimateParticleRect(RectTransform rect, TextMeshProUGUI tmp, Vector3 direction,
-                                        float speed, float lifetime, float targetScale, float delay)
-{
-    if (delay > 0f)
-        yield return new WaitForSeconds(delay);
+            Vector3 direction = isPositive ? Vector3.up : Vector3.down;
 
-    float elapsed = 0f;
-    float noise = Random.Range(0.6f, 1.4f);
-    float maxAlpha = Random.Range(0.5f, 0.85f);
+            float speed = Random.Range(80f, 130f);
+            float lifetime = Random.Range(1.0f, 1.7f);
+            float targetScale = Random.Range(0.8f, 1.6f);
 
-    while (elapsed < lifetime)
-    {
-        float t = elapsed / lifetime;
-        // Curva de aceleración/deceleración
-        float ease = Mathf.SmoothStep(0f, 1f, t);
-
-        // Movimiento vertical + pequeña oscilación lateral
-        rect.localPosition += direction * speed * ease * Time.deltaTime;
-        rect.localPosition += new Vector3(Mathf.Sin(elapsed * 5f * noise) * 30f * Time.deltaTime, 0f, 0f);
-
-        // Fade in/out
-        if (t < 0.25f)
-            tmp.alpha = Mathf.Lerp(0f, maxAlpha, t / 0.25f);
-        else if (t > 0.8f)
-            tmp.alpha = Mathf.Lerp(maxAlpha, 0f, (t - 0.8f) / 0.2f);
-        else
-            tmp.alpha = maxAlpha;
-
-        // Rebote en escala
-        if (t < 0.25f)
-        {
-            float bounce = Mathf.Sin((t / 0.25f) * Mathf.PI);
-            float scaleValue = Mathf.Lerp(rect.localScale.x, targetScale * 1.1f, bounce);
-            rect.localScale = Vector3.one * scaleValue;
-        }
-        else
-        {
-            rect.localScale = Vector3.Lerp(rect.localScale, Vector3.one * targetScale, Time.deltaTime * 2.5f);
+            float delay = Random.Range(0f, 0.1f);
+            StartCoroutine(
+                AnimateParticleRect(
+                    rect,
+                    tmp,
+                    direction,
+                    speed,
+                    lifetime,
+                    targetScale,
+                    delay
+                )
+            );
         }
 
-        // Pequeña rotación tipo confeti
-        rect.Rotate(0f, 0f, Random.Range(-25f, 25f) * Time.deltaTime);
-
-        elapsed += Time.deltaTime;
-        yield return null;
+        yield break;
     }
 
-    Destroy(rect.gameObject);
-}
-
-
-private void TriggerStarEffect()
-{
-    if (starBurstPrefab == null || estrella == null) return;
-
-    // Crear el efecto exactamente donde está la estrella
-    GameObject burst = Instantiate(starBurstPrefab, estrella.transform.parent);
-    starSound.Play();
-    StartCoroutine(RotateStarBurst());
-    burst.transform.position = estrella.transform.position;
-    burst.transform.localScale = Vector3.one; // igual al tamaño del UI
-
-    // Si es UI y está en el canvas, alinear correctamente
-    if (burst.TryGetComponent<RectTransform>(out RectTransform burstRect) &&
-        estrella.TryGetComponent<RectTransform>(out RectTransform starRect))
+    private IEnumerator AnimateParticleRect(
+        RectTransform rect,
+        TextMeshProUGUI tmp,
+        Vector3 direction,
+        float speed,
+        float lifetime,
+        float targetScale,
+        float delay
+    )
     {
-        burstRect.anchorMin = starRect.anchorMin;
-        burstRect.anchorMax = starRect.anchorMax;
-        burstRect.anchoredPosition = starRect.anchoredPosition;
+        if (delay > 0f)
+            yield return new WaitForSeconds(delay);
+
+        float elapsed = 0f;
+        float noise = Random.Range(0.6f, 1.4f);
+        float maxAlpha = Random.Range(0.5f, 0.85f);
+
+        while (elapsed < lifetime)
+        {
+            float t = elapsed / lifetime;
+            float ease = Mathf.SmoothStep(0f, 1f, t);
+
+            rect.localPosition += direction * speed * ease * Time.deltaTime;
+            rect.localPosition += new Vector3(
+                Mathf.Sin(elapsed * 5f * noise) * 30f * Time.deltaTime,
+                0f,
+                0f
+            );
+
+            if (t < 0.25f)
+                tmp.alpha = Mathf.Lerp(0f, maxAlpha, t / 0.25f);
+            else if (t > 0.8f)
+                tmp.alpha = Mathf.Lerp(maxAlpha, 0f, (t - 0.8f) / 0.2f);
+            else
+                tmp.alpha = maxAlpha;
+
+            if (t < 0.25f)
+            {
+                float bounce = Mathf.Sin((t / 0.25f) * Mathf.PI);
+                float scaleValue = Mathf.Lerp(
+                    rect.localScale.x,
+                    targetScale * 1.1f,
+                    bounce
+                );
+                rect.localScale = Vector3.one * scaleValue;
+            }
+            else
+            {
+                rect.localScale = Vector3.Lerp(
+                    rect.localScale,
+                    Vector3.one * targetScale,
+                    Time.deltaTime * 2.5f
+                );
+            }
+
+            rect.Rotate(0f, 0f, Random.Range(-25f, 25f) * Time.deltaTime);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(rect.gameObject);
     }
 
-    // Destruir el efecto automático después de unos segundos
-    //Destroy(burst, 2f);
-}
-
-
-private IEnumerator RotateStarBurst()
-{
-    float timer = 0f;
-    while (timer < 0.6f)
+    // Activa el efecto sobre la estrella (se mantiene mientras rating >= 100)
+    private void EnableStarEffect()
     {
-        estrella.transform.Rotate(0f, 0f, 360f * Time.deltaTime * 2);
-        timer += Time.deltaTime;
-        yield return null;
+        if (starBurstPrefab == null || estrella == null)
+            return;
+
+        // Si ya está activo, evitar duplicarlo
+        if (activeStarBurst != null)
+            return;
+
+        if (starSound != null)
+            starSound.Play();
+
+        activeStarBurst = Instantiate(starBurstPrefab, estrella.transform.parent);
+        activeStarBurst.transform.position = estrella.transform.position;
+        activeStarBurst.transform.localScale = Vector3.one;
+
+        if (
+            activeStarBurst.TryGetComponent<RectTransform>(out RectTransform burstRect)
+            && estrella.TryGetComponent<RectTransform>(out RectTransform starRect)
+        )
+        {
+            burstRect.anchorMin = starRect.anchorMin;
+            burstRect.anchorMax = starRect.anchorMax;
+            burstRect.anchoredPosition = starRect.anchoredPosition;
+        }
+
+        ParticleSystem system = activeStarBurst.GetComponent<ParticleSystem>();
+        if (system != null)
+            system.Play();
+
+        if (starShineRoutine == null)
+            starShineRoutine = StartCoroutine(StarShineLoop());
     }
-    estrella.transform.rotation = Quaternion.identity;
-}
 
-
-// Activa el efecto sobre la estrella
-private void EnableStarEffect()
-{
-    if (starBurstPrefab == null || estrella == null) return;
-
-    // Si ya está activo, evitare duplicarlo
-    if (activeStarBurst != null) return;
-
-    // Instanciar efecto y guardarlo
-    starSound.Play();
-    activeStarBurst = Instantiate(starBurstPrefab, estrella.transform.parent);
-    activeStarBurst.transform.position = estrella.transform.position;
-    activeStarBurst.transform.localScale = Vector3.one;
-
-    // Si es UI (RectTransform), que coincida con el anclaje de la estrella
-    if (activeStarBurst.TryGetComponent<RectTransform>(out RectTransform burstRect) &&
-        estrella.TryGetComponent<RectTransform>(out RectTransform starRect))
+    // Desactiva el efecto al bajar de 100%
+    private void DisableStarEffect()
     {
-        burstRect.anchorMin = starRect.anchorMin;
-        burstRect.anchorMax = starRect.anchorMax;
-        burstRect.anchoredPosition = starRect.anchoredPosition;
+        // 1) Apagar y destruir el efecto instanciado
+        if (activeStarBurst != null)
+        {
+            var ps = activeStarBurst.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                // Detiene la emisión; deja que las partículas vivas mueran
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            }
+
+            // Destruir después de un momento para que termine de “desvanecer”
+            Destroy(activeStarBurst, 1.5f);
+            activeStarBurst = null;
+        }
+
+        // 2) Detener el brillo/rotación de la estrella
+        if (starShineRoutine != null)
+        {
+            StopCoroutine(starShineRoutine);
+            starShineRoutine = null;
+        }
+
+        // 3) Restaurar visual de la estrella (si aplica)
+        if (estrella != null)
+            estrella.transform.rotation = Quaternion.identity;
     }
 
-    // Asegurar que el sistema de partículas arranque
-    var system = activeStarBurst.GetComponent<ParticleSystem>();
-    if (system != null)
-        system.Play();
-
-    // Puedes añadir una animación sutil de rotación/brillo a la estrella
-    StartCoroutine(StarShineLoop());
-}
-
-// Desactiva el efecto al bajar del 100%
-private void DisableStarEffect()
-{
-    if (activeStarBurst != null)
+    private void ResetStarVisuals()
     {
-        // Detener emisión y destruir tras unos segundos
-        var ps = activeStarBurst.GetComponent<ParticleSystem>();
-        if (ps != null)
-            ps.Stop();
+        if (estrella == null)
+            return;
 
-        Destroy(activeStarBurst, 1.5f);
-        activeStarBurst = null;
+        estrella.transform.rotation = Quaternion.identity;
+
+        Image starImg = estrella.GetComponent<Image>();
+        if (starImg != null)
+        {
+            // Si quieres preservar el color original “de diseño”, puedes
+            // serializarlo; por ahora lo dejamos tal cual si no se cambió.
+            // Aquí lo reseteamos a su propio color actual (sin pulso).
+            // (Si quieres reset fijo, dímelo y lo ajusto.)
+        }
     }
 
-    StopCoroutine(StarShineLoop());
-}
-
-// Animación de rotación/brillo constante de la estrella mientras hay 100%
-private IEnumerator StarShineLoop()
-{
-    float rotationSpeed = 60f;  // grados por segundo
-    float glowPulse = 1f;       // intensidad del pulso
-    float t = 0f;
-
-    Image starImg = estrella.GetComponent<Image>();
-    Color baseColor = starImg.color;
-    
-    while (activeStarBurst != null)
+    // Animación de rotación/brillo constante de la estrella mientras hay 100%
+    private IEnumerator StarShineLoop()
     {
-        // Rotar suavemente
-        estrella.transform.Rotate(new Vector3(0f, 0f, rotationSpeed * Time.deltaTime));
+        if (estrella == null)
+            yield break;
 
-        // Pulso de brillo
-        t += Time.deltaTime * 2f;
-        float glow = (Mathf.Sin(t) + 1f) * 0.5f * glowPulse;
-        starImg.color = Color.Lerp(baseColor, Color.white, glow);
+        float rotationSpeed = 60f; // grados por segundo
+        float glowPulse = 1f;
+        float t = 0f;
 
-        yield return null;
+        Image starImg = estrella.GetComponent<Image>();
+        Color baseColor = starImg != null ? starImg.color : Color.white;
+
+        while (activeStarBurst != null)
+        {
+            estrella.transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
+
+            if (starImg != null)
+            {
+                t += Time.deltaTime * 2f;
+                float glow = (Mathf.Sin(t) + 1f) * 0.5f * glowPulse;
+                starImg.color = Color.Lerp(baseColor, Color.white, glow);
+            }
+
+            yield return null;
+        }
+
+        estrella.transform.rotation = Quaternion.identity;
+        if (starImg != null)
+            starImg.color = baseColor;
     }
-
-    // Restaurar valores originales
-    estrella.transform.rotation = Quaternion.identity;
-    starImg.color = baseColor;
-}
 
     public int GetCurrentRating() => currentRating;
 }

@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
 {
     buttonClick.Play();
     fadeOut.SetActive(true);
-    StartCoroutine(FadeOutAndChangeScene("Intro"));
+    StartCoroutine(FadeOutAndChangeScene("Curis Hook"));
 }
 
 IEnumerator FadeOutAndChangeScene(string nextScene)
