@@ -1,6 +1,7 @@
 VAR show_name = ""
 
 Carmen: Awww, muchas gracias jefecita!
+#SFX_JINGLE_FUNNY
 Lolita: Quietas ahí.
 Lucía: Y ahora qué?
 Lolita: A dónde creen que van, no les parece que olvidan algo de suma importancia?
@@ -97,8 +98,11 @@ Narrador: Qué les deparará el futuro? Solo hay una forma de averiguarlo!
 -Lolita: Espléndido, ahora sí podemos ir a comer. Conozco un buen lugar por el centro, yo invito muchachas!
 Lucía: Espera, vienes con nosotras?
 Lolita: Iré por mis llaves, no tardo. Pero al volver quiero verlas manos a la obra.
+#SFX_JINGLEPLATA
 Carmen: Por supuesto, yo recibiré a los panelistas y guiaré a nuestros técnicos.
+#SFX_JINGLE6
 Lucía: Yo mientras iré a camerinos a alistarme.
+#SFX_JINGLE4
 Lolita: Y yo las estaré observando desde el monitor. Rómpanse una pierna ;)
 
 #WIGGLE_NORMAL

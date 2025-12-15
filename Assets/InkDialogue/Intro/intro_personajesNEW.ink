@@ -140,13 +140,21 @@ Lolita: Pero hey, sin presiones.
     -> preguntas
 
 * [Cuánto me van a pagar?] 
+
     Lolita: Todo depende del rating que alcances en cada capítulo.
     Lolita: Si llegas a...
+    #EXPRESSION_CARMEN_HYPEADA1
+    #EXPRESSION_LOLITA_SONRISACENTRO
+    #EXPRESSION_LUCÍA_EMOCIONADA1
     #WIGGLE_NORMAL
     Lolita: 100 PUNTOS DE RATING!!!! 
     #NO_WIGGLE
     Lolita: Recibirás un jugoso cheque y el show será renovado para una nueva temporada.
+    #EXPRESSION_LOLITA_PREOCUPADA1
     Lolita: Por el contrario... 
+    #EXPRESSION_LOLITA_SERIACENTRO1
+    #EXPRESSION_CARMEN_TRISTE1
+    #EXPRESSION_LUCÍA_ASUSTADA1
     #WIGGLE_NORMAL
     Lolita: SI LLEGAS A 0 PUNTOS DE RATING!!!!
     #NO_WIGGLE
@@ -154,6 +162,7 @@ Lolita: Pero hey, sin presiones.
     Lolita: Y no recibirás ni un centavo.
     Carmen: Ay nooo :c 
     Lolita: Lo siento chicas, yo no hago las reglas. Solo sigo órdenes de los ejecutivos del Canal 13.
+    #EXPRESSION_LUCÍA_PREOCUPADA1
     Lucía: Tranquila Lolita, entiendo.
     -> preguntas
     
@@ -162,6 +171,7 @@ Lolita: Pero hey, sin presiones.
 
 === dilema ===
 #EXPRESSION_CARMEN_FELIZ1
+#EXPRESSION_LUCÍA_DEFAULT
 - Carmen: Bueno si esas fueron tus dudas, creo que podemos continuar con los preparativos.
 #EXPRESSION_LOLITA_SONRISACENTRO
 Lolita: El tiempo es oro, al fin y al cabo, el mundo del espectáculo es todo un negocio.
