@@ -341,18 +341,19 @@ Poncharelo: Tristes.
 Poncharelo: Sinvergüenzas!
 #SFX_DRAMA2
 Poncharelo: *Señalando a Rocío* Usted mijita!
+#EXPRESSION_ROCÍO_ENOJADA1
 Rocío: Yo qué, sapo?
 #SFX_AIRHORN
 Poncharelo: Se me hace que tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
 #SFX_AUDIENCE CHEERING 3_REVERB
 Narrador: La audiencia aplaude.
-#SFX_DRAMA3
+#SFX_DRAMA4
 Poncharelo: *Señalando a Isaac, Héctor y Xavier* Y ustedes mamarrachos. 
     // cada no de ellos con expresiones distintas, isaac smug enojado, hector asustado y xavier confundido
 Isaac: ...
 Héctor: ...
 Xavier: ...
-#SFX_DRAMA2
+#SFX_DRAMA1
 Poncharelo: Despierten de ese dulce sueño porque son tremendos cachudos!!!
 #SFX_AUDIENCE CHEERING 1_REVERB
 Poncharelo: Ya dejen de pelearse por esta trepadora.
@@ -375,7 +376,7 @@ Narrador: Poncharelo vuelve a su asiento.
 Xavier: ... Bueno, creo que yo me retiro.
 #EXPRESSION_LUCÍA_DUDOSA2
 Lucía: Espera, te vas tan pronto?
-#SFX_MONEY1
+#SFX_DRAMA3
 Xavier: Es que me cobran 5 latas la hora en el parqueadero.
 #EXPRESSION_LUCÍA_CONFUNDIDA1
 #SFX_BAMBOOHIT
