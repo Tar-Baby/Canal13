@@ -4548,7 +4548,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.7999878, y: -6.700012}
+  m_AnchoredPosition: {x: -52.3, y: -7.47}
   m_SizeDelta: {x: 1920, y: 934.0541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907727222
@@ -4944,6 +4944,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2e5e8215172581f479522e91a225d8c9, type: 3}
   - key: Applause1
     clip: {fileID: 8300000, guid: 119c0e9e3cc938a458386d77c9ab906d, type: 3}
+  - key: BambooHit
+    clip: {fileID: 8300000, guid: 5f57f239ca966774b89cec48f699b4ac, type: 3}
+  - key: Audience Screaming1
+    clip: {fileID: 8300000, guid: 9a3b6fe6fb5cbd74eb1e3d1371d9dd80, type: 3}
+  - key: FightingSounds
+    clip: {fileID: 8300000, guid: a593933af25a4424a81b845dc813cc4c, type: 3}
   sfx_Source: {fileID: 885531581}
   sfxEchoFilter: {fileID: 885531585}
   sfxReverbFilter: {fileID: 885531584}
@@ -5136,7 +5142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1585562774713124142, guid: 23e5b6186ca480f48beaf7865aeee703, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 728.51
+      value: 845.52
       objectReference: {fileID: 0}
     - target: {fileID: 1585562774713124142, guid: 23e5b6186ca480f48beaf7865aeee703, type: 3}
       propertyPath: m_AnchoredPosition.y

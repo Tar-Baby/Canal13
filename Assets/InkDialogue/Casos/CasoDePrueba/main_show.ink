@@ -144,6 +144,7 @@ Héctor: Buenas con todos, un gusto haber sido invitado.
 - Lucía: Y tienes alguna idea de por qué estás aquí?
 Héctor: Pues la verdad no, Rocío dijo que tenía una sorpresa para mí y que podía salir en televisión. Y heme aquí.
 Lucía: Pues enorme sorpresa la que te vas a llevar.
+#SFX_AUDIENCE CHEERING 1_REVERB
 #WIGGLE_NORMAL
 Lucía: QUE PASE EL SEGUNDO NOVIOOOOO!!!
 #NO_WIGGLE
@@ -153,6 +154,7 @@ Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
 Narrador: Llega Isaac y se acerca para besar a Rocío.
 Héctor: Hijo de la gran...
+#SFX_FIGHTINGSOUNDS
 Narrador: Héctor se abalanza sobre él y comienzan a caerse a golpes.
 //reacion del publico asombro
 Lucía: Ave maría purísima, se armó la grande.
@@ -251,7 +253,8 @@ Rocío: Lo conocí ayer...jeje... es que... tiene carro y ya pues... (risas nerv
     #SFX_RATING UP LARGE_ECHO
     ~ episode_rating += 20
     ->funaRocio
-    
+  
+- -> opinionExterna  
     
 === funaRocio ===
 Lucía: Sabes Rocío, a lo largo de este caso he sido demasiado paciente contigo. Te di el beneficio de la duda pero ya es suficiente.
@@ -292,6 +295,7 @@ Rocío: Lucía, yo quiero un hombre bueno, que me cuide, que me proteja...
 === opinionExterna ===
 Lucía: Creo que es momento de pedir una opinión externa.
 * [Que pasen los expertos!]
+    #SFX_BAMBOOHIT
     Lolita (vía intercom): Lo lamento Lucía, me temo que no hemos aprobado el presupuesto para eso todavía.
     Lucía: Y hasta ahora me lo dicen?
     Carmen (vía intercom): Jeje, se me pasó por alto. Una disculpa jefecita.
@@ -299,90 +303,139 @@ Lucía: Creo que es momento de pedir una opinión externa.
     ->opinionExterna
     
 * [Preguntémosle al público!]
-    #SFX_RATING UP MEDIUM_ECHO
-    ~ episode_rating += 10
-    Narrador: Le dan el micrófono a un miembro random del público y este sube al escenario.
+    #SFX_RATING UP SMALL_ECHO
+    ~ episode_rating += 5
+    
+
+-   Narrador: Le dan el micrófono a un miembro random del público y este sube al escenario.
     Lucía: Hola qué tal, gracias por acompañarnos hoy en el show. Cuál es tu nombre?
     Poncharelo: Un gusto mi estimada Lucía, me llamo Poncharelo.
     Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
-    Poncharelo: Escúcheme Señorita C-Dura, puedo llamarla así? 
-    Lucía: Pero claro!
-    Poncharelo: Pues si me permite decirlo...
-    #SFX_DRAMA1
-    Poncharelo: Estoy verdaderamente arrecho!
-    Lucía: Hey, cuidado con ese vocabulario por favor.
-    Poncharelo: Discúlpeme, Señorita C-Dura. Pero yo pienso que estos son unos...
-    #SFX_DRAMATIC VINE
-    Poncharelo: Pobres.
-    #SFX_DRAMATIC VINE
-    Poncharelo: Tristes.
-    #SFX_DRAMATIC VINE
-    Poncharelo: Sinvergüenzas!
-    #SFX_DRAMA2
-    Poncharelo: *Señalando a Rocío* Usted mijita!
-    Rocío: Yo qué, sapo?
-    #SFX_AIRHORN
-    Poncharelo: Se me hace que tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
-    #SFX_AUDIENCE CHEERING 3_REVERB
-    Narrador: La audiencia aplaude.
-    #SFX_DRAMA3
-    Poncharelo: *Señalando a Isaac, Héctor y Xavier* Y ustedes pelados. 
-    // cada no de ellos con expresiones distintas, isaac smug enojado, hector asustado y xavier confundido
-    Isaac: ...
-    Héctor: ...
-    Xavier: ...
-    #SFX_DRAMA2
-    Poncharelo: Despierten de ese dulce sueño porque son tremendos cachudos!!!
-    #SFX_AUDIENCE CHEERING 1_REVERB
-    Poncharelo: Dejen de pelearse por esta trepadora.
-    Narrador: El público enloquece.
-    Lucía: Ah caray, se los está papeando...
-    Lucía: Te agradezco Poncharelo por tu honesta reacción a nuestro caso de hoy. 
-
-    Poncharelo: No hay de qué, Señorita Lucía.
-    Narrador: Poncharelo vuelve a su asiento.
-    Xavier: ... Bueno, creo que yo me retiro.
-    Lucía: Espera, te vas tan rápido?
-    #SFX_MONEY1
-    Xavier: Es que me cobran 5 latas la hora en el parqueadero.
-    #SFX_AUDIENCE SHOCK 1_REVERB
-    #WIGGLE_NORMAL
-    Lucía: 5 LATAS???!!! 
-    #NO_WIGGLE
-    #SFX_SITCOMLAUGHTER
-    Isaac: Uhhh, otro chiro tenía que ser.
-    Lucía: Hmmm
-    Hector: Ya no caeré en tus burdas provocaciones!
-
-    Lucía: Bueno mis queridos televidentes, espero estén disfrutando del programa.
-    #MUSIC_STOP
-    #SFX_COMMERCIAL BREAK
-    #WIGGLE_NORMAL
-    Lucía: Volveremos después de estos breves cortes comerciales!
-    #NO_WIGGLE
-    #MUSIC_CHILL
-    Narrador: Los panelistas se retiran a camerinos. Héctor cabizbajo, Isaac con una expresión de alivio y Rocío con semblante reflexivo.
-   
-    Narrador: Carmen y Lolita se acercan al escenario.
-    #WIGGLE_NORMAL
-    Carmen: Estás haciéndolo de maravilla, Lucy!!!
-    #NO_WIGGLE
-    Lolita: El show ha superado mis expectativas, estupendo trabajo.
-    Lucía: Gracias por su apoyo chicas, estoy divi
-    Lucía: No soy la unica que ha estado escuchando cosas. Verdad?
-    Lolita: Qué clase de cosas?
+    Poncharelo: Escúcheme Señorita C-Dura, puedo llamarla así?
     
-    #MUSIC_DEFAULT SHOW THEME
+    
+    * [Me gusta como suena, pero claro!]
+        #SFX_RATING UP LARGE_ECHO
+        ~ episode_rating += 20
+        Poncharelo: Pues si me permite decirlo...
+        #SFX_DRAMA1
+        Poncharelo: Estoy verdaderamente arrecho!
+        Lucía: Hey, cuidado con ese vocabulario por favor.
+        Poncharelo: Discúlpeme, Señorita C-Dura. Pero yo pienso que estos son unos...
+        
+        
+    * [A mí me respetas, carajo]
+     #SFX_RATING DOWN LARGE_ECHO
+        ~ episode_rating -= 20
+        Poncharelo: Pues si me permite decirlo...
+        #SFX_DRAMA1
+        Poncharelo: Estoy verdaderamente arrecho!
+        Lucía: Hey, cuidado con ese vocabulario por favor.
+        Poncharelo: Discúlpeme, Señorita Lucía. Pero yo pienso que estos son unos...
 
+-#SFX_DRAMATIC VINE
+Poncharelo: Pobres.
+#SFX_DRAMATIC VINE
+Poncharelo: Tristes.
+#SFX_DRAMATIC VINE
+Poncharelo: Sinvergüenzas!
+#SFX_DRAMA2
+Poncharelo: *Señalando a Rocío* Usted mijita!
+Rocío: Yo qué, sapo?
+#SFX_AIRHORN
+Poncharelo: Se me hace que tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
+#SFX_AUDIENCE CHEERING 3_REVERB
+Narrador: La audiencia aplaude.
+#SFX_DRAMA3
+Poncharelo: *Señalando a Isaac, Héctor y Xavier* Y ustedes mamarrachos. 
+    // cada no de ellos con expresiones distintas, isaac smug enojado, hector asustado y xavier confundido
+Isaac: ...
+Héctor: ...
+Xavier: ...
+#SFX_DRAMA2
+Poncharelo: Despierten de ese dulce sueño porque son tremendos cachudos!!!
+#SFX_AUDIENCE CHEERING 1_REVERB
+Poncharelo: Ya dejen de pelearse por esta trepadora.
+Narrador: El público enloquece.
+
+* [Darle la razón]
+    #SFX_RATING UP MEDIUM_ECHO
+    ~ episode_rating += 10
+    
+* [Decirle que no sea batracio]
+    #SFX_RATING DOWN MEDIUM_ECHO
+    ~ episode_rating -= 10
+    
+
+-Lucía: Ah caray, se los está papeando...
+Lucía: Te agradezco Poncharelo por tu honesta reacción a nuestro caso de hoy. 
+Poncharelo: No hay de qué, Señorita Lucía.
+Narrador: Poncharelo vuelve a su asiento.
+
+Xavier: ... Bueno, creo que yo me retiro.
+#EXPRESSION_LUCÍA_DUDOSA2
+Lucía: Espera, te vas tan pronto?
+#SFX_MONEY1
+Xavier: Es que me cobran 5 latas la hora en el parqueadero.
+#EXPRESSION_LUCÍA_CONFUNDIDA1
+#SFX_BAMBOOHIT
+#WIGGLE_NORMAL
+Lucía: 5 LATAS???!!! 
+#NO_WIGGLE
+#SFX_SITCOMLAUGHTER
+Isaac: Uhhh, otro chiro tenía que ser.
+Hector: Ya no caeré en tus burdas provocaciones!
+Lucía: Mejor detengo esto antes de que se caigan a trompazos otra vez.
+Lucía: Bueno mis queridos televidentes, espero estén disfrutando del programa.
+#MUSIC_STOP
+#EXPRESSION_LUCÍA_QUE PASEEE
+#SFX_COMMERCIAL BREAK
+#WIGGLE_NORMAL
+Lucía: Volveremos después de estos breves cortes comerciales!
+#NO_WIGGLE
+
+//Pausa comercial y charla critica    
+#MUSIC_CHILL
+Narrador: Los panelistas se retiran a camerinos. Héctor cabizbajo, Isaac con una expresión de alivio y Rocío con semblante reflexivo.
+   
+Narrador: Carmen y Lolita se acercan al escenario.
+#WIGGLE_NORMAL
+Carmen: Estás haciéndolo de maravilla, Lucy!!!
+#NO_WIGGLE
+Lolita: El show ha superado mis expectativas, estupendo trabajo.
+Lucía: Gracias por su apoyo chicas, estoy divi
+Lucía: No soy la unica que ha estado escuchando cosas. Verdad?
+Lolita: Qué clase de cosas?
+
+//La gran revelacion 
+Carmen (vía intercom): Volvemos al aire en 3...2...1
+#MUSIC_DEFAULT SHOW THEME
+#SFX_AUDIENCE CHEERING 2_REVERB
+#WIGGLE_NORMAL
+Lucía: Estamos de regreso con su chisme favorito aquí en CANAL 13!!!
+    #NO_WIGGLE
+    Rocío: En fin como les iba diciendo. 
+    Rocío: Antes de ser interrumpida.
+    Rocío: Esta Rosa es para...
+    
+    
+    
 
 //todos se cargan a Rocio hasta que aparece un ultimo testigo. Alguien que vi el show en este momento y esta afuera del estudio tratando de entrar.
-- 
+   
+
+* [Ay, tampoco exageres pues mijita.]
+~ episode_rating -= 10
+#SFX_RATING UP MEDIUM_ECHO
 
 
-//Cortes comerciales y se habla 
+    
+* [Oye pero sí eres descarada]
+~ episode_rating += 10
+    #SFX_RATING UP MEDIUM_ECHO
+    #SFX_AUDIENCE SMALL LAUGHTER 1_REVERB
 
-
-#MUSIC_MYSTERY
+-#MUSIC_MYSTERY
 Lolita (vía intercom): Lucía, tenemos una situación.
 Lucía: Qué sucede?
 Lolita (vía intercom): Es increíble, recibimos una llamada de alguien que estaba viendo el programa y nos pide urgen. 
@@ -391,6 +444,5 @@ Carmen (vía intercom): Está en el backstage ahora mismo...
 Lucía: Ah, está bien. Que pase.
 
 
--> DONE
 
 -> END
