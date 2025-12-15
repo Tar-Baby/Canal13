@@ -148,15 +148,15 @@ RectTransform:
   m_GameObject: {fileID: 58903199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 480102880}
   m_Father: {fileID: 1100804020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -872.5, y: 374.7}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -863.1, y: -111.4}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &58903201
@@ -4687,9 +4687,9 @@ RectTransform:
   - {fileID: 189722547}
   m_Father: {fileID: 1100804020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -52.3, y: -7.47}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -52.3, y: -479.26}
   m_SizeDelta: {x: 1920, y: 934.0541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907727222
@@ -5222,6 +5222,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9a3b6fe6fb5cbd74eb1e3d1371d9dd80, type: 3}
   - key: FightingSounds
     clip: {fileID: 8300000, guid: a593933af25a4424a81b845dc813cc4c, type: 3}
+  - key: Triple
+    clip: {fileID: 8300000, guid: 021e76aa5afc66f419db6a5d3f877b04, type: 3}
+  - key: Honk
+    clip: {fileID: 8300000, guid: 5221c3e2e08b0a04abe7f679ce03f272, type: 3}
+  - key: Yamete
+    clip: {fileID: 8300000, guid: 6f836a5c345459e448a79c7976b7953b, type: 3}
   sfx_Source: {fileID: 885531581}
   sfxEchoFilter: {fileID: 885531585}
   sfxReverbFilter: {fileID: 885531584}

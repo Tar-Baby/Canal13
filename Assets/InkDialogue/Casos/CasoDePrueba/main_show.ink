@@ -239,6 +239,7 @@ Lucía: QUE PASE EL TESTIGOOOO!!!!
 Xavier: Hola mucho gusto, soy Xavier el novio de Rocío.
 //Isaac pone cara de alivio, secuencia donde lo disimula
 Lucía: (viendo con rabia a Rocio).
+#SFX_TRIPLE
 Lucía: Tienes...otro...novio...???
 Narrador: Todos voltean a ver a Rocío con indignación.
 // reaccion del publico: Indignacion
@@ -258,11 +259,18 @@ Rocío: Lo conocí ayer...jeje... es que... tiene carro y ya pues... (risas nerv
     
 === funaRocio ===
 Lucía: Sabes Rocío, a lo largo de este caso he sido demasiado paciente contigo. Te di el beneficio de la duda pero ya es suficiente.
-Narrador: Rocío no puede más y estalla en cólera.
-Rocío: Bueno ya, sí lo admito soy una interesada!
+Narrador: Rocío no puede más y estalla en llanto.
+
+#SFX_YAMETE
+#WIGGLE_NORMAL
+#EXPRESSION_ROCÍO_TRISTE1
+Rocío: BUENO YA, SÍ LO ADMITO SOY UNA INTERESADA!
+#NO_WIGGLE
 Lucía: Ya era hora de que lo reconocieras...
+#SFX_DRAMA1
 Rocío: Y ahora a dónde me van a mandar, a la Penitenciaria?
 Todos al unísono: NO!
+#SFX_DRAMA1
 Rocío: Entonces a dónde me van a mandar, a DespiérTC para que Caterva me putee?
 Todos al unísono: TAMPOCO!
 Lucía: A ver, a veeeer Rocío, sin lisuras!!!!
@@ -334,11 +342,11 @@ Lucía: Creo que es momento de pedir una opinión externa.
         Poncharelo: Discúlpeme, Señorita Lucía. Pero yo pienso que estos son unos...
 
 -#SFX_DRAMATIC VINE
-Poncharelo: Pobres.
+Poncharelo: POBRES.
 #SFX_DRAMATIC VINE
-Poncharelo: Tristes.
+Poncharelo: TRISTES.
 #SFX_DRAMATIC VINE
-Poncharelo: Sinvergüenzas!
+Poncharelo: SINVERGÜENZAS!
 #SFX_DRAMA2
 Poncharelo: *Señalando a Rocío* Usted mijita!
 #EXPRESSION_ROCÍO_ENOJADA1
@@ -372,11 +380,10 @@ Narrador: El público enloquece.
 Lucía: Te agradezco Poncharelo por tu honesta reacción a nuestro caso de hoy. 
 Poncharelo: No hay de qué, Señorita Lucía.
 Narrador: Poncharelo vuelve a su asiento.
-
 Xavier: ... Bueno, creo que yo me retiro.
 #EXPRESSION_LUCÍA_DUDOSA2
 Lucía: Espera, te vas tan pronto?
-#SFX_DRAMA3
+#SFX_HONK
 Xavier: Es que me cobran 5 latas la hora en el parqueadero.
 #EXPRESSION_LUCÍA_CONFUNDIDA1
 #SFX_BAMBOOHIT
