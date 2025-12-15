@@ -212,18 +212,17 @@ Isaac: Se le estimuló la hipergamia. Claramente está confundida y necesita que
     //public_reaction = "indignación"
     
 Narrador: Lámpara este man oe. Lucía pone cara de enojo...
-
+#SFX_APPLAUSE1
 Lucía: Ok, primero que nada la palabra "Hipergamia" queda prohibida en mi set.
 Lucía: Segundo, acaso estás diciendo que las mujeres somos todas unas infieles y unas incapaces? Eso no te lo voy a permitir!
-    //public_reaction = "aplausos"
 
 Héctor: Lucía, me permites romperle la nariz a este ridículo?
 Isaac: Ja, solo estás celoso porque Rocío prefiere estar con un hombre proveedor como yo. 
 Lucía: “Hombre proveedor?”... Así que tú eres el del Gasto!!!
+#SFX_MONEY1
 Isaac: Así es y a mucha honra!
-    //public_reaction = "sorpresa"
 Lucía: Rocío por qué estás tan callada, vas a dejar que este sinvergüenza se exprese así de ti y de todas nosotras?
-Rocío: ... es que... Lucía... nunca nadie se había preocupado tanto por mí!
+Rocío: ... Es que... Lucía... nunca nadie se había preocupado tanto por mí!
 Lucía: No seas ridícula, por favor.
 
 Carmen (vía intercom): Eh... Lucía, producción me comenta que tienen un Testigo Sorpresa.
@@ -236,6 +235,7 @@ Lucía: Este es mi show, papito, y aquí mando YO!!!
 Lucía: QUE PASE EL TESTIGOOOO!!!!
 #NO_WIGGLE
 Xavier: Hola mucho gusto, soy Xavier el novio de Rocío.
+//Isaac pone cara de alivio, secuencia donde lo disimula
 Lucía: (viendo con rabia a Rocio).
 Lucía: Tienes...otro...novio...???
 Narrador: Todos voltean a ver a Rocío con indignación.
@@ -317,11 +317,12 @@ Lucía: Creo que es momento de pedir una opinión externa.
     Poncharelo: Tristes.
     #SFX_DRAMATIC VINE
     Poncharelo: Sinvergüenzas!
+    #SFX_DRAMA2
     Poncharelo: *Señalando a Rocío* Usted mijita!
     Rocío: Yo qué, sapo?
     #SFX_AIRHORN
     Poncharelo: Se me hace que tú lo que quieres es un cajero automático, una cara bonita, y un chofer, no una pareja.
-    // reaccion del publico: Aplausos
+    #SFX_AUDIENCE CHEERING 3_REVERB
     Narrador: La audiencia aplaude.
     #SFX_DRAMA3
     Poncharelo: *Señalando a Isaac, Héctor y Xavier* Y ustedes pelados. 
@@ -329,30 +330,49 @@ Lucía: Creo que es momento de pedir una opinión externa.
     Isaac: ...
     Héctor: ...
     Xavier: ...
-    Poncharelo: Despierten de ese dulce sueño porque son tremendos cachudos!!!
     #SFX_DRAMA2
+    Poncharelo: Despierten de ese dulce sueño porque son tremendos cachudos!!!
+    #SFX_AUDIENCE CHEERING 1_REVERB
     Poncharelo: Dejen de pelearse por esta trepadora.
     Narrador: El público enloquece.
     Lucía: Ah caray, se los está papeando...
     Lucía: Te agradezco Poncharelo por tu honesta reacción a nuestro caso de hoy. 
+
     Poncharelo: No hay de qué, Señorita Lucía.
     Narrador: Poncharelo vuelve a su asiento.
+    Xavier: ...Bueno, creo que yo me retiro.
+    Lucía: Espera, te vas tan rápido?
+    #SFX_MONEY1
+    Xavier: Es que me cobran 5 latas la hora en el parqueadero.
+    Lucía: ... 
+    Isaac: Otro chiro tenía que ser.
+    Lucía: Hmmm
+    Hector:
+
+    Lucía: Bueno mis queridos televidentes, espero estén disfrutando del programa.
+    #MUSIC_STOP
+    #SFX_COMMERCIAL BREAK
+    #WIGGLE_NORMAL
+    Lucía: Volveremos después de estos breves cortes comerciales!
+    #NO_WIGGLE
+    #MUSIC_CHILL
+    Narrador: Los panelistas se retiran a camerinos. Héctor cabizbajo, Isaac con una expresión de alivio y Rocío con semblante reflexivo.
+   
+    Narrador: Carmen y Lolita se acercan al escenario.
+    #WIGGLE_NORMAL
+    Carmen: Estás haciéndolo de maravilla, Lucy!!!
+    #NO_WIGGLE
+    Lolita: El show ha superado mis expectativas, estupendo trabajo.
+    Lucía: Gracias por su apoyo chicas, estoy divi
+    Lucía: No soy la unica que ha estado escuchando cosas. Verdad?
+    Lolita: Qué clase de cosas?
+    
     #MUSIC_DEFAULT SHOW THEME
 
 
 //todos se cargan a Rocio hasta que aparece un ultimo testigo. Alguien que vi el show en este momento y esta afuera del estudio tratando de entrar.
-- Xavier: ...Bueno, creo que yo me retiro.
-Lucía: Espera, te vas tan rápido?
-// Money Sound Effect
-Xavier: Es que me cobran 5 latas la hora en el parqueadero.
-Lucía: ... 
-Isaac: Otro chiro tenía que ser.
-Lucía: Hmmm
-Hector:
+- 
 
-Lucía: Esperen un momento, no soy la unica que escucha eso. Verdad?
-
-Rocío: Qué cosa
 
 //Cortes comerciales y se habla 
 

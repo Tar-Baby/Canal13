@@ -680,14 +680,14 @@ RectTransform:
   m_GameObject: {fileID: 219371295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 0.84, z: 0.59}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1051037908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 0, y: 0.25}
-  m_AnchoredPosition: {x: 105, y: 11.5}
+  m_AnchoredPosition: {x: 116.1, y: 11.7}
   m_SizeDelta: {x: 222.16455, y: 124.96754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &219371297
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 122b2c4d3491e074ba16cce197364f44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c5e2af29afa31e48a110190afc38dc7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -870,7 +870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -31, y: 50.382935}
+  m_AnchoredPosition: {x: -31, y: 50.382812}
   m_SizeDelta: {x: 56.399784, y: 114.22009}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &254155769
@@ -1474,14 +1474,14 @@ RectTransform:
   m_GameObject: {fileID: 381690206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 0.84, z: 0.59}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1051037908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 0, y: 0.25}
-  m_AnchoredPosition: {x: 104.46, y: 11.499996}
+  m_AnchoredPosition: {x: 116.1, y: 11.7}
   m_SizeDelta: {x: 222.16455, y: 124.96754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &381690208
@@ -1504,7 +1504,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 61a00918cdc09b741aefefcce4dda9cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f932b802280d20b48986ad66a61b52c3, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2949,8 +2949,8 @@ RectTransform:
   m_GameObject: {fileID: 1046248765}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.02, y: 1.02, z: 1.02}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1.02, y: 0.1, z: 1.02}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1051037908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2979,7 +2979,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 83e98427349206e49b5f0882f4964f05, type: 3}
+  m_Sprite: {fileID: -6283802744909198736, guid: 0d24b6b8580a142428cd28f0584abfc8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3034,7 +3034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 244.9, y: 360.8}
+  m_AnchoredPosition: {x: 252.2, y: 356.3}
   m_SizeDelta: {x: 225.8, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1051037909
@@ -3515,7 +3515,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -361.69, y: 376.4}
+  m_AnchoredPosition: {x: -418.5, y: 376.4}
   m_SizeDelta: {x: 507.0141, y: 122.2928}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207454593
@@ -3843,14 +3843,14 @@ RectTransform:
   m_GameObject: {fileID: 1279202787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.0255, y: 0.045, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1051037908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33.84, y: 5.685583}
+  m_AnchoredPosition: {x: 109.21, y: 11.13}
   m_SizeDelta: {x: 1550.5154, y: 872.16504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1279202789
@@ -3866,14 +3866,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.83567655, b: 0.7327044, a: 1}
+  m_Color: {r: 1, g: 0.8354276, b: 0.42452818, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8cc3ac8560c8372459f4e7337f790ba6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5460a41590027046bfa2bd957dfb469, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4546,9 +4546,9 @@ RectTransform:
   - {fileID: 189722547}
   m_Father: {fileID: 1100804020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 957.2, y: 460.3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2.7999878, y: -6.700012}
   m_SizeDelta: {x: 1920, y: 934.0541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1907727222
@@ -4893,6 +4893,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 686dd6304f6856044b73ad983dbbb938, type: 3}
   - key: Mystery
     clip: {fileID: 8300000, guid: 0bfbdbb3afb0c7d4e953a37dc840326c, type: 3}
+  - key: Chill
+    clip: {fileID: 8300000, guid: 47d5f39369fbfc641af25fbdc61d3426, type: 3}
   sfxLibrary:
   - key: Rating up small
     clip: {fileID: 8300000, guid: d48f5d47b0396f44e844b828390f5b3c, type: 3}
@@ -4938,6 +4940,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2814d4b8e12392d44a36bd7c68a20d8d, type: 3}
   - key: Commercial Break
     clip: {fileID: 8300000, guid: 892dd33cb2fa9684980fd9307b9d5b55, type: 3}
+  - key: Money1
+    clip: {fileID: 8300000, guid: 2e5e8215172581f479522e91a225d8c9, type: 3}
+  - key: Applause1
+    clip: {fileID: 8300000, guid: 119c0e9e3cc938a458386d77c9ab906d, type: 3}
   sfx_Source: {fileID: 885531581}
   sfxEchoFilter: {fileID: 885531585}
   sfxReverbFilter: {fileID: 885531584}
