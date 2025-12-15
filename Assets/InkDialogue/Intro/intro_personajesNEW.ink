@@ -75,11 +75,16 @@ Lolita: Pero hey, sin presiones.
     #EXPRESSION_CARMEN_TRISTE1
     #EXPRESSION_LOLITA_SERIACENTRO1
     Carmen: Oye, eso no es gracioso.
+    #EXPRESSION_CARMEN_HYPEADA1
     Carmen: Sabes que soy tu Asistente de Producción y muy buena amiga tuya desde hace años!
     #EXPRESSION_LOLITA_SONRISACENTRO
     Lolita: Bueno, ya que insistes.
+    #EXPRESSION_LOLITA_ENTRADA
+    #EXPRESSION_CARMEN_AVERGONZADA1
     Lolita: Mi nombre es Lola Cortez, tengo 33 años de edad. Trabajo de Directora de Producción en el departamento de Horario Estelar del prestigioso Canal 13.
+    #EXPRESSION_LOLITA_ALIVIADA1
     Lolita: Actualmente me encuentro soltera. Mi casa se encuentra en la sección noroeste de Mo-
+    #EXPRESSION_LUCÍA_ASUSTADA1
     Lucía: Ehhh, ok, ok ya entendí.
     -> contexto
     
@@ -107,17 +112,25 @@ Lolita: Pero hey, sin presiones.
 === preguntas ===
 
 * [De qué trata el show?]
+    #EXPRESSION_CARMEN_CONFIADA1
     Carmen: La premisa gira entorno a que las personas acudan a nuestro programa. 
+    #EXPRESSION_CARMEN_FELIZ1
     Carmen: Para que los ayudemos a resolver problemas que afectan sus vidas cotidianas.
+    #EXPRESSION_LOLITA_ENTRADA
     Lolita: Una propuesta muy revolucionaría, si me lo preguntan.
+    #EXPRESSION_LUCÍA_CHISTE1
     Lucía: Suena muy cliché, a quién se le ocurrió esa tontería?
+    #EXPRESSION_CARMEN_TRISTE1
     Carmen: ...
+    #EXPRESSION_LOLITA_PREOCUPADA1
     Lolita: ...
     Carmen: A ti, Lucía.
+    #EXPRESSION_LUCÍA_PREOCUPADA2
     Lucía: Oh...
     -> preguntas
 
 * [Cuál es mi rol dentro del show?]
+    #EXPRESSION_CARMEN_HYPEADA1
     Carmen: Eres la Presentadora! La estrella del programa!
     Carmen: Tú tratas con los invitados y mantienes contento al público.
     Lolita: Tus decisiones influirán en el desarrollo del conflicto y las reacciones de la audiencia. 
@@ -130,12 +143,12 @@ Lolita: Pero hey, sin presiones.
     Lolita: Todo depende del rating que alcances en cada capítulo.
     Lolita: Si llegas a...
     #WIGGLE_NORMAL
-    Lolita: 100 Puntos de Rating!!!! 
+    Lolita: 100 PUNTOS DE RATING!!!! 
     #NO_WIGGLE
     Lolita: Recibirás un jugoso cheque y el show será renovado para una nueva temporada.
     Lolita: Por el contrario... 
     #WIGGLE_NORMAL
-    Lolita: Si tienes menos de 40 Puntos de Rating!!!
+    Lolita: SI LLEGAS A 0 PUNTOS DE RATING!!!!
     #NO_WIGGLE
     Lolita: Lamentablemente la cadena se verá en la obligación de CANCELAR el programa.
     Lolita: Y no recibirás ni un centavo.
@@ -150,23 +163,40 @@ Lolita: Pero hey, sin presiones.
 === dilema ===
 #EXPRESSION_CARMEN_FELIZ1
 - Carmen: Bueno si esas fueron tus dudas, creo que podemos continuar con los preparativos.
+#EXPRESSION_LOLITA_SONRISACENTRO
 Lolita: El tiempo es oro, al fin y al cabo, el mundo del espectáculo es todo un negocio.
+#EXPRESSION_CARMEN_TRISTE1
 Carmen: Espera un momento, no lo entiendes Lolita.
+#EXPRESSION_CARMEN_ACTIVADA1
 Carmen: Cuando estamos al aire, tenemos el poder de dar un mensaje.
+#EXPRESSION_LOLITA_CANSADA1
 Lolita: Ay, ya va a comenzar otra vez...
+#EXPRESSION_LUCÍA_CONFUNDIDA1
 Lucía: Creo que Carmen tiene un punto.
+#EXPRESSION_CARMEN_RISA1
 Carmen: Tú sabes a lo que me refiero!
+#EXPRESSION_LOLITA_SERIACENTRO1
+#EXPRESSION_LUCÍA_ASUSTADA1
 Lolita: A ver, dinos qué piensas hacer con el "superpoder" de la televisión?
 
 *[Quiero ayudar a las personas!]
+#EXPRESSION_LUCÍA_HYPEADA1
 #SFX_JINGLE CORRECTO
+#EXPRESSION_CARMEN_FELIZ1
+#EXPRESSION_LOLITA_ALIVIADA1
     Carmen: Así se habla!
 
 *[Quiero hacer plata!]
+#EXPRESSION_CARMEN_TRISTE1
+#EXPRESSION_LUCÍA_HYPEADA1
 #SFX_JINGLE CORRECTO
+#EXPRESSION_LOLITA_SONRISACENTRO
     Lolita: Esa es la actitud!
     
-
--Lucía: Dejemos la charla para después, Carmencita salgamos a comer algo y a que te dé el sol. Te veo pálida.
+ 
+-#EXPRESSION_LUCÍA_EMOCIONADA1
+#EXPRESSION_CARMEN_AVERGONZADA1
+#EXPRESSION_LOLITA_SERIACENTRO1
+Lucía: Dejemos la charla para después, Carmencita salgamos a comer algo y a que te dé el sol. Te veo pálida.
 
  -> END
