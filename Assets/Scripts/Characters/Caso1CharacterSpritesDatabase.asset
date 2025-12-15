@@ -97,3 +97,11 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 5691b0447473ba34c87fa8162777437e, type: 3}
   - characterName: Xavier
     expressions: []
+  - characterName: Carmen
+    expressions:
+    - expressionName: Default
+      sprite: {fileID: 21300000, guid: 6915ccff766b9564b94e6e91bfd5246d, type: 3}
+  - characterName: Lolita
+    expressions:
+    - expressionName: Default
+      sprite: {fileID: 21300000, guid: 16ad35b354ac3e146be30f9e582852de, type: 3}

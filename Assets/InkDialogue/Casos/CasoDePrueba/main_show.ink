@@ -154,10 +154,18 @@ Héctor: Espera, cómo que segundo novio???!!!!
 // reaccion del publico Emoción y Aplausos
 Narrador: Llega Isaac y se acerca para besar a Rocío.
 Héctor: Hijo de la gran...
+#HIDE_HECTOR
+#HIDE_ISAAC
+#SHOW_LUCÍA_LEFT
 #SFX_FIGHTINGSOUNDS
 Narrador: Héctor se abalanza sobre él y comienzan a caerse a golpes.
+#EXPRESSION_LUCÍA_SORPRENDIDA1
+#EXPRESSION_ROCÍO_AVERGONZADA2
 //reacion del publico asombro
+#SFX_AUDIENCE SHOCK 1_REVERB
 Lucía: Ave maría purísima, se armó la grande.
+#EXPRESSION_ROCÍO_TRISTE1
+#EXPRESSION_LUCÍA_INCOMODA2
 Rocío: Se van a lastimar, alguien haga algo!!!
 
 * [Dejar que se saquen la madre]
@@ -306,7 +314,7 @@ Lucía: Creo que es momento de pedir una opinión externa.
     #SFX_BAMBOOHIT
     Lolita (vía intercom): Lo lamento Lucía, me temo que no hemos aprobado el presupuesto para eso todavía.
     Lucía: Y hasta ahora me lo dicen?
-    Carmen (vía intercom): Jeje, se me pasó por alto. Una disculpa jefecita.
+    Carmen (vía intercom): Jeje, se me pasó por alto avisarte. Una disculpa jefecita.
     Lolita (vía intercom): Mejor intenta pidiéndole al público su opinión, de seguro tienen algo interesante que decir.
     ->opinionExterna
     
@@ -315,8 +323,8 @@ Lucía: Creo que es momento de pedir una opinión externa.
     ~ episode_rating += 5
     
 
--   Narrador: Le dan el micrófono a un miembro random del público y este sube al escenario.
-    Lucía: Hola qué tal, gracias por acompañarnos hoy en el show. Cuál es tu nombre?
+-   Narrador: Hora de recibir una llamada aleatoria de uno de los televidentes!
+    Lucía: Hola qué tal, gracias por ver el gran estreno de nuestro show. Cuál es tu nombre?
     Poncharelo: Un gusto mi estimada Lucía, me llamo Poncharelo.
     Lucía: Poncharelo dinos, qué piensas de todo esto embrollo?
     Poncharelo: Escúcheme Señorita C-Dura, puedo llamarla así?
@@ -348,7 +356,7 @@ Poncharelo: TRISTES.
 #SFX_DRAMATIC VINE
 Poncharelo: SINVERGÜENZAS!
 #SFX_DRAMA2
-Poncharelo: *Señalando a Rocío* Usted mijita!
+Poncharelo: Rocío, usted mijita!
 #EXPRESSION_ROCÍO_ENOJADA1
 Rocío: Yo qué, sapo?
 #SFX_AIRHORN
@@ -356,7 +364,7 @@ Poncharelo: Se me hace que tú lo que quieres es un cajero automático, una cara
 #SFX_AUDIENCE CHEERING 3_REVERB
 Narrador: La audiencia aplaude.
 #SFX_DRAMA4
-Poncharelo: *Señalando a Isaac, Héctor y Xavier* Y ustedes mamarrachos. 
+Poncharelo: Y en cuanto al trío de mamertos... 
     // cada no de ellos con expresiones distintas, isaac smug enojado, hector asustado y xavier confundido
 Isaac: ...
 Héctor: ...
@@ -379,7 +387,8 @@ Narrador: El público enloquece.
 -Lucía: Ah caray, se los está papeando...
 Lucía: Te agradezco Poncharelo por tu honesta reacción a nuestro caso de hoy. 
 Poncharelo: No hay de qué, Señorita Lucía.
-Narrador: Poncharelo vuelve a su asiento.
+
+Narrador: Poncharelo cuelga el teléfono.
 Xavier: ... Bueno, creo que yo me retiro.
 #EXPRESSION_LUCÍA_DUDOSA2
 Lucía: Espera, te vas tan pronto?
@@ -404,8 +413,11 @@ Lucía: Volveremos después de estos breves cortes comerciales!
 
 //Pausa comercial y charla critica    
 #MUSIC_CHILL
+#FADEALL
 Narrador: Los panelistas se retiran a camerinos. Héctor cabizbajo, Isaac con una expresión de alivio y Rocío con semblante reflexivo.
-   
+#SHOW_LOLITA_LEFT
+#SHOW_CARMEN_CENTER
+#SHOW_LUCÍA_RIGHT
 Narrador: Carmen y Lolita se acercan al escenario.
 #WIGGLE_NORMAL
 Carmen: Estás haciéndolo de maravilla, Lucy!!!
