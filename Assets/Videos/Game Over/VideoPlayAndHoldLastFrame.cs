@@ -8,6 +8,8 @@ public class VideoPlayAndHoldLastFrame : MonoBehaviour
 
     private void Awake()
     {
+        UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+        
         if (videoPlayer == null)
             videoPlayer = GetComponent<VideoPlayer>();
 

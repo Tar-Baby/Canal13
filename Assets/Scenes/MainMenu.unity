@@ -146,7 +146,7 @@ RectTransform:
   m_GameObject: {fileID: 6739619}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.55, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1606267011}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 3c7fd061146757840885d06ccac0ab01, type: 3}
+  m_Texture: {fileID: 2800000, guid: 7c871714baaaf7c458c9f74bd6a564a4, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1395,7 +1395,7 @@ GameObject:
   - component: {fileID: 1606267012}
   - component: {fileID: 1606267015}
   m_Layer: 5
-  m_Name: Opciones
+  m_Name: Opciones ahorita Creditos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1460,7 +1460,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1606267013}
   m_OnClick:
     m_PersistentCalls:
@@ -1475,6 +1475,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1187286530}
+        m_TargetAssemblyTypeName: SceneFader, Assembly-CSharp
+        m_MethodName: FadeToScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: "Cr\xE9ditos"
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1606267013
