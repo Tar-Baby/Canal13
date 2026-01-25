@@ -48,6 +48,13 @@ public class MainMenu : MonoBehaviour
     fadeOut.SetActive(true);
     StartCoroutine(FadeOutAndChangeScene("Curis Hook"));
 }
+    
+    public void PlayCredits()
+    {
+        buttonClick.Play();
+        fadeOut.SetActive(true);
+        StartCoroutine(FadeOutAndChangeScene("Créditos"));
+    }
 
 IEnumerator FadeOutAndChangeScene(string nextScene)
 {
@@ -83,6 +90,7 @@ IEnumerator FadeOutMixer()
     public void QuitGame()   //en el futuro agregar panel de confirmacion para salir del juego
     {
         buttonClick.Play();
+        fadeOut.SetActive(true);
         Application.Quit();
         Debug.Log("Game has quit.");
     }
