@@ -1,6 +1,7 @@
 VAR show_name = ""
 
 // Texto inicial
+#BG_LOBBY
 #SHOW_LUCÍA_LEFT
 Lucía: No puedo creerlo, hoy es el gran día. Y por fin soy la primera en llegar al estudio!
 #SFX_JINGLE FUNNY
@@ -106,6 +107,9 @@ Lolita: Pero hey, sin presiones.
     Lolita: Puedo escucharlas... ash como sea.
     -> contexto
     
+    
+* [Vamos al grano]
+    -> dilema 
 
  *-> dilema   
     
@@ -166,13 +170,16 @@ Lolita: Pero hey, sin presiones.
     Lucía: Tranquila Lolita, entiendo.
     -> preguntas
     
+* [No tengo dudas]
+    -> dilema 
+    
 *-> contexto
 
 
 === dilema ===
 #EXPRESSION_CARMEN_FELIZ1
 #EXPRESSION_LUCÍA_DEFAULT
-- Carmen: Bueno si esas fueron tus dudas, creo que podemos continuar con los preparativos.
+- Carmen: Bueno creo que podemos continuar con los preparativos.
 #EXPRESSION_LOLITA_SONRISACENTRO
 Lolita: El tiempo es oro, al fin y al cabo, el mundo del espectáculo es todo un negocio.
 #EXPRESSION_CARMEN_TRISTE1

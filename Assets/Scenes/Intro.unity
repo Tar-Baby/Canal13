@@ -2156,6 +2156,101 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804842112}
   m_CullTransparentMesh: 1
+--- !u!1 &820640549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 820640550}
+  - component: {fileID: 820640553}
+  - component: {fileID: 820640552}
+  - component: {fileID: 820640551}
+  m_Layer: 5
+  m_Name: BackgroundB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &820640550
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820640549}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 19.3, y: 19.3, z: 19.3}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1854290026}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.020019531, y: 91.6}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &820640551
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820640549}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a8e76c0be8279e742a0ebee85a445f43, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &820640552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820640549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: 9c61827185957324e90b97a5f98eab51, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &820640553
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820640549}
+  m_CullTransparentMesh: 1
 --- !u!1 &914683851
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,7 +2541,7 @@ GameObject:
   - component: {fileID: 963747359}
   - component: {fileID: 963747361}
   m_Layer: 5
-  m_Name: LobbyFondo
+  m_Name: BackgroundA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4474,7 +4569,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1614908061}
-  - component: {fileID: 1614908060}
   - component: {fileID: 1614908062}
   m_Layer: 0
   m_Name: DialogueManager
@@ -4483,37 +4577,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1614908060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614908059}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14dda2699efda4542ad47a0f4b4ea8a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inkScripts:
-  - {fileID: 4900000, guid: a04d641e4ff85664e9d3129b8f8405a1, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 4900000, guid: 6824f16170a85674e95692144d5fdd02, type: 3}
-  inkNames:
-  - Ink 1
-  - Ink 2
-  - Ink 3
-  - Ink 4
-  - Final Ink
-  autoStartOnPlay: 1
-  delayBeforeStart: 7
-  characterManager: {fileID: 0}
-  sceneManager: {fileID: 0}
-  backingPanel: {fileID: 0}
-  dialoguePanelUI: {fileID: 914683853}
-  hideSystemKeyboard: 0
 --- !u!4 &1614908061
 Transform:
   m_ObjectHideFlags: 0
@@ -4615,6 +4678,16 @@ MonoBehaviour:
   sfxReverbFilter: {fileID: 1786883553}
   sfxLowPassFilter: {fileID: 1786883555}
   sfxPresets: []
+  backgroundA: {fileID: 963747359}
+  backgroundB: {fileID: 820640552}
+  backgroundFadeSeconds: 0.5
+  backgroundLibrary:
+  - key: Lobby
+    texture: {fileID: 2800000, guid: f43cc463bd858cd4b8075232d19ae458, type: 3}
+  - key: Studio
+    texture: {fileID: 2800000, guid: 9c61827185957324e90b97a5f98eab51, type: 3}
+  - key: Elevadores
+    texture: {fileID: 2800000, guid: e21ac08524914d8479dd47fdb557b34a, type: 3}
 --- !u!1 &1714938458
 GameObject:
   m_ObjectHideFlags: 0
@@ -5095,6 +5168,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 963747358}
+  - {fileID: 820640550}
   - {fileID: 153798752}
   - {fileID: 544909459}
   - {fileID: 185500733}

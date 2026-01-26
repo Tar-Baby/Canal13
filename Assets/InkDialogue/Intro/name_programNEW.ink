@@ -1,15 +1,20 @@
 VAR show_name = ""
 
 Carmen: Awww, muchas gracias jefecita!
-#SFX_JINGLE_FUNNY
+#SFX_JINGLE INTERES
+#EXPRESSION_LOLITA_SERIACENTRO1
 Lolita: Quietas ahí.
 Lucía: Y ahora qué?
 Lolita: A dónde creen que van, no les parece que olvidan algo de suma importancia?
 Carmen: Ehhh, cómo dices?
 Lucía: De qué hablas Lolita?
+#BG_STUDIO
+#EXPRESSION_LOLITA_PREOCUPADA1
 Lolita: Quizás estar en el set de grabación les refresque la memoria. Ya saben qué le falta a esta producción?
+#EXPRESSION_LOLITA_CANSADA1
 Lucía: La verdad no tengo la más mínima idea de qué podría ser.
 Carmen: Yo tampoco.
+#EXPRESSION_LOLITA_ENOJADA1
 #WIGGLE_NORMAL
 Lolita: EL NOMBRE DEL PROGRAMA!!
 #NO_WIGGLE
@@ -56,7 +61,9 @@ Lucía: Hmmm, qué nombre puedo ponerle al show?
 }
 
  
-- Lolita: Espléndido, ahora sí podemos ir a comer. Conozco un gran lugar por el centro, yo invito muchachas!
+- 
+#BG_ELEVADORES
+Lolita: Espléndido, ahora sí podemos ir a comer. Conozco un gran lugar por el centro, yo invito muchachas!
 Lucía: Espera, vienes con nosotras?
 Lolita: Iré por mis llaves, no tardo. Pero al volver quiero verlas manos a la obra.
 Carmen: Por supuesto, yo recibiré a los panelistas y guiaré a nuestros técnicos.
@@ -95,10 +102,11 @@ Narrador: Qué les deparará el futuro? Solo hay una forma de averiguarlo!
     Lolita: Debo admitirlo, "{show_name}" es un título óptimo. Funciona.
 }
 
--Lolita: Espléndido, ahora sí podemos ir a comer. Conozco un buen lugar por el centro, yo invito muchachas!
+-#BG_ELEVADORES
+Lolita: Espléndido, ahora sí podemos ir a comer. Conozco un buen lugar por el centro, yo invito muchachas!
 Lucía: Espera, vienes con nosotras?
 Lolita: Iré por mis llaves, no tardo. Pero al volver quiero verlas manos a la obra.
-#SFX_JINGLEPLATA
+#SFX_JINGLE PLATA
 Carmen: Por supuesto, yo recibiré a los panelistas y guiaré a nuestros técnicos.
 #SFX_JINGLE6
 Lucía: Yo mientras iré a camerinos a alistarme.

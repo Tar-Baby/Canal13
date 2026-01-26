@@ -118,6 +118,24 @@ public class DialogManagerINPUT : MonoBehaviour
     [SerializeField] private AudioLowPassFilter sfxLowPassFilter;
     [SerializeField] private List<SoundEffectPreset> sfxPresets;
     
+    
+    [System.Serializable]
+    public class BackgroundEntryRaw
+    {
+        public string key; // FOREST, CITY, etc.
+        public Texture texture; // Texture2D (or any Texture)
+    }
+
+    [Header("Background (Ink Tags) - RawImage")]
+    [SerializeField] private RawImage backgroundA;
+    [SerializeField] private RawImage backgroundB;
+    [SerializeField] private float backgroundFadeSeconds = 0.6f;
+    [SerializeField] private List<BackgroundEntryRaw> backgroundLibrary = new();
+
+    private Dictionary<string, Texture> backgroundMap;
+    private bool backgroundAIsActive = true;
+    private Coroutine backgroundFadeRoutine;
+    
     // ===========================
 // INK TAG PROCESSING
 // ===========================
@@ -146,6 +164,8 @@ public class DialogManagerINPUT : MonoBehaviour
     private void Awake()
     {
         InitializeFirstAvailableInk();
+        BuildBackgroundMap();
+        InitializeBackgroundLayers();
         
         if (Application.platform == RuntimePlatform.Android)
         {
@@ -1081,6 +1101,15 @@ public class DialogManagerINPUT : MonoBehaviour
         {
             string trimmedTag = tag.Trim().ToUpper();
 
+            if (trimmedTag.StartsWith("BG_"))
+            {
+                string key = trimmedTag.Substring("BG_".Length).Trim();
+                if (!string.IsNullOrEmpty(key))
+                    SetBackgroundSmoothRaw(key);
+
+                continue;
+            }
+            
             // Format: #SHOW_CHARACTERNAME_SLOTNAME
             // Example: #SHOW_HERO_LEFT, #SHOW_VILLAIN_RIGHT
             if (trimmedTag.StartsWith("SHOW_"))
@@ -1447,4 +1476,96 @@ public class DialogManagerINPUT : MonoBehaviour
         }
     }
     
+    
+    private void BuildBackgroundMap()
+    {
+        backgroundMap = new Dictionary<string, Texture>();
+
+        foreach (var entry in backgroundLibrary)
+        {
+            if (entry == null || string.IsNullOrWhiteSpace(entry.key))
+                continue;
+
+            if (entry.texture == null)
+                continue;
+
+            backgroundMap[entry.key.Trim().ToUpper()] = entry.texture;
+        }
+    }
+
+    private void InitializeBackgroundLayers()
+    {
+        if (backgroundA == null || backgroundB == null)
+            return;
+
+        backgroundA.raycastTarget = false;
+        backgroundB.raycastTarget = false;
+
+        Color a = backgroundA.color;
+        Color b = backgroundB.color;
+
+        backgroundA.color = new Color(a.r, a.g, a.b, 1f);
+        backgroundB.color = new Color(b.r, b.g, b.b, 0f);
+    }
+    
+    private void SetBackgroundSmoothRaw(string key)
+    {
+        if (backgroundA == null || backgroundB == null)
+            return;
+
+        if (backgroundMap == null)
+            BuildBackgroundMap();
+
+        string k = key.Trim().ToUpper();
+        if (!backgroundMap.TryGetValue(k, out Texture tex) || tex == null)
+        {
+            Debug.LogWarning($"[BG] Texture not found for key '{k}'");
+            return;
+        }
+
+        RawImage from = backgroundAIsActive ? backgroundA : backgroundB;
+        RawImage to = backgroundAIsActive ? backgroundB : backgroundA;
+
+        // Avoid re-fading to the same texture
+        if (from.texture == tex && from.color.a > 0.99f)
+            return;
+
+        to.texture = tex;
+
+        Color toC = to.color;
+        to.color = new Color(toC.r, toC.g, toC.b, 0f);
+
+        if (backgroundFadeRoutine != null)
+            StopCoroutine(backgroundFadeRoutine);
+
+        backgroundFadeRoutine = StartCoroutine(
+            CrossfadeBackgroundRaw(from, to, backgroundFadeSeconds)
+        );
+
+        backgroundAIsActive = !backgroundAIsActive;
+    }
+
+    private IEnumerator CrossfadeBackgroundRaw(RawImage from, RawImage to, float seconds)
+    {
+        float t = 0f;
+
+        Color fromBase = from.color;
+        Color toBase = to.color;
+
+        while (t < seconds)
+        {
+            float k = seconds <= 0f ? 1f : t / seconds;
+
+            from.color = new Color(fromBase.r, fromBase.g, fromBase.b, 1f - k);
+            to.color = new Color(toBase.r, toBase.g, toBase.b, k);
+
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        from.color = new Color(fromBase.r, fromBase.g, fromBase.b, 0f);
+        to.color = new Color(toBase.r, toBase.g, toBase.b, 1f);
+
+        backgroundFadeRoutine = null;
+    }
 }
