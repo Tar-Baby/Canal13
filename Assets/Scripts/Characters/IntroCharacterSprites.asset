@@ -53,6 +53,8 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 99efede4045bbe444b546d36134f1fe9, type: 3}
     - expressionName: Enojada1
       sprite: {fileID: 21300000, guid: 611308812cd100146b197955ce151408, type: 3}
+    - expressionName: Inquisitiva1
+      sprite: {fileID: 21300000, guid: 3000bf4da53c2014e95fc0033c173be0, type: 3}
   - characterName: Carmen
     expressions:
     - expressionName: Default

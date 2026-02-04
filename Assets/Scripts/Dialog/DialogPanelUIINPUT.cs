@@ -331,7 +331,7 @@ public class DialogPanelUIINPUT : MonoBehaviour
     private void ShowChoices(List<string> choices)
     {
         HideAllInteractiveElements();
-        PersistentCoroutineRunner.Instance.StartCoroutine(ShowChoicesDelayed(choices, 1f));
+        PersistentCoroutineRunner.Instance.StartCoroutine(ShowChoicesDelayed(choices, 1.1f));
     }
 
     // MODIFICADO: Mejor debug y manejo de 4 opciones

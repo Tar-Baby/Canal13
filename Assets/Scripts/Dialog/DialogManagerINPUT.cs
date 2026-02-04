@@ -497,6 +497,7 @@ public class DialogManagerINPUT : MonoBehaviour
             {
                 DialogEvents.DisplayDialog(line);
                 dialoguePanelUIINPUT.DisplayDialogLine(line);
+                ApplySpeakerPop();
 
 
                 if (!string.IsNullOrEmpty(currentSpeaker) && characterManager != null)
@@ -578,6 +579,7 @@ public class DialogManagerINPUT : MonoBehaviour
             if (!string.IsNullOrEmpty(line))
             {
                 DialogEvents.DisplayDialog(line);
+                ApplySpeakerPop();
 
                 if (!string.IsNullOrEmpty(currentSpeaker) && characterManager != null)
                 {
@@ -895,6 +897,7 @@ public class DialogManagerINPUT : MonoBehaviour
 
 
                 DialogEvents.DisplayDialog(line);
+                ApplySpeakerPop();
 
                 if (!string.IsNullOrEmpty(currentSpeaker) && characterManager != null)
                 {
@@ -1567,5 +1570,13 @@ public class DialogManagerINPUT : MonoBehaviour
         to.color = new Color(toBase.r, toBase.g, toBase.b, 1f);
 
         backgroundFadeRoutine = null;
+    }
+    
+    private void ApplySpeakerPop()
+    {
+        if (speakerNameText != null)
+            speakerNameText.text = currentSpeaker;
+
+        UpdateSpeakerAnimation(currentSpeaker);
     }
 }

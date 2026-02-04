@@ -10,7 +10,9 @@ Carmen: Ehhh, cómo dices?
 Lucía: De qué hablas Lolita?
 #BG_STUDIO
 #EXPRESSION_LOLITA_PREOCUPADA1
-Lolita: Quizás estar en el set de grabación les refresque la memoria. Ya saben qué le falta a esta producción?
+Lolita: Quizás estar en el set de grabación les refresque la memoria. 
+#EXPRESSION_LOLITA_INQUISITIVA1
+Lolita: Ya saben qué le falta a esta producción?
 #EXPRESSION_LOLITA_CANSADA1
 Lucía: La verdad no tengo la más mínima idea de qué podría ser.
 Carmen: Yo tampoco.
